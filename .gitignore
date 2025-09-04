@@ -10,6 +10,9 @@ Obscura/[Bb]uilds/
 Obscura/[Ll]ogs/
 Obscura/[Uu]ser[Ss]ettings/
 
+# Jetbrains Idea folder
+*.idea
+
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
 Obscura/[Mm]emoryCaptures/
