@@ -1,25 +1,41 @@
 using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
+using UnityEngine.Tilemaps;
 
 
 public class PlayerMovement : MonoBehaviour {
-    [SerializeField] private float movementSpeed = 5f;
-    //[SerializeField] private float acceleration = 1f;
-    //[SerializeField] private float maxSpeed = 15f;
+    [SerializeField] private float initialMovementSpeed = 0.02f;
+    [SerializeField] private float acceleration = 0.5f;
+    [SerializeField] private float maxSpeed = 1f;
+
+    [SerializeField] private Tilemap collisionTilemap;
+
+    private float currentSpeed;
+
+    private Vector3Int moveDirection;
+    private Vector3 targetPosition;
+
+    private Vector3Int currentCell;
 
     private bool canMove = true;
-    private Rigidbody2D rb;
 
-    void Start() {
-        rb = GetComponent<Rigidbody2D>();
+    private void Start() {
+        currentSpeed = initialMovementSpeed;
+
+        currentCell = collisionTilemap.WorldToCell(transform.position);
+        transform.position = collisionTilemap.GetCellCenterWorld(currentCell);
     }
 
     void Update() {
         if (canMove) {
-            this.proccessInput();
+            proccessInput();
+        }
+        else {
+            proccessMovementTowardsTarget();
         }
     }
 
@@ -28,22 +44,37 @@ public class PlayerMovement : MonoBehaviour {
         float movementOffsetY = Input.GetAxisRaw("Vertical");
 
         if (!Mathf.Approximately(movementOffsetX, 0f) || !Mathf.Approximately(movementOffsetY, 0f)) {
+
             canMove = false;
-            bool isHorizontalMove = Mathf.Abs(movementOffsetX) > Mathf.Abs(movementOffsetY);
+            moveDirection = new Vector3Int(Mathf.RoundToInt(movementOffsetX), Mathf.RoundToInt(movementOffsetY), 0);
 
+            Vector3Int targetCell = calculateTargetCell(currentCell, moveDirection);
+            targetPosition = collisionTilemap.GetCellCenterWorld(targetCell);
 
-            Vector2 moveDirection = isHorizontalMove
-                ? new Vector2(movementOffsetX * movementSpeed, 0f)
-                : new Vector2(0f, movementOffsetY * movementSpeed);
-          
-            rb.linearVelocity = moveDirection;
+            Debug.Log($"[PlayerMovement::proccessInput]: targetCell = {targetCell}");
+            Debug.Log($"[PlayerMovement::proccessInput]: targetCell = {targetPosition}");
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-        if (!canMove) {
-            rb.linearVelocity = Vector2.zero;
+    void proccessMovementTowardsTarget() {
+        currentSpeed = Mathf.Min(currentSpeed + acceleration * Time.deltaTime, maxSpeed);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, currentSpeed * Time.deltaTime);
+
+        if (Vector3.Distance(transform.position, targetPosition) < 0.001f) {
+            transform.position = targetPosition;
+            currentCell = collisionTilemap.WorldToCell(transform.position);
+
+            currentSpeed = initialMovementSpeed;
             canMove = true;
         }
     }
+
+    Vector3Int calculateTargetCell(Vector3Int prevCell, Vector3Int moveDir) {
+        Vector3Int nextCell = prevCell + new Vector3Int(moveDir.x, moveDir.y, 0);
+        if (!collisionTilemap.HasTile(nextCell)) {
+            return calculateTargetCell(nextCell, moveDir);
+        }
+        return prevCell;
+    }
+
 }
