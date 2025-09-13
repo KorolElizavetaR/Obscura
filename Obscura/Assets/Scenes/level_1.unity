@@ -165,9 +165,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5aebc0ea1288e2d40a26d4d959e06be4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialMovementSpeed: 5
-  acceleration: 3
-  maxSpeed: 25
+  initialMovementSpeed: 10
+  acceleration: 5
+  maxSpeed: 30
   collisionTilemap: {fileID: 1245844792}
 --- !u!114 &50395927
 MonoBehaviour:
@@ -183,6 +183,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   collisionTilemap: {fileID: 1245844792}
+  currentCell: {x: 0, y: 0, z: 0}
+  targetCell: {x: 0, y: 0, z: 0}
+  moveDir: {x: 0, y: 0}
+  isMoving: 0
 --- !u!1 &155129699
 GameObject:
   m_ObjectHideFlags: 0

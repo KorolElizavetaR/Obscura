@@ -46,7 +46,10 @@ public class PlayerMovement : MonoBehaviour {
         if (!Mathf.Approximately(movementOffsetX, 0f) || !Mathf.Approximately(movementOffsetY, 0f)) {
 
             canMove = false;
-            moveDirection = new Vector3Int(Mathf.RoundToInt(movementOffsetX), Mathf.RoundToInt(movementOffsetY), 0);
+
+            moveDirection = Mathf.Abs(movementOffsetX) > Mathf.Abs(movementOffsetY) 
+                ? new Vector3Int(Mathf.RoundToInt(movementOffsetX), 0, 0)
+                : new Vector3Int(0, Mathf.RoundToInt(movementOffsetY), 0);
 
             Vector3Int targetCell = calculateTargetCell(currentCell, moveDirection);
             targetPosition = collisionTilemap.GetCellCenterWorld(targetCell);
