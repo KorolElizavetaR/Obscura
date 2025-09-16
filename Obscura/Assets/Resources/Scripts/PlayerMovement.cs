@@ -14,6 +14,8 @@ public class PlayerMovement : MonoBehaviour {
 
     [SerializeField] private Tilemap collisionTilemap;
 
+    private readonly int TARGET_CALCULATION_DEPTH = 20;
+
     private float currentSpeed;
 
     private Vector3Int moveDirection;
@@ -72,10 +74,10 @@ public class PlayerMovement : MonoBehaviour {
         }
     }
 
-    Vector3Int calculateTargetCell(Vector3Int prevCell, Vector3Int moveDir) {
+    Vector3Int calculateTargetCell(Vector3Int prevCell, Vector3Int moveDir, int depth = 0) {
         Vector3Int nextCell = prevCell + new Vector3Int(moveDir.x, moveDir.y, 0);
-        if (!collisionTilemap.HasTile(nextCell)) {
-            return calculateTargetCell(nextCell, moveDir);
+        if (!collisionTilemap.HasTile(nextCell) && depth < TARGET_CALCULATION_DEPTH) {
+            return calculateTargetCell(nextCell, moveDir, depth + 1);
         }
         return prevCell;
     }
