@@ -7,12 +7,12 @@ using UnityEngine.Rendering;
 using UnityEngine.Tilemaps;
 
 
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovementTargetCalculation : MonoBehaviour {
     [SerializeField] private float initialMovementSpeed = 0.02f;
     [SerializeField] private float acceleration = 0.5f;
     [SerializeField] private float maxSpeed = 1f;
 
-    [SerializeField] private Tilemap collisionTilemap;
+    [SerializeField] private TilemapHandler tilemapHandler;
 
     private readonly int TARGET_CALCULATION_DEPTH = 20;
 
@@ -28,8 +28,10 @@ public class PlayerMovement : MonoBehaviour {
     private void Start() {
         currentSpeed = initialMovementSpeed;
 
-        currentCell = collisionTilemap.WorldToCell(transform.position);
-        transform.position = collisionTilemap.GetCellCenterWorld(currentCell);
+        currentCell = tilemapHandler.Grid.WorldToCell(transform.position);
+        transform.position = tilemapHandler.Grid.GetCellCenterWorld(currentCell);
+
+        Debug.Log($"[PlayerMovement] currentCell = {currentCell}");
     }
 
     void Update() {
@@ -53,11 +55,13 @@ public class PlayerMovement : MonoBehaviour {
                 ? new Vector3Int(Mathf.RoundToInt(movementOffsetX), 0, 0)
                 : new Vector3Int(0, Mathf.RoundToInt(movementOffsetY), 0);
 
-            Vector3Int targetCell = calculateTargetCell(currentCell, moveDirection);
-            targetPosition = collisionTilemap.GetCellCenterWorld(targetCell);
+            Debug.Log($"[PlayerMovement] moveDirection = {moveDirection}");
+            Debug.Log($"[PlayerMovement] currentCell = {currentCell}");
 
-            Debug.Log($"[PlayerMovement::proccessInput]: targetCell = {targetCell}");
-            Debug.Log($"[PlayerMovement::proccessInput]: targetCell = {targetPosition}");
+            Vector3Int targetCell = calculateTargetCell(currentCell, moveDirection);
+            targetPosition = tilemapHandler.Grid.GetCellCenterWorld(targetCell);
+
+            Debug.Log($"[PlayerMovement] targetCell = {targetCell}");
         }
     }
 
@@ -67,7 +71,7 @@ public class PlayerMovement : MonoBehaviour {
 
         if (Vector3.Distance(transform.position, targetPosition) < 0.001f) {
             transform.position = targetPosition;
-            currentCell = collisionTilemap.WorldToCell(transform.position);
+            currentCell = tilemapHandler.Grid.WorldToCell(transform.position);
 
             currentSpeed = initialMovementSpeed;
             canMove = true;
@@ -76,7 +80,9 @@ public class PlayerMovement : MonoBehaviour {
 
     Vector3Int calculateTargetCell(Vector3Int prevCell, Vector3Int moveDir, int depth = 0) {
         Vector3Int nextCell = prevCell + new Vector3Int(moveDir.x, moveDir.y, 0);
-        if (!collisionTilemap.HasTile(nextCell) && depth < TARGET_CALCULATION_DEPTH) {
+        Debug.Log($"[PlayerMovement] nextCell = {nextCell}");
+
+        if (!tilemapHandler.checkTileForCollision(nextCell) && depth < TARGET_CALCULATION_DEPTH) {
             return calculateTargetCell(nextCell, moveDir, depth + 1);
         }
         return prevCell;
