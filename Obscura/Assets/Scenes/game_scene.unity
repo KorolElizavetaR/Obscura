@@ -128,7 +128,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 50395922}
-  - component: {fileID: 50395926}
+  - component: {fileID: 50395927}
+  - component: {fileID: 50395928}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -152,7 +153,7 @@ Transform:
   - {fileID: 718338999}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &50395926
+--- !u!114 &50395927
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,11 +162,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 50395921}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 51580c8c56ae0bd4ba0015c3536926f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 3eadf1d9eec83414786ea803f642545c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  tilemapHandler: {fileID: 0}
+--- !u!114 &50395928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50395921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79e659dd6d900b248b6c6efe3a3e94de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -713,8 +725,7 @@ MonoBehaviour:
   _levels:
   - {fileID: 1446761184725008186, guid: 67bf7a331ac653d49a2b77666f78b3ed, type: 3}
   - {fileID: 1446761184725008186, guid: 5204482eb425dab4698f56aea124e745, type: 3}
-  player: {fileID: 50395926}
-  currentLevelId: 1
+  currentLevelId: 0
 --- !u!1 &1417123526
 GameObject:
   m_ObjectHideFlags: 0
