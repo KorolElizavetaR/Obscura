@@ -5,33 +5,27 @@ using System.Collections.Generic;
 
 public class TilemapHandler : MonoBehaviour
 {
-    [SerializeField]  private Grid grid;
-
-    //[SerializeField] private Tilemap levelCollisionTilemap;
-    //[SerializeField] private Tilemap finishTilemap;
+    [SerializeField] private Grid grid;
     [SerializeField] private List <TilesBehavior> tiles;
+    [SerializeField] private GameObject playerBegginingPosition;
+
+    public Vector3Int getInitialPlayerPosition() {
+        return Grid.WorldToCell(playerBegginingPosition.transform.position);
+    }
 
     public Grid Grid => grid;
 
-    private void Start() {
-        //grid = GetComponent<Grid>();
-    }
-
-    public bool checkTileForCollision(Vector3Int currentTile) {
-        //if (levelCollisionTilemap.HasTile(currentTile)) {
-        //    return true;
-        //} else if (finishTilemap.HasTile(currentTile)) {
-        //    return false;
-        //}
-
+    public TilePropertyModel checkTileEvent(Vector3Int currentTile) {
         foreach (TilesBehavior tile in tiles) {
+            if (tile is FinishTileBeh finishTileBeh) {
+
+            }
+
             if (tile.checkEventTrigger(currentTile)) {
-                TilesBehavior.State state = tile.onEvent();
-                Debug.Log($"Obtained state");
-                return state.GetCollision();
+                TilePropertyModel state = tile.onEvent();
+                return state;
             }
         }
-
-        return false;
+        return TilePropertyModel.baseProperty;
     }
 }

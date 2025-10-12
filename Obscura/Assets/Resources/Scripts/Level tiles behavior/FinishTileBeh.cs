@@ -5,14 +5,12 @@ public class FinishTileBeh : TilesBehavior {
 
     [SerializeField] private GameObject winWindow;
 
-    public FinishTileBeh() {
-        base.state = new State();
-        state.SetCollision(false);
-        state.SetDeadly(false);
+    private void Awake() {
+        tileProperty.IsDeadly = false;
+        tileProperty.IsCollision = false;
     }
 
-    public override State onEvent() {
-        Debug.Log($"u win in 1 sec");
+    public override TilePropertyModel onEvent() {
         StartCoroutine(ShowWinWindow());
         return base.onEvent();
     }

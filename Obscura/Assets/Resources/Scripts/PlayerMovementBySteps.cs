@@ -6,16 +6,21 @@ using UnityEngine.Tilemaps;
 public class PlayerMovementBySteps : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 1.5f;
-    [SerializeField] private TilemapHandler tilemapHandler;
+    public TilemapHandler tilemapHandler;
 
     private Vector3Int currentCell;
     private Vector3Int targetCell;
     private Vector3Int moveDir;
+    public Vector3Int getMovementDir => moveDir;
 
     private bool canMove;
 
     private void Start() {
-        currentCell = tilemapHandler.Grid.WorldToCell(transform.position);
+        if (tilemapHandler == null) {
+            Debug.LogError("TilemapHandler is not assigned in the Inspector!");
+            return;
+        }
+        currentCell = tilemapHandler.getInitialPlayerPosition();
         targetCell = currentCell;
         transform.position = tilemapHandler.Grid.GetCellCenterWorld(currentCell);
     }
@@ -60,8 +65,9 @@ public class PlayerMovementBySteps : MonoBehaviour
 
     private void TryMoveToNextCell() {
         Vector3Int nextCell = currentCell + new Vector3Int(moveDir.x, moveDir.y, 0);
+        TilePropertyModel tileProp = tilemapHandler.checkTileEvent(nextCell); // Проверка события следующей клетки.
 
-        if (!tilemapHandler.checkTileForCollision(nextCell)) // если нет стены
+        if (!tileProp.IsCollision) // если клетка не стена
         {
             targetCell = nextCell;
         }

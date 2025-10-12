@@ -1,17 +1,18 @@
 using System.Collections;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class EnemyTilesBehavior : TilesBehavior {
-    public EnemyTilesBehavior() {
-        base.state = new State();
-        state.SetCollision(true);
-        state.SetDeadly(true);
-    }   
 
-    override public State onEvent() {
+    private void Awake() {
+        tileProperty.IsCollision = true;
+        tileProperty.IsDeadly  = true;
+    }
+
+    override public TilePropertyModel onEvent() {
         Debug.Log($"u ded in 1 sec");
         StartCoroutine(ShowDeathWindow());
-        return base.onEvent();
+        return tileProperty;
     }
 
     public IEnumerator ShowDeathWindow() {
