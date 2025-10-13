@@ -10,9 +10,9 @@ public class FinishTileBeh : TilesBehavior {
         tileProperty.IsCollision = false;
     }
 
-    public override TilePropertyModel onEvent() {
+    public override ObjectProperty OnEvent() {
         StartCoroutine(ShowWinWindow());
-        return base.onEvent();
+        return base.OnEvent();
     }
 
     public IEnumerator ShowWinWindow() {

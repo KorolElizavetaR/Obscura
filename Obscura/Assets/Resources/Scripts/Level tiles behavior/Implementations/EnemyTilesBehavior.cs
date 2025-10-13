@@ -9,7 +9,7 @@ public class EnemyTilesBehavior : TilesBehavior {
         tileProperty.IsDeadly  = true;
     }
 
-    override public TilePropertyModel onEvent() {
+    override public ObjectProperty OnEvent() {
         Debug.Log($"u ded in 1 sec");
         StartCoroutine(ShowDeathWindow());
         return tileProperty;

@@ -1,29 +1,37 @@
+using System;
 using UnityEngine;
 
-public class MovementHandler : MonoBehaviour
-{
+public class MovementHandler : MonoBehaviour {
     [SerializeField] private float moveSpeed = 10f;
     public static TilemapHandler tilemapHandler;
 
     private Vector3Int currentCell;
     private Vector3Int targetCell;
-    public Vector3Int _moveDir { get ; set; }
+    public Vector3Int _moveDir { get; set; }
 
-    void Start()
-    {
-        currentCell = tilemapHandler.getInitialPlayerPosition();
+    void Start() {
+        if (TryGetComponent<Player>(out Player playerComponent)) {
+            currentCell = tilemapHandler.getInitialPlayerPosition();
+            //targetCell = currentCell;
+            //transform.position = tilemapHandler.Grid.GetCellCenterWorld(currentCell);
+        }
+        else {
+            //currentCell = tilemapHandler.Grid.WorldToCell(transform.position);
+            //targetCell = currentCell;
+        }
+        Debug.Log($"[MovementHandler] currentCell: {currentCell}");
         targetCell = currentCell;
         transform.position = tilemapHandler.Grid.GetCellCenterWorld(currentCell);
     }
 
     /// <summary>
-    /// Проверяет, будет ли объект двигаться дальше
+    /// Совершает перемещение, после чего проверяет, будет ли объект двигаться дальше.
     /// </summary>
     /// <returns>
     /// <para><c>true</c> - если объект будет двигаться дальше</para>
     /// <para><c>false</c> - если объект останавливается</para>
     /// </returns>
-    public bool move () {
+    public bool move() {
         Vector3 targetPos = tilemapHandler.Grid.GetCellCenterWorld(targetCell);
         transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
 
@@ -42,7 +50,7 @@ public class MovementHandler : MonoBehaviour
 
     private void TryMoveToNextCell() {
         Vector3Int nextCell = currentCell + new Vector3Int(_moveDir.x, _moveDir.y, 0);
-        TilePropertyModel tileProp = tilemapHandler.checkTileEvent(nextCell); // Проверка события следующей клетки.
+        ObjectProperty tileProp = tilemapHandler.checkTileEvent(nextCell); // Проверка события следующей клетки.
 
         if (!tileProp.IsCollision) // если клетка не стена
         {

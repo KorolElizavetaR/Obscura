@@ -2,8 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class TilesBehavior : MonoBehaviour {
-    public TilePropertyModel tileProperty = new TilePropertyModel();
+public class TilesBehavior : ObjectBehavior {
 
     protected Tilemap currentTilemap;
 
@@ -11,11 +10,11 @@ public class TilesBehavior : MonoBehaviour {
         currentTilemap = GetComponent<Tilemap>();
     }
 
-    virtual public TilePropertyModel onEvent() {
-        return tileProperty;
-    }
+    //override public ObjectProperty OnEvent() {
+    //    return tileProperty;
+    //}
     
-    public bool checkEventTrigger (Vector3Int currentTile) {
+    override public bool CheckIsCurrentObject (Vector3Int currentTile) {
         return currentTilemap.HasTile(currentTile);
     }
 

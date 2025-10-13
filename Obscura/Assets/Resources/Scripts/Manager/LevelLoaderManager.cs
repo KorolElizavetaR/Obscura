@@ -6,7 +6,6 @@ public class LevelLoaderManager : MonoBehaviour {
 
     [SerializeField] private List<GameObject> _levels;
     private GameObject currentLevel;
-    //[SerializeField] private Player player;
     [SerializeField] int currentLevelId;
 
     private void Awake() {

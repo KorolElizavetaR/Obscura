@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class TilePropertyModel {
-    public TilePropertyModel(bool isCollision, bool isDeadly) {
+public class ObjectProperty {
+    public ObjectProperty(bool isCollision, bool isDeadly) {
         IsCollision = isCollision;
         IsDeadly = isDeadly;
     }
 
-    public TilePropertyModel() {
+    public ObjectProperty() {
         IsCollision = false;
         IsDeadly = false;
     }
@@ -14,5 +14,5 @@ public class TilePropertyModel {
     [SerializeField] public bool IsCollision { get; set; }
     [SerializeField] public bool IsDeadly { get; set; }
 
-    public static TilePropertyModel baseProperty = new TilePropertyModel(false, false);
+    public static ObjectProperty baseProperty = new ObjectProperty(false, false);
 }
