@@ -664,7 +664,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.63, y: 0.63, z: 0.63}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1329264644424334449}
@@ -698,9 +698,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grid: {fileID: 816268514144873244}
-  tiles:
-  - {fileID: 2427291970863159810}
+  objects:
   - {fileID: 1152281295220119514}
+  - {fileID: 6048260373587488488}
   playerBegginingPosition: {fileID: 4410046551271132611}
 --- !u!1 &2112324150300564231
 GameObject:
@@ -713,7 +713,7 @@ GameObject:
   - component: {fileID: 7455316078275990410}
   - component: {fileID: 4284075716756832416}
   - component: {fileID: 5466776824970396732}
-  - component: {fileID: 2427291970863159810}
+  - component: {fileID: 6048260373587488488}
   m_Layer: 0
   m_Name: Finish
   m_TagString: Untagged
@@ -860,7 +860,7 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &2427291970863159810
+--- !u!114 &6048260373587488488
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -869,7 +869,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2112324150300564231}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae646ac3dab53d04d936b3a3f3c8fd61, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f724ac74c9b0034c8f12ab0e00221c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   winWindow: {fileID: 0}

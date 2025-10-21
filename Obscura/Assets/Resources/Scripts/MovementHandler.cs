@@ -16,7 +16,7 @@ public class MovementHandler : MonoBehaviour {
             //transform.position = tilemapHandler.Grid.GetCellCenterWorld(currentCell);
         }
         else {
-            //currentCell = tilemapHandler.Grid.WorldToCell(transform.position);
+            currentCell = tilemapHandler.Grid.WorldToCell(transform.position);
             //targetCell = currentCell;
         }
         Debug.Log($"[MovementHandler] currentCell: {currentCell}");
