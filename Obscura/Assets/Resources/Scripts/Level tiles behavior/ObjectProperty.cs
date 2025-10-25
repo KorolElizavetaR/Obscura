@@ -1,18 +1,19 @@
 using UnityEngine;
 
 public class ObjectProperty {
-    public ObjectProperty(bool isCollision, bool isDeadly) {
+    public ObjectProperty(bool isCollision) {
         IsCollision = isCollision;
-        IsDeadly = isDeadly;
     }
 
     public ObjectProperty() {
         IsCollision = false;
-        IsDeadly = false;
     }
 
     [SerializeField] public bool IsCollision { get; set; }
-    [SerializeField] public bool IsDeadly { get; set; }
 
-    public static ObjectProperty baseProperty = new ObjectProperty(false, false);
+    public static ObjectProperty emptyTileProperty = new ObjectProperty(false);
+
+    public override string ToString() {
+        return $"IsCollision = {IsCollision}";
+    }
 }

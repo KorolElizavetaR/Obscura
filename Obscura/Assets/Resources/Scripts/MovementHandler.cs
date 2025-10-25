@@ -9,19 +9,17 @@ public class MovementHandler : MonoBehaviour {
     private Vector3Int targetCell;
     public Vector3Int _moveDir { get; set; }
 
+    private bool isPlayer;
+
     void Start() {
-        if (TryGetComponent<Player>(out Player playerComponent)) {
-            currentCell = tilemapHandler.getInitialPlayerPosition();
-            //targetCell = currentCell;
-            //transform.position = tilemapHandler.Grid.GetCellCenterWorld(currentCell);
-        }
-        else {
-            currentCell = tilemapHandler.Grid.WorldToCell(transform.position);
-            //targetCell = currentCell;
-        }
+        isPlayer = TryGetComponent<Player>(out Player playerComponent);
+        Debug.Log($"[MovementHandler] playerComponent: {playerComponent}");
+        currentCell = isPlayer 
+            ? tilemapHandler.getInitialPlayerPosition()
+            : tilemapHandler.getCellFromCoords(transform.position);
         Debug.Log($"[MovementHandler] currentCell: {currentCell}");
         targetCell = currentCell;
-        transform.position = tilemapHandler.Grid.GetCellCenterWorld(currentCell);
+        transform.position = tilemapHandler.getCoordFromCell(currentCell);
     }
 
     /// <summary>
@@ -32,15 +30,14 @@ public class MovementHandler : MonoBehaviour {
     /// <para><c>false</c> - если объект останавливаетс€</para>
     /// </returns>
     public bool move() {
-        Vector3 targetPos = tilemapHandler.Grid.GetCellCenterWorld(targetCell);
+        Vector3 targetPos = tilemapHandler.getCoordFromCell(targetCell);
         transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-
+        /// значит, что мы достигли нужной клетки.
         if (Mathf.Approximately(Vector3.Distance(transform.position, targetPos), 0f)) {
             transform.position = targetPos;
             currentCell = targetCell;
             TryMoveToNextCell();
             if (currentCell == targetCell) {
-                //canMove = true;
                 _moveDir = Vector3Int.zero;
                 return false;
             }
@@ -49,12 +46,21 @@ public class MovementHandler : MonoBehaviour {
     }
 
     private void TryMoveToNextCell() {
+        Debug.Log($"movedir: {_moveDir}");
         Vector3Int nextCell = currentCell + new Vector3Int(_moveDir.x, _moveDir.y, 0);
-        ObjectProperty tileProp = tilemapHandler.checkTileEvent(nextCell); // ѕроверка событи€ следующей клетки.
 
-        if (!tileProp.IsCollision) // если клетка не стена
+        //bool collision = tilemapHandler.isCollision(nextCell);
+
+        if (isPlayer) {
+            tilemapHandler.triggerTileEvent(currentCell, nextCell);
+        }
+
+        bool collision = tilemapHandler.isCollision(nextCell);
+
+        if (!collision) // если клетка не стена
         {
             targetCell = nextCell;
         }
     }
+
 }

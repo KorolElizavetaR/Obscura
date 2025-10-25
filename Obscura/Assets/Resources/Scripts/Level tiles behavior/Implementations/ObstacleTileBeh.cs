@@ -1,8 +1,15 @@
 using UnityEngine;
 
-public class ObstacleTileBeh : TilesBehavior {
+public class ObstacleTileBeh : StaticObjBehavior {
     private void Awake() {
-        tileProperty.IsDeadly = false;
-        tileProperty.IsCollision = true;
+        objectProperty.IsCollision = true;
     }
+    public override void OnEvent() {
+        return;
+    }
+
+    public override void OnEvent(ObjectBehavior nextCell) {
+        return;
+    }
+
 }

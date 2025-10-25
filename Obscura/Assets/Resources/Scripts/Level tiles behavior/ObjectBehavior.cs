@@ -3,9 +3,12 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public abstract class ObjectBehavior : MonoBehaviour {
-    public ObjectProperty tileProperty = new ObjectProperty();
+
+    public TilemapHandler _tilemapHandler;
+
+
+    public ObjectProperty objectProperty { get; set; } = new ObjectProperty();
     public abstract bool CheckIsCurrentObject(Vector3Int cellPos);
-    virtual public ObjectProperty OnEvent() {
-        return tileProperty;
-    }
+    abstract public void OnEvent();
+    abstract public void OnEvent(ObjectBehavior nextCell);
 }

@@ -1,23 +1,28 @@
 using UnityEngine;
 using System.Collections;
 
-public class FinishTileBeh : TilesBehavior {
+public class FinishTileBeh : StaticObjBehavior {
 
-    [SerializeField] private GameObject winWindow;
+    //[SerializeField] private GameObject winWindow;
 
     private void Awake() {
-        tileProperty.IsDeadly = false;
-        tileProperty.IsCollision = false;
+        objectProperty.IsCollision = false;
     }
 
-    public override ObjectProperty OnEvent() {
-        StartCoroutine(ShowWinWindow());
-        return base.OnEvent();
+    public override void OnEvent() {
+        return;
+    }
+
+    public override void OnEvent(ObjectBehavior nextCell) {
+        ObjectProperty nextCellProperty = nextCell.objectProperty;
+        if (nextCellProperty.IsCollision) {
+            StartCoroutine(ShowWinWindow());
+        }
     }
 
     public IEnumerator ShowWinWindow() {
-        yield return new WaitForSeconds(1); // Pause for one frame (in Unity)
+        yield return new WaitForSeconds(1);
         Debug.Log("Show win window");
-        winWindow.SetActive(true);
+        //winWindow.SetActive(true);
     }
 }

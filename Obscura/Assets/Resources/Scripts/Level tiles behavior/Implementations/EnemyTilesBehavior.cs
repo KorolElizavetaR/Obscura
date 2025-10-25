@@ -2,17 +2,17 @@ using System.Collections;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
-public class EnemyTilesBehavior : TilesBehavior {
-
+public class EnemyTilesBehavior : StaticObjBehavior {
     private void Awake() {
-        tileProperty.IsCollision = true;
-        tileProperty.IsDeadly  = true;
+        objectProperty.IsCollision = true;
     }
 
-    override public ObjectProperty OnEvent() {
+    override public void OnEvent() {
         Debug.Log($"u ded in 1 sec");
         StartCoroutine(ShowDeathWindow());
-        return tileProperty;
+    }
+    public override void OnEvent(ObjectBehavior nextCell) {
+        throw new System.NotImplementedException("Shouldn't be here");
     }
 
     public IEnumerator ShowDeathWindow() {

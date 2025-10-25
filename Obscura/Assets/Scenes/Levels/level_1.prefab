@@ -636,6 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2d0412d3b9854f47862ff5703f6d4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tilemapHandler: {fileID: 0}
 --- !u!1 &1446761184725008186
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,11 +698,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f2c93a632ec8a4483af894f1fb8c3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 816268514144873244}
   objects:
   - {fileID: 1152281295220119514}
   - {fileID: 6048260373587488488}
-  playerBegginingPosition: {fileID: 4410046551271132611}
 --- !u!1 &2112324150300564231
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,6 +871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f724ac74c9b0034c8f12ab0e00221c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tilemapHandler: {fileID: 0}
   winWindow: {fileID: 0}
 --- !u!1 &4410046551271132611
 GameObject:
@@ -1000,7 +1000,7 @@ Tilemap:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5573254868775972394}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Tiles:
   - first: {x: -5, y: 0, z: 0}
     second:

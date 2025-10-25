@@ -4,37 +4,60 @@ using UnityEngine.Tilemaps;
 using System.Collections.Generic;
 
 public class TilemapHandler : MonoBehaviour {
-    [SerializeField] private Grid grid;
+    [SerializeField] private Grid Grid;
     [SerializeField] private List<ObjectBehavior> objects;
-    [SerializeField] private GameObject playerBegginingPosition;
+    private GameObject playerBegginingPosition;
 
-    private void Awake() {
+    public void Awake() {
         playerBegginingPosition = GameObject.FindGameObjectWithTag("Respawn");
-        foreach (ObjectBehavior obj in objects) {
-            if (obj is SpriteBehavior sprite) {
-                sprite.CurrentCell = getCell(sprite.gameObject);
-            }
+        Debug.Log($"[TilemapHandler] playerBegginingPosition: {playerBegginingPosition}");
+
+        Grid = GetComponent<Grid>();
+
+        foreach (var obj in objects) {
+            obj._tilemapHandler = this;
         }
+        Debug.Log($"[TilemapHandler] Awake");
+    }
+
+    public Vector3Int getCellFromCoords(Vector3 objCoord) {
+        return Grid.WorldToCell(objCoord);
+    }
+    public Vector3 getCoordFromCell(Vector3Int objCell) {
+        return Grid.GetCellCenterWorld(objCell);
     }
 
     public Vector3Int getInitialPlayerPosition() {
         return Grid.WorldToCell(playerBegginingPosition.transform.position);
     }
 
-    public Vector3Int getCell(GameObject obj) {
-        return Grid.WorldToCell(obj.transform.position);
+   
+    public void triggerTileEvent(Vector3Int currentCell, Vector3Int nextCell) {
+        ObjectBehavior objBehCurrent = getObjectBeh(currentCell);
+        ObjectBehavior objBehNext = getObjectBeh(nextCell);
+        
+        if (objBehCurrent != null) {
+            objBehCurrent.OnEvent(objBehNext);
+        }
+        if (objBehNext != null) { 
+            objBehNext.OnEvent(); 
+        };
     }
 
-    public Grid Grid => grid;
+    public bool isCollision(Vector3Int cell) {
+        ObjectBehavior objBeh = getObjectBeh(cell);
+        return objBeh != null 
+            ? objBeh.objectProperty.IsCollision 
+            : false;
+    }
 
-    public ObjectProperty checkTileEvent(Vector3Int currentTile) {
+    private ObjectBehavior getObjectBeh(Vector3Int currentCell) {
         foreach (ObjectBehavior tile in objects) {
-            if (tile.CheckIsCurrentObject(currentTile)) {
-                ObjectProperty state = tile.OnEvent();
-                return state;
+            if (tile.CheckIsCurrentObject(currentCell)) {
+                return tile;
             }
         }
-        return ObjectProperty.baseProperty;
+        return null;
     }
 
 }

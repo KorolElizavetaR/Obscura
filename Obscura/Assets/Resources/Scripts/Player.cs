@@ -16,7 +16,8 @@ public class Player : MonoBehaviour
             ProcessInput();
         }
         else {
-            canMove = !movementHandler.move();
+            bool canMoveForward = movementHandler.move();
+            canMove = !canMoveForward;
         }
     }
 

@@ -439,7 +439,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 718338998}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Density: 1
   m_Material: {fileID: 0}
@@ -725,7 +725,7 @@ MonoBehaviour:
   _levels:
   - {fileID: 1446761184725008186, guid: 67bf7a331ac653d49a2b77666f78b3ed, type: 3}
   - {fileID: 1446761184725008186, guid: 5204482eb425dab4698f56aea124e745, type: 3}
-  currentLevelId: 1
+  currentLevelId: 0
 --- !u!1 &1417123526
 GameObject:
   m_ObjectHideFlags: 0
