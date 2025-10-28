@@ -14,8 +14,11 @@ public class FinishTileBeh : StaticObjBehavior {
     }
 
     public override void OnEvent(ObjectBehavior nextCell) {
-        ObjectProperty nextCellProperty = nextCell.objectProperty;
-        if (nextCellProperty.IsCollision) {
+        //ObjectProperty nextCellProperty = nextCell.objectProperty;
+
+        bool nextCellCollision = _tilemapHandler.isCollision(nextCell);
+
+        if (nextCellCollision) {
             StartCoroutine(ShowWinWindow());
         }
     }
