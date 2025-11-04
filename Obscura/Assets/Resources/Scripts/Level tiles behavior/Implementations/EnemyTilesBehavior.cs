@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
+using UnityEngine.Playables;
 
 public class EnemyTilesBehavior : StaticObjBehavior {
+
     private void Awake() {
         objectProperty.IsCollision = true;
+
+        
     }
 
     override public void OnEvent() {
+        Player.State.IsDead = true;
+
         Debug.Log($"u ded in 1 sec");
         StartCoroutine(ShowDeathWindow());
     }
