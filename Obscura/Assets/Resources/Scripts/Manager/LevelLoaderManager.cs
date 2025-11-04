@@ -7,14 +7,14 @@ public class LevelLoaderManager : MonoBehaviour {
     [SerializeField] private List<GameObject> _levels;
     private GameObject currentLevel;
     [SerializeField] int currentLevelId;
-    
+
     [Header("Camera")]
     public Camera cam;
     public float horizontalPadding = 1f;
     public float verticalPadding = 1f;
 
     private void Awake() {
-      //currentLevelId = PlayerPrefs.GetInt("level");
+      currentLevelId = PlayerPrefs.GetInt("level");
       currentLevel = Instantiate(_levels[currentLevelId]);
       MovementHandler.tilemapHandler = currentLevel.GetComponent<TilemapHandler>();
       SetupCamera();

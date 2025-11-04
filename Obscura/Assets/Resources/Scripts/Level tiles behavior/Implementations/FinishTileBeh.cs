@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class FinishTileBeh : StaticObjBehavior {
 
@@ -20,6 +21,20 @@ public class FinishTileBeh : StaticObjBehavior {
 
         if (nextCellCollision) {
             StartCoroutine(ShowWinWindow());
+
+            int currentLevel = PlayerPrefs.GetInt("level");
+
+            string jsonData = PlayerPrefs.GetString("levels", string.Empty);
+            var completedLevels = string.IsNullOrEmpty(jsonData)
+                ? new HashSet<int>()
+                : JsonFormatter.FromJson<HashSet<int>>(jsonData);
+
+            completedLevels.Add(currentLevel);
+
+            Debug.Log($"F completedLevels: {completedLevels.Count}");
+
+            jsonData = JsonFormatter.ToJson(completedLevels);
+            PlayerPrefs.SetString("levels", jsonData);
         }
     }
 

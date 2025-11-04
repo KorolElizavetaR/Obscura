@@ -24,5 +24,6 @@ public class EnemyTilesBehavior : StaticObjBehavior {
     public IEnumerator ShowDeathWindow() {
         yield return null; // Pause for one frame (in Unity)
         Debug.Log("Show death window");
+
     }
 }
