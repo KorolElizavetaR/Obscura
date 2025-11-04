@@ -1,13 +1,15 @@
 using Unity.Android.Types;
 using UnityEngine;
 
-public class Player : MonoBehaviour
-{
-    public static readonly PlayerState State = new PlayerState();
+public class Player : MonoBehaviour {
+    public static PlayerState State;
     private bool canMove;
     private MovementHandler movementHandler;
+    [SerializeField] private Animator animator;
+
 
     private void Start() {
+        State = new PlayerState(animator);
         movementHandler = GetComponent<MovementHandler>();
     }
 
@@ -33,17 +35,48 @@ public class Player : MonoBehaviour
             movementHandler._moveDir = Mathf.Abs(movementOffsetX) > Mathf.Abs(movementOffsetY)
                 ? new Vector3Int(Mathf.RoundToInt(movementOffsetX), 0, 0)
                 : new Vector3Int(0, Mathf.RoundToInt(movementOffsetY), 0);
+
+            transform.rotation = (movementHandler._moveDir.x, movementHandler._moveDir.y) switch {
+                ( > 0, 0) => Quaternion.Euler(0, 0, 90),   // Right
+                ( < 0, 0) => Quaternion.Euler(0, 0, -90),  // Left
+                (0, > 0) => Quaternion.Euler(0, 0, 180),   // Up
+                (0, < 0) => Quaternion.identity,           // Down
+                _ => transform.rotation                    // No change for other cases
+            };
         }
     }
 
     public class PlayerState {
-        public bool IsMoving { get; set; }
-        public bool IsDead { get; set; }
+        private bool isMoving;
+        private bool isDead;
 
-        public PlayerState() {
-            IsMoving = false;
-            IsDead = false;
+        private Animator animator;
+
+        public PlayerState(Animator animator) {
+            this.animator = animator;
+
+            Debug.Log($"animator null:{animator is null} ");
         }
+
+        public bool IsMoving {
+            get => isMoving;
+            set {
+                if (isMoving && !value) {
+                    animator.SetTrigger("bounceTrigger");
+                } 
+                this.isMoving = value;
+            }
+        }
+        public bool IsDead {
+            get => isDead;
+            set {
+                this.isDead = value;
+                if (isDead) {
+                    animator.SetTrigger("deathTrigger");
+                }
+            }
+        }
+
     }
 
 }
