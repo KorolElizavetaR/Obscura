@@ -17,12 +17,16 @@ public class PopupAnimation : MonoBehaviour {
     private RectTransform rectTransform;
 
     public void Start() {
+        levelFade.raycastTarget = backgroundFade.raycastTarget = false;
+
         rectTransform = GetComponent<RectTransform>();
         startPoz = rectTransform.anchoredPosition;
     }
 
     public Tween onOpenModalSlide() {
         tween?.Kill();
+
+        backgroundFade.raycastTarget = true;
 
         Sequence seq = DOTween.Sequence();
         seq.Append(rectTransform.DOAnchorPos(targetPoz, duration).SetEase(ease));
@@ -36,6 +40,8 @@ public class PopupAnimation : MonoBehaviour {
     public Tween onCloseModalSlide() {
         tween?.Kill();
 
+        backgroundFade.raycastTarget = false;
+
         var seq = DOTween.Sequence();
         seq.Append(rectTransform.DOAnchorPos(startPoz, duration).SetEase(ease));
         seq.Join(backgroundFade.DOFade(0, duration));
@@ -45,12 +51,9 @@ public class PopupAnimation : MonoBehaviour {
         return tween;
     }
 
-    //public void onCloseModalSlideF() {
-    //    onCloseModalSlide();
-    //}
-
     public Tween onCloseModalFade() {
         tween?.Kill();
+        levelFade.raycastTarget = true;
         tween = levelFade.DOFade(1f, duration) as Tween;
         return tween;
     }
