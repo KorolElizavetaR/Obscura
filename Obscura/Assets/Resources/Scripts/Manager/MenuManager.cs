@@ -36,6 +36,6 @@ public class MenuManager : MonoBehaviour
 
     private void setAvailableLevelAmount() {
         PlayerPrefs.SetInt("maxAvailableLevel", _levels.Count-1);
-        PlayerPrefs.Save(); ;
+        PlayerPrefs.Save();
     }
 }
