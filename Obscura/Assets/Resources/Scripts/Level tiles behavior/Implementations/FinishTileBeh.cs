@@ -4,10 +4,12 @@ using System.Collections.Generic;
 
 public class FinishTileBeh : StaticObjBehavior {
 
-    //[SerializeField] private GameObject winWindow;
+    public PopupAnimation winWindow;
 
     private void Awake() {
         objectProperty.IsCollision = false;
+
+
     }
 
     public override void OnEvent() {
@@ -20,7 +22,7 @@ public class FinishTileBeh : StaticObjBehavior {
         bool nextCellCollision = _tilemapHandler.isCollision(nextCell);
 
         if (nextCellCollision) {
-            StartCoroutine(ShowWinWindow());
+            //StartCoroutine(ShowWinWindow());
 
             int currentLevel = PlayerPrefs.GetInt("level");
 
@@ -35,12 +37,15 @@ public class FinishTileBeh : StaticObjBehavior {
 
             jsonData = JsonFormatter.ToJson(completedLevels);
             PlayerPrefs.SetString("levels", jsonData);
+
+            ShowWinWindow();
         }
     }
 
-    public IEnumerator ShowWinWindow() {
-        yield return new WaitForSeconds(1);
-        Debug.Log("Show win window");
-        //winWindow.SetActive(true);
+    public void ShowWinWindow() {
+        //yield return new WaitForSeconds(1);
+        //Debug.Log("Show win window");
+
+        winWindow.onOpenModalSlide();
     }
 }
