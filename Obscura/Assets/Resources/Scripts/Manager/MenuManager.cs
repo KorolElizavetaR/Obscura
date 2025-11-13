@@ -9,7 +9,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private Sprite _levelSprite;
     [SerializeField] private Sprite _levelCompletedSprite;
 
-    [SerializeField] private List<ModalEvent> _levels;
+    [SerializeField] private List<LevelPicker> _levels;
 
     void Start() {
         string jsonData = PlayerPrefs.GetString("levels", string.Empty);

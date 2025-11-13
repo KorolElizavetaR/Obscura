@@ -3,7 +3,7 @@ using UnityEngine.InputSystem.Controls;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class ModalEvent : MonoBehaviour
+public class LevelPicker : MonoBehaviour
 {
     [SerializeField] private int levelIndex;
     [SerializeField] private Image levelImage;

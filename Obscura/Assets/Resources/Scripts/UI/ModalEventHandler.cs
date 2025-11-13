@@ -27,4 +27,5 @@ public class ModalEventHandler : MonoBehaviour
     public void onClickCloseModal() {
         popupAnimation.onCloseModalSlide();
     }
+
 }
