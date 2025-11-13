@@ -13,6 +13,7 @@ public class LevelLoaderManager : MonoBehaviour {
     public float verticalPadding = 1f;
 
     [SerializeField] private PopupAnimation winModal;
+    [SerializeField] private PopupAnimation failWindow;
 
     private void Awake() {
         int currentLevelId = PlayerPrefs.GetInt("level");
@@ -44,6 +45,10 @@ public class LevelLoaderManager : MonoBehaviour {
         FinishTileBeh finishTileBeh = currentLevel.GetComponentInChildren<FinishTileBeh>();
         if (finishTileBeh is not null) {
             finishTileBeh.winWindow = winModal;
+        }
+        EnemyTilesBehavior enemyTilesBehavior = currentLevel.GetComponentInChildren<EnemyTilesBehavior>();
+        if (enemyTilesBehavior is not null) {
+            enemyTilesBehavior.failWindow = failWindow;
         }
     }
 }

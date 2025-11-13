@@ -5,10 +5,10 @@ using UnityEngine.Playables;
 
 public class EnemyTilesBehavior : StaticObjBehavior {
 
-    private void Awake() {
-        objectProperty.IsCollision = true;
+    public PopupAnimation failWindow;
 
-        
+    private void Awake() {
+        objectProperty.IsCollision = true;        
     }
 
     override public void OnEvent() {
@@ -24,6 +24,6 @@ public class EnemyTilesBehavior : StaticObjBehavior {
     public IEnumerator ShowDeathWindow() {
         yield return null; // Pause for one frame (in Unity)
         Debug.Log("Show death window");
-
+        failWindow.onOpenModalSlide();
     }
 }

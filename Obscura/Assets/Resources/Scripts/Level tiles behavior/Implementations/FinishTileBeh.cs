@@ -38,6 +38,8 @@ public class FinishTileBeh : StaticObjBehavior {
             jsonData = JsonFormatter.ToJson(completedLevels);
             PlayerPrefs.SetString("levels", jsonData);
 
+            Player.State.IsWin = true;
+
             ShowWinWindow();
         }
     }

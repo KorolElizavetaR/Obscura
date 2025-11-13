@@ -14,13 +14,15 @@ public class Player : MonoBehaviour {
     }
 
     private void Update() {
-        if (canMove) {
-            ProcessInput();
-        }
-        else {
-            bool canMoveForward = movementHandler.move();
-            canMove = !canMoveForward;
-            State.IsMoving = canMoveForward;
+        if (!State.IsDead && !State.IsWin) {
+            if (canMove) {
+                ProcessInput();
+            }
+            else {
+                bool canMoveForward = movementHandler.move();
+                canMove = !canMoveForward;
+                State.IsMoving = canMoveForward;
+            }
         }
     }
 
@@ -49,6 +51,7 @@ public class Player : MonoBehaviour {
     public class PlayerState {
         private bool isMoving;
         private bool isDead;
+        private bool isWin = false;
 
         private Animator animator;
 
@@ -57,6 +60,8 @@ public class Player : MonoBehaviour {
 
             Debug.Log($"animator null:{animator is null} ");
         }
+
+        public bool IsWin { get => isWin; set => this.isWin = value; }
 
         public bool IsMoving {
             get => isMoving;

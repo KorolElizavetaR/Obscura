@@ -14,4 +14,19 @@ public class HandleModalButtonsEvents : MonoBehaviour {
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
+    public void loadNextLevel() {
+        int maxAvailableLevel = PlayerPrefs.GetInt("maxAvailableLevel");
+        int currLevel = PlayerPrefs.GetInt("level");
+        if (currLevel == maxAvailableLevel) {
+            Debug.Log("Дальше уровней нема");
+            return;
+        }
+        PlayerPrefs.SetInt("level", ++currLevel);
+        SceneManager.LoadScene("game_scene");
+    }
+
+    public void reloadLevel() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
 }

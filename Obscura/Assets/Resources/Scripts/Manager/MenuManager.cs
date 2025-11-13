@@ -12,10 +12,7 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private List<LevelPicker> _levels;
 
     void Start() {
-        string jsonData = PlayerPrefs.GetString("levels", string.Empty);
-        var completedLevels = string.IsNullOrEmpty(jsonData)
-            ? new HashSet<int>()
-            : JsonFormatter.FromJson<HashSet<int>>(jsonData);
+        HashSet<int> completedLevels = getCompletedLevels();
 
         Debug.Log($"completedLevels: [{string.Join(", ", completedLevels)}]");
 
@@ -26,5 +23,19 @@ public class MenuManager : MonoBehaviour
                 level.LevelImage.sprite = _levelSprite;
             }
         }
+
+        setAvailableLevelAmount();
+    }
+
+    private HashSet<int> getCompletedLevels() {
+        string jsonData = PlayerPrefs.GetString("levels", string.Empty);
+        return string.IsNullOrEmpty(jsonData)
+            ? new HashSet<int>()
+            : JsonFormatter.FromJson<HashSet<int>>(jsonData);
+    }
+
+    private void setAvailableLevelAmount() {
+        PlayerPrefs.SetInt("maxAvailableLevel", _levels.Count-1);
+        PlayerPrefs.Save(); ;
     }
 }
