@@ -50,8 +50,5 @@ TagManager:
   - name: UI
     uniqueID: 1202439335
     locked: 0
-  - name: loadingscreen
-    uniqueID: 1399317847
-    locked: 0
   m_RenderingLayers:
   - Default
