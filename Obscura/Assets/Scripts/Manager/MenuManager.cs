@@ -3,16 +3,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+// Запускается каждый раз при загрузке сцены
 public class MenuManager : MonoBehaviour
 {
-    [SerializeField] private Sprite _levelSprite;
-    [SerializeField] private Sprite _levelCompletedSprite;
+    [SerializeField] private Sprite _levelButtonSprite;
+    [SerializeField] private Sprite _levelButtonCompletedSprite;
 
     [SerializeField] private Sprite _lockSprite;
 
     [SerializeField] private TMP_FontAsset _textFont;
 
     [SerializeField] private List<LevelSelectionButton> _levels;
+
+    
 
     void Start() {
         setVisualForLevel();
@@ -36,8 +39,8 @@ public class MenuManager : MonoBehaviour
             levelIcon.transform.SetParent(level.transform, false);
 
             level.LevelImage.sprite = completedLevels.Contains(level.LevelIndex)
-                ? _levelCompletedSprite
-                : _levelSprite;
+                ? _levelButtonCompletedSprite
+                : _levelButtonSprite;
 
             // make object from initiateLevelIcon(level) chilf og LevelSelectionButton
         }
