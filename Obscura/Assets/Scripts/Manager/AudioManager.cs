@@ -22,4 +22,12 @@ public class AudioManager : MonoBehaviour {
     public void disableOST() {
         disableVolume(OSTVolume);
     }
+
+    public void enableSFX() {
+        enableVolume(SFXVolume);
+    }
+
+    public void disableSFX() {
+        disableVolume(SFXVolume);
+    }
 }

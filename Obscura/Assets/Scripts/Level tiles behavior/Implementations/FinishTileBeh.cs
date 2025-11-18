@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 public class FinishTileBeh : StaticObjBehavior {
 
@@ -37,6 +38,7 @@ public class FinishTileBeh : StaticObjBehavior {
             PlayerPrefs.SetString("levels", jsonData);
 
             Player.State.IsWin = true;
+            
 
             ShowWinWindow();
         }

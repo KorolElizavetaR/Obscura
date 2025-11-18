@@ -9,6 +9,8 @@ public class Player : MonoBehaviour {
 
     private PlayerSFX playerSFX;
 
+    private bool playedWinSoundOnce;
+
 
     private void Start() {
         State = new PlayerState(animator);
@@ -27,6 +29,10 @@ public class Player : MonoBehaviour {
                 canMove = !canMoveForward;
                 State.IsMoving = canMoveForward;
             }
+        }
+        if (State.IsWin && !playedWinSoundOnce) {
+            playedWinSoundOnce = true;
+            playerSFX.playWinSound();
         }
     }
 
@@ -66,7 +72,9 @@ public class Player : MonoBehaviour {
             Debug.Log($"animator null:{animator is null} ");
         }
 
-        public bool IsWin { get => isWin; set => this.isWin = value; }
+        public bool IsWin { get => isWin; set {
+                this.isWin = value;
+            } }
 
         public bool IsMoving {
             get => isMoving;
