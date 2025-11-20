@@ -15,8 +15,6 @@ public class MenuManager : MonoBehaviour
 
     [SerializeField] private List<LevelSelectionButton> _levels;
 
-    
-
     void Start() {
         setVisualForLevel();
         setMaxAvailableLevelAmount();

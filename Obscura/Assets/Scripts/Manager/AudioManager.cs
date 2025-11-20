@@ -2,32 +2,26 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour {
-    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] 
+    private AudioMixer audioMixer;
 
     private const string OSTVolume = "OSTVolume";
     private const string SFXVolume = "SFXVolume";
 
-    private void enableVolume(string name) {
-        audioMixer.SetFloat(name, 0f);
+    private void Start() {
+        Debug.Log("AudioManager Awake in scene: " + gameObject.scene.name);
+        string[] soundVolumePrefsNames = { OSTVolume, SFXVolume };
+
+        foreach (string soundVolumePref in soundVolumePrefsNames) {
+            bool turnedOn = PlayerPrefs.GetInt(soundVolumePref, 1) == 1;
+            Debug.Log($"{soundVolumePref} active: {turnedOn}");
+            setVolume(soundVolumePref, turnedOn);
+        }
     }
 
-    private void disableVolume(string name) { 
-        audioMixer.SetFloat(name, -80f); 
+    public void setVolume(string name, bool turnedOn) {
+        float volume = turnedOn ? 0.0f : -80f;
+        audioMixer.SetFloat(name, volume);
     }
 
-    public void enableOST() {
-        enableVolume(OSTVolume);
-    }
-
-    public void disableOST() {
-        disableVolume(OSTVolume);
-    }
-
-    public void enableSFX() {
-        enableVolume(SFXVolume);
-    }
-
-    public void disableSFX() {
-        disableVolume(SFXVolume);
-    }
 }
