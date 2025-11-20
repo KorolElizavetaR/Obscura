@@ -7,7 +7,7 @@ public class MovingBlockBehavior : DynamicObjBehavior {
     // перемещение блока
     private MovementHandler movementHandler;
     private bool isMoving = false;
-    private void Awake() {
+    public void Awake() {
         movementHandler = GetComponent<MovementHandler>();
 
         objectProperty.IsCollision = true;

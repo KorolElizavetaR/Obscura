@@ -1,18 +1,12 @@
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using System.Collections.Generic;
+using System.Collections;
+using UnityEngine.TestTools;
+using System.Reflection;
 
 namespace Tests.Unit {
-
-    class FakeTilemapHandler : TilemapHandler {
-        bool _value;
-        public FakeTilemapHandler(bool alwaysCollision) {
-            _value = alwaysCollision;
-        }
-
-        public override bool isCollision(ObjectBehavior nextCell) {
-            return _value;
-        }
-    }
 
     public class UnitTests {
 
@@ -58,5 +52,36 @@ namespace Tests.Unit {
             Assert.IsTrue(Player.State.IsDead);
         }
 
+        [Test]
+        public void JsonFormatter_SerializesAndDeserializesHashSetCorrectly() {
+            var set = new HashSet<int> { 2, 5, 8 };
+            string json = JsonFormatter.ToJson(set);
+            var deserialized = JsonFormatter.FromJson<HashSet<int>>(json);
+
+            Assert.AreEqual(3, deserialized.Count);
+            Assert.IsTrue(deserialized.Contains(5));
+        }
+
+        [Test]
+        public void EnemyTilesBehavior_OnEvent_SetsPlayerDeadAndStartsCoroutine() {
+            var go = new GameObject();
+            var enemy = go.AddComponent<EnemyTilesBehavior>();
+            var popup = new GameObject().AddComponent<PopupAnimation>();
+            enemy.failWindow = popup;
+
+            // Инициализируем Player.State
+            var playerObj = new GameObject();
+            Player.State = new Player.PlayerState(playerObj.AddComponent<Animator>());
+
+            enemy.OnEvent();
+
+            Assert.IsTrue(Player.State.IsDead);
+        }
+
+        public class SimpleTilemapHandlerStub : TilemapHandler {
+            public override bool isCollision(Vector3Int cell) => true;
+            public override bool isCollision(ObjectBehavior objBeh) => objBeh?.objectProperty.IsCollision ?? false;
+        }
+        
     }
 }

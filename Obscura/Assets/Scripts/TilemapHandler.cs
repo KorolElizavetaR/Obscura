@@ -44,7 +44,7 @@ public class TilemapHandler : MonoBehaviour {
         };
     }
 
-    public bool isCollision(Vector3Int cell) {
+    public virtual bool isCollision(Vector3Int cell) {
         ObjectBehavior objBeh = getObjectBeh(cell);
         return isCollision(objBeh);
     }
