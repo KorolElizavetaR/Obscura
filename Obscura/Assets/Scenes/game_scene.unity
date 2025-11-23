@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 50395927}
   - component: {fileID: 50395928}
   - component: {fileID: 50395929}
+  - component: {fileID: 50395930}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -270,6 +271,20 @@ MonoBehaviour:
   AudioSource: {fileID: 743039814}
   movementSound: {fileID: 8300000, guid: 14544ef0b38021a47ba1e89db2bc1deb, type: 3}
   winSound: {fileID: 8300000, guid: ae92575b982997247bddaffe2582f93b, type: 3}
+--- !u!114 &50395930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50395921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79650cbcd0790d949b7397d38082d05b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _touch: {fileID: 697655777954867485, guid: 31a70bc8ff2629042b85301f2b876d6e, type: 3}
+  _swipe: {fileID: -1279047887351936044, guid: 31a70bc8ff2629042b85301f2b876d6e, type: 3}
 --- !u!1 &86833876
 GameObject:
   m_ObjectHideFlags: 0
@@ -2636,7 +2651,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad283b691dedad48b35ccd66316ac66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentToggleState: 1
   prefName: OSTVolume
   audioManager: {fileID: 1285172723}
 --- !u!222 &1379391159
@@ -2860,7 +2874,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad283b691dedad48b35ccd66316ac66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentToggleState: 1
   prefName: SFXVolume
   audioManager: {fileID: 1285172723}
 --- !u!222 &1418504975
