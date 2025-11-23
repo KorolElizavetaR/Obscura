@@ -1,0 +1,8 @@
+C:/msys64/projectory_hub/Unity/Obscura/Obscura/.utmp/RelWithDebInfo/3r1o6z62/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/msys64/projectory_hub/Unity/Obscura/Obscura/.utmp/RelWithDebInfo/3r1o6z62/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+C:/msys64/projectory_hub/Unity/Obscura/Obscura/.utmp/RelWithDebInfo/3r1o6z62/armeabi-v7a/GameActivity/CMakeFiles/game.dir
+C:/msys64/projectory_hub/Unity/Obscura/Obscura/.utmp/RelWithDebInfo/3r1o6z62/armeabi-v7a/GameActivity/CMakeFiles/edit_cache.dir
+C:/msys64/projectory_hub/Unity/Obscura/Obscura/.utmp/RelWithDebInfo/3r1o6z62/armeabi-v7a/GameActivity/CMakeFiles/rebuild_cache.dir
+C:/msys64/projectory_hub/Unity/Obscura/Obscura/.utmp/RelWithDebInfo/3r1o6z62/armeabi-v7a/FramePacing/CMakeFiles/swappywrapper.dir
+C:/msys64/projectory_hub/Unity/Obscura/Obscura/.utmp/RelWithDebInfo/3r1o6z62/armeabi-v7a/FramePacing/CMakeFiles/edit_cache.dir
+C:/msys64/projectory_hub/Unity/Obscura/Obscura/.utmp/RelWithDebInfo/3r1o6z62/armeabi-v7a/FramePacing/CMakeFiles/rebuild_cache.dir

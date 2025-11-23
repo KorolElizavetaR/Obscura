@@ -31,11 +31,11 @@ public class MovementHandler : MonoBehaviour {
     /// </returns>
     public bool move() {
         Vector3 targetPos = tilemapHandler.getCoordFromCell(targetCell);
-        Debug.Log($"[MovementHandler] currentCell: {currentCell}");
+        //Debug.Log($"[MovementHandler] currentCell: {currentCell}");
         transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
         /// значит, что мы достигли нужной клетки.
         if (Mathf.Approximately(Vector3.Distance(transform.position, targetPos), 0f)) {
-            Debug.Log($"next sell");
+            //Debug.Log($"next sell");
             transform.position = targetPos;
             currentCell = targetCell;
             TryMoveToNextCell();

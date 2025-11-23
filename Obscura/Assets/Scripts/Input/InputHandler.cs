@@ -18,6 +18,21 @@ public class InputHandler : MonoBehaviour
 
     private InputCallback inputCallback;
 
+    private static InputHandler Instance;
+    //private float _swipeThreshold = 10f;
+
+    void Awake() {
+        if (Instance == null) {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else {
+            Destroy(gameObject);
+        }
+        Application.targetFrameRate = 60;
+        QualitySettings.vSyncCount = 0;
+    }
+
     private void Start() {
         _touch.action.Enable();
         _swipe.action.Enable();
@@ -27,11 +42,20 @@ public class InputHandler : MonoBehaviour
     }
 
     private void ProcessSwipeDelta(InputAction.CallbackContext context) {
-        inputCallback._swipeDelta = _swipe.action.ReadValue<Vector2>();
+        Vector2 swipeDelta = _swipe.action.ReadValue<Vector2>();
+        inputCallback._swipeDelta = swipeDelta;
         onSwipeDelta?.Invoke(inputCallback);
+
+        //if (swipeDelta.magnitude >= _swipeThreshold) {
+        //    inputCallback._swipeDelta = swipeDelta;
+        //    onSwipeDelta?.Invoke(inputCallback);
+        //} else {
+        //    inputCallback._swipeDelta = Vector2.zero;
+        //}
     }
 
     private void ProcessTouchComplete(InputAction.CallbackContext context) {
+        Debug.Log($"inputCallback._swipeDelta: {inputCallback._swipeDelta}");
         onTouchComplete?.Invoke(inputCallback);
     }
 

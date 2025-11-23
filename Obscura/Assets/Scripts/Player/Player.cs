@@ -1,4 +1,3 @@
-using Unity.Android.Types;
 using UnityEngine;
 using static InputHandler;
 
@@ -18,7 +17,7 @@ public class Player : MonoBehaviour {
     private void Start() {
         State = new PlayerState(animator);
         movementHandler = GetComponent<MovementHandler>();
-        inputHandler = GetComponent<InputHandler>();
+        inputHandler = FindFirstObjectByType<InputHandler>();
         inputHandler.onTouchComplete += onSwipe;
 
         playerSFX = GetComponent<PlayerSFX>();
@@ -57,17 +56,16 @@ public class Player : MonoBehaviour {
     }
 
     private void ProcessMovement(float movementOffsetX, float movementOffsetY) {
+        
         playerSFX.playMovementSound();
         canMove = false;
         State.IsMoving = true;
 
-        // Normalize the swipe delta to get direction (-1, 0, or 1)
-        float normalizedX = Mathf.Clamp(movementOffsetX, -1f, 1f);
-        float normalizedY = Mathf.Clamp(movementOffsetY, -1f, 1f);
-
-        movementHandler._moveDir = Mathf.Abs(normalizedX) > Mathf.Abs(normalizedY)
-            ? new Vector3Int(Mathf.RoundToInt(Mathf.Sign(normalizedX)), 0, 0)
-            : new Vector3Int(0, Mathf.RoundToInt(Mathf.Sign(normalizedY)), 0);
+        Debug.Log($"movementOffsetX: {movementOffsetX} ; movementOffsetY {movementOffsetY}");
+        movementHandler._moveDir = Mathf.Abs(movementOffsetX) > Mathf.Abs(movementOffsetY)
+            ? new Vector3Int(Mathf.RoundToInt(Mathf.Sign(movementOffsetX)), 0, 0)
+            : new Vector3Int(0, Mathf.RoundToInt(Mathf.Sign(movementOffsetY)), 0);
+        Debug.Log($"movementHandler._moveDir: {movementHandler._moveDir};");
 
         transform.rotation = (movementHandler._moveDir.x, movementHandler._moveDir.y) switch {
             ( > 0, 0) => Quaternion.Euler(0, 0, 90),   // Right

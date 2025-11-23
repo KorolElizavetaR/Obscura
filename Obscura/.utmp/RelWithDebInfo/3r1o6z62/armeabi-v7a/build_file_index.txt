@@ -1,0 +1,3 @@
+C:\msys64\projectory_hub\Unity\Obscura\Obscura\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\CMakeLists.txt
+C:\msys64\projectory_hub\Unity\Obscura\Obscura\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\FramePacing\CMakeLists.txt
+C:\msys64\projectory_hub\Unity\Obscura\Obscura\Library\Bee\Android\Prj\IL2CPP\Gradle\unityLibrary\src\main\cpp\GameActivity\CMakeLists.txt
