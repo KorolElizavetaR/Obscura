@@ -47,24 +47,21 @@ public class Player : MonoBehaviour {
         }
 
         Debug.Log("On swipe call");
-        float movementOffsetX = inputCallback._swipeDelta.x;
-        float movementOffsetY = inputCallback._swipeDelta.y;
+        Vector3Int movementDir = inputCallback._swipeDelta;
 
-        if (!Mathf.Approximately(movementOffsetX, 0f) || !Mathf.Approximately(movementOffsetY, 0f)) {
-            ProcessMovement(movementOffsetX, movementOffsetY);
+        if (!movementDir.Equals(Vector3Int.zero)) {
+            ProcessMovement(movementDir);
         }
     }
 
-    private void ProcessMovement(float movementOffsetX, float movementOffsetY) {
+    private void ProcessMovement(Vector3Int movementDir) {
         
-        playerSFX.playMovementSound();
+        //playerSFX.playMovementSound();
         canMove = false;
         State.IsMoving = true;
 
-        Debug.Log($"movementOffsetX: {movementOffsetX} ; movementOffsetY {movementOffsetY}");
-        movementHandler._moveDir = Mathf.Abs(movementOffsetX) > Mathf.Abs(movementOffsetY)
-            ? new Vector3Int(Mathf.RoundToInt(Mathf.Sign(movementOffsetX)), 0, 0)
-            : new Vector3Int(0, Mathf.RoundToInt(Mathf.Sign(movementOffsetY)), 0);
+        Debug.Log($"movementDir: {movementDir}");
+        movementHandler._moveDir = movementDir;
         Debug.Log($"movementHandler._moveDir: {movementHandler._moveDir};");
 
         transform.rotation = (movementHandler._moveDir.x, movementHandler._moveDir.y) switch {
