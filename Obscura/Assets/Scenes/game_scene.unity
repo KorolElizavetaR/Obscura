@@ -2571,6 +2571,7 @@ MonoBehaviour:
   verticalPadding: 0.5
   winModal: {fileID: 1780890554}
   failWindow: {fileID: 284447955}
+  player: {fileID: 50395928}
 --- !u!114 &1285172723
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,7 +5,9 @@ using UnityEngine.InputSystem.Controls;
 public class LevelLoaderManager : MonoBehaviour {
 
     [SerializeField] private List<GameObject> _levels;
+
     private GameObject currentLevel;
+    private TilemapHandler currentTilemapHandler;
 
     [Header("Camera")]
     public Camera cam;
@@ -15,11 +17,16 @@ public class LevelLoaderManager : MonoBehaviour {
     [SerializeField] private PopupAnimation winModal;
     [SerializeField] private PopupAnimation failWindow;
 
+    [SerializeField]
+    private Player player;
+
     private void Awake() {
         int currentLevelId = PlayerPrefs.GetInt("level");
         currentLevel = Instantiate(_levels[currentLevelId]);
-        MovementHandler.tilemapHandler = currentLevel.GetComponent<TilemapHandler>();
+        currentTilemapHandler = currentLevel.GetComponent<TilemapHandler>();
+        MovementHandler.tilemapHandler = currentTilemapHandler;
         SetupCamera();
+        SetupPlayerPosition();
         initWinModal();
     }
 
@@ -50,5 +57,9 @@ public class LevelLoaderManager : MonoBehaviour {
         if (enemyTilesBehavior is not null) {
             enemyTilesBehavior.failWindow = failWindow;
         }
+    }
+
+    private void SetupPlayerPosition() {
+        player.transform.position = currentTilemapHandler.PlayerBeginningPosition;
     }
 }

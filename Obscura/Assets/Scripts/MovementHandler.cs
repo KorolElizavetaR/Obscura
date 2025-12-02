@@ -13,12 +13,18 @@ public class MovementHandler : MonoBehaviour {
 
     void Start() {
         isPlayer = TryGetComponent<Player>(out Player playerComponent);
-        Debug.Log($"[MovementHandler] playerComponent: {playerComponent}");
-        currentCell = isPlayer 
-            ? tilemapHandler.getInitialPlayerPosition()
-            : tilemapHandler.getCellFromCoords(transform.position);
-        Debug.Log($"[MovementHandler] currentCell: {currentCell}");
+        //Debug.Log($"[MovementHandler] playerComponent: {playerComponent}");
+        //currentCell = isPlayer 
+        //    ? tilemapHandler.getInitialPlayerPosition()
+        //    : tilemapHandler.getCellFromCoords(transform.position);
+        //Debug.Log($"[MovementHandler] currentCell: {currentCell}");
+        Vector3 initialCoords = transform.position;
+        Debug.Log($"[MovementHandler] initialCoords: {initialCoords}");
+        Debug.Log($"[MovementHandler] tilemapHandler: {tilemapHandler}");
+        currentCell = tilemapHandler.getCellFromCoords(initialCoords);
         targetCell = currentCell;
+        Debug.Log($"[MovementHandler] currentCell: {currentCell}");
+        //targetCell = currentCell;
         transform.position = tilemapHandler.getCoordFromCell(currentCell);
     }
 

@@ -6,19 +6,36 @@ using System.Collections.Generic;
 public class TilemapHandler : MonoBehaviour {
     [SerializeField] private Grid Grid;
     [SerializeField] private List<AbstractTile> objects;
-    private GameObject playerBegginingPosition;
+
+    private Vector3 playerBegginingPosition;
+    public Vector3 PlayerBeginningPosition => playerBegginingPosition;
+
+
+    //private Player player;
 
     public void Awake() {
-        playerBegginingPosition = GameObject.FindGameObjectWithTag("Respawn");
+        playerBegginingPosition = GameObject.FindGameObjectWithTag("Respawn").transform.position;
         Debug.Log($"[TilemapHandler] playerBegginingPosition: {playerBegginingPosition}");
 
         Grid = GetComponent<Grid>();
 
-        foreach (var obj in objects) {
+        foreach (AbstractTile obj in objects) {
             obj._tilemapHandler = this;
         }
         Debug.Log($"[TilemapHandler] Awake");
     }
+
+    //void Start() {
+    //    //bool isPlayer = TryGetComponent<Player>(out Player playerComponent);
+    //    Player player = GameObject.FindFirstObjectByType<Player>();
+
+    //    if (!player) {
+    //        Debug.Log($"[TilemapHandler] Player component found!");
+    //        player.transform.position = playerBegginingPosition.transform.position;
+    //    } else {
+    //        Debug.LogError($"[TilemapHandler] Player component is not found!");
+    //    }
+    //}
 
     public Vector3Int getCellFromCoords(Vector3 objCoord) {
         return Grid.WorldToCell(objCoord);
@@ -27,11 +44,11 @@ public class TilemapHandler : MonoBehaviour {
         return Grid.GetCellCenterWorld(objCell);
     }
 
-    public Vector3Int getInitialPlayerPosition() {
-        return Grid.WorldToCell(playerBegginingPosition.transform.position);
-    }
+    //public Vector3Int getInitialPlayerPosition() {
+    //    return Grid.WorldToCell(playerBegginingPosition.transform.position);
+    //}
 
-   
+
     public void triggerTileEvent(Vector3Int currentCell, Vector3Int nextCell) {
         AbstractTile objBehCurrent = getObjectBeh(currentCell);
         AbstractTile objBehNext = getObjectBeh(nextCell);
