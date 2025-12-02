@@ -1,17 +1,17 @@
 using UnityEngine;
 
-public class ObjectProperty {
-    public ObjectProperty(bool isCollision) {
+public class TileProperty {
+    public TileProperty(bool isCollision) {
         IsCollision = isCollision;
     }
 
-    public ObjectProperty() {
+    public TileProperty() {
         IsCollision = false;
     }
 
     [SerializeField] public bool IsCollision { get; set; }
 
-    public static ObjectProperty emptyTileProperty = new ObjectProperty(false);
+    public static TileProperty emptyTileProperty = new TileProperty(false);
 
     public override string ToString() {
         return $"IsCollision = {IsCollision}";

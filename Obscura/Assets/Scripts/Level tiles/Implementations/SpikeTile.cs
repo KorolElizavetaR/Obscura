@@ -1,23 +1,18 @@
 using System.Collections;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
-using UnityEngine.Playables;
 
-public class EnemyTilesBehavior : StaticObjBehavior {
-
+public class SpikeTile : StaticTile {
     public PopupAnimation failWindow;
-
     private void Awake() {
         objectProperty.IsCollision = true;        
     }
-
     override public void OnEvent() {
         Player.State.IsDead = true;
 
         Debug.Log($"u ded in 1 sec");
         StartCoroutine(ShowDeathWindow());
     }
-    public override void OnEvent(ObjectBehavior nextCell) {
+    public override void OnEvent(AbstractTile nextCell) {
         throw new System.NotImplementedException("Shouldn't be here");
     }
 

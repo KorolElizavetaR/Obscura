@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2193968620451949341}
   - component: {fileID: 1152281295220119514}
   m_Layer: 0
-  m_Name: walls
+  m_Name: WallsTilemap
   m_TagString: Walls
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -550,7 +550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2d0412d3b9854f47862ff5703f6d4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tilemapHandler: {fileID: 0}
+  _tilemapHandler: {fileID: 2816728987171503026}
 --- !u!1 &863192925980753562
 GameObject:
   m_ObjectHideFlags: 0
@@ -564,7 +564,7 @@ GameObject:
   - component: {fileID: 7431124801811224770}
   - component: {fileID: 874456463838717833}
   m_Layer: 0
-  m_Name: moving block
+  m_Name: MovingBlockTilemap
   m_TagString: Moving Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -652,7 +652,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c63b7e6d01959f34392b7d27d456ed0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tilemapHandler: {fileID: 0}
+  _tilemapHandler: {fileID: 2816728987171503026}
 --- !u!114 &874456463838717833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -748,7 +748,7 @@ GameObject:
   - component: {fileID: 5466776824970396732}
   - component: {fileID: 6495204026680996323}
   m_Layer: 0
-  m_Name: Finish
+  m_Name: FinishTilemap
   m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -906,10 +906,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2112324150300564231}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f724ac74c9b0034c8f12ab0e00221c3, type: 3}
+  m_Script: {fileID: 11500000, guid: af643572cdc584a4d839db15405dae71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tilemapHandler: {fileID: 0}
+  _tilemapHandler: {fileID: 2816728987171503026}
   winWindow: {fileID: 0}
 --- !u!1 &3342981506594392147
 GameObject:
@@ -956,7 +956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   width: 7.02
-  height: 8.32
+  height: 8.07
 --- !u!1 &4410046551271132611
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +1056,7 @@ GameObject:
   - component: {fileID: 4753143591404638723}
   - component: {fileID: 8652056439819502720}
   m_Layer: 0
-  m_Name: grid (visual)
+  m_Name: GridTilemap_visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

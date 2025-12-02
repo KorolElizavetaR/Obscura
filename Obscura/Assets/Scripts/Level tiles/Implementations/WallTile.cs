@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ObstacleTileBeh : StaticObjBehavior {
+public class WallTile : StaticTile {
     private void Awake() {
         objectProperty.IsCollision = true;
     }
@@ -8,7 +8,7 @@ public class ObstacleTileBeh : StaticObjBehavior {
         return;
     }
 
-    public override void OnEvent(ObjectBehavior nextCell) {
+    public override void OnEvent(AbstractTile nextCell) {
         return;
     }
 

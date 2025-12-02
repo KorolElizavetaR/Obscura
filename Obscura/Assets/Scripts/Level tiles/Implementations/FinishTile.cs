@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 
-public class FinishTileBeh : StaticObjBehavior {
+public class FinishTile : StaticTile {
 
     public PopupAnimation winWindow;
 
@@ -15,7 +15,7 @@ public class FinishTileBeh : StaticObjBehavior {
         return;
     }
 
-    public override void OnEvent(ObjectBehavior nextCell) {
+    public override void OnEvent(AbstractTile nextCell) {
         //ObjectProperty nextCellProperty = nextCell.objectProperty;
 
         bool nextCellCollision = _tilemapHandler.isCollision(nextCell);

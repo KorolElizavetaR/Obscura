@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2193968620451949341}
   - component: {fileID: 1152281295220119514}
   m_Layer: 0
-  m_Name: Level
+  m_Name: WallsTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -636,7 +636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2d0412d3b9854f47862ff5703f6d4c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tilemapHandler: {fileID: 0}
+  _tilemapHandler: {fileID: 2816728987171503026}
 --- !u!1 &1446761184725008186
 GameObject:
   m_ObjectHideFlags: 0
@@ -703,7 +703,7 @@ MonoBehaviour:
   Grid: {fileID: 0}
   objects:
   - {fileID: 1152281295220119514}
-  - {fileID: 6048260373587488488}
+  - {fileID: 3909413558931823262}
 --- !u!1 &2112324150300564231
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,9 +715,9 @@ GameObject:
   - component: {fileID: 7455316078275990410}
   - component: {fileID: 4284075716756832416}
   - component: {fileID: 5466776824970396732}
-  - component: {fileID: 6048260373587488488}
+  - component: {fileID: 3909413558931823262}
   m_Layer: 0
-  m_Name: Finish
+  m_Name: FinishTilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -862,7 +862,7 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
---- !u!114 &6048260373587488488
+--- !u!114 &3909413558931823262
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -871,10 +871,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2112324150300564231}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f724ac74c9b0034c8f12ab0e00221c3, type: 3}
+  m_Script: {fileID: 11500000, guid: af643572cdc584a4d839db15405dae71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _tilemapHandler: {fileID: 0}
+  _tilemapHandler: {fileID: 2816728987171503026}
+  winWindow: {fileID: 0}
 --- !u!1 &2561044366335470701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1989,7 +1990,7 @@ GameObject:
   - component: {fileID: 4753143591404638723}
   - component: {fileID: 8652056439819502720}
   m_Layer: 0
-  m_Name: grid (visual)
+  m_Name: GridTilemap_cisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2626,7 +2627,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 0.85882354, g: 0.3764706, b: 0.32156864, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_Origin: {x: -6, y: -3, z: 0}
   m_Size: {x: 10, y: 22, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -2726,7 +2727,7 @@ Transform:
   m_GameObject: {fileID: 6167235531224202324}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.53, y: 3.47, z: 0}
+  m_LocalPosition: {x: -1.51, y: 3.47, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2744,5 +2745,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cdec11e93b4f3a4896cc003e70ba01a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 9.2
+  width: 9.06
   height: 9.16

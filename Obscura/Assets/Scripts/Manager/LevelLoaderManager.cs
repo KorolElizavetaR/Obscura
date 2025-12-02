@@ -42,11 +42,11 @@ public class LevelLoaderManager : MonoBehaviour {
     }
 
     private void initWinModal() {
-        FinishTileBeh finishTileBeh = currentLevel.GetComponentInChildren<FinishTileBeh>();
+        FinishTile finishTileBeh = currentLevel.GetComponentInChildren<FinishTile>();
         if (finishTileBeh is not null) {
             finishTileBeh.winWindow = winModal;
         }
-        EnemyTilesBehavior enemyTilesBehavior = currentLevel.GetComponentInChildren<EnemyTilesBehavior>();
+        SpikeTile enemyTilesBehavior = currentLevel.GetComponentInChildren<SpikeTile>();
         if (enemyTilesBehavior is not null) {
             enemyTilesBehavior.failWindow = failWindow;
         }

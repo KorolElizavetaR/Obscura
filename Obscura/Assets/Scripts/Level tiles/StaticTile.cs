@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public abstract class StaticObjBehavior : ObjectBehavior {
+public abstract class StaticTile : AbstractTile {
 
     protected Tilemap currentTilemap;
 

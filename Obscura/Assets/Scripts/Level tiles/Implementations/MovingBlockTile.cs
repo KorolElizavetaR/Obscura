@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class MovingBlockBehavior : DynamicObjBehavior {
+public class MovingBlockTile : DynamicTile {
     // следит за игроком
     private MovementHandler playerMovement;
     // перемещение блока
@@ -38,7 +38,7 @@ public class MovingBlockBehavior : DynamicObjBehavior {
         //throw new NotImplementedException();
     }
 
-    public override void OnEvent(ObjectBehavior nextCell) {
+    public override void OnEvent(AbstractTile nextCell) {
         //movementHandler._moveDir = playerMovement._moveDir;
 
         //objectProperty.IsCollision = nextCell.objectProperty.IsCollision;

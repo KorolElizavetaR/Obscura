@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class TilemapHandler : MonoBehaviour {
     [SerializeField] private Grid Grid;
-    [SerializeField] private List<ObjectBehavior> objects;
+    [SerializeField] private List<AbstractTile> objects;
     private GameObject playerBegginingPosition;
 
     public void Awake() {
@@ -33,8 +33,8 @@ public class TilemapHandler : MonoBehaviour {
 
    
     public void triggerTileEvent(Vector3Int currentCell, Vector3Int nextCell) {
-        ObjectBehavior objBehCurrent = getObjectBeh(currentCell);
-        ObjectBehavior objBehNext = getObjectBeh(nextCell);
+        AbstractTile objBehCurrent = getObjectBeh(currentCell);
+        AbstractTile objBehNext = getObjectBeh(nextCell);
         
         if (objBehCurrent != null) {
             objBehCurrent.OnEvent(objBehNext);
@@ -45,18 +45,18 @@ public class TilemapHandler : MonoBehaviour {
     }
 
     public bool isCollision(Vector3Int cell) {
-        ObjectBehavior objBeh = getObjectBeh(cell);
+        AbstractTile objBeh = getObjectBeh(cell);
         return isCollision(objBeh);
     }
 
-    public virtual bool isCollision(ObjectBehavior objBeh) {
+    public virtual bool isCollision(AbstractTile objBeh) {
         return objBeh != null
             ? objBeh.objectProperty.IsCollision
             : false;
     }
 
-    private ObjectBehavior getObjectBeh(Vector3Int currentCell) {
-        foreach (ObjectBehavior tile in objects) {
+    private AbstractTile getObjectBeh(Vector3Int currentCell) {
+        foreach (AbstractTile tile in objects) {
             if (tile.CheckIsCurrentObject(currentCell)) {
                 return tile;
             }
