@@ -1,9 +1,9 @@
 using UnityEngine;
 using static InputHandler;
 
-public class Player : MonoBehaviour {
+public class Player : DynamicTile {
     public static PlayerState State;
-    private bool canMove;
+    private bool restrictSwiping;
     private MovementHandler movementHandler;
     [SerializeField] 
     private Animator animator;
@@ -30,9 +30,9 @@ public class Player : MonoBehaviour {
     }
 
     private void Update() {
-        if (!State.IsDead && !State.IsWin && !canMove) {
+        if (!State.IsDead && !State.IsWin && !restrictSwiping) {
             bool canMoveForward = movementHandler.move();
-            canMove = !canMoveForward;
+            restrictSwiping = !canMoveForward;
             State.IsMoving = canMoveForward;
         }
         if (State.IsWin && !playedWinSoundOnce) {
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour {
     }
 
     private void onSwipe(InputCallback inputCallback) {
-        if (!canMove || State.IsDead || State.IsWin) {
+        if (!restrictSwiping || State.IsDead || State.IsWin) {
             return;
         }
 
@@ -57,7 +57,7 @@ public class Player : MonoBehaviour {
     private void ProcessMovement(Vector3Int movementDir) {
         
         //playerSFX.playMovementSound();
-        canMove = false;
+        restrictSwiping = false;
         State.IsMoving = true;
 
         Debug.Log($"movementDir: {movementDir}");
@@ -71,6 +71,14 @@ public class Player : MonoBehaviour {
             (0, < 0) => Quaternion.identity,           // Down
             _ => transform.rotation                    // No change for other cases
         };
+    }
+
+    public override void OnEvent() {
+        throw new System.NotImplementedException();
+    }
+
+    public override void OnEvent(AbstractTile nextCell) {
+        throw new System.NotImplementedException();
     }
 
     public class PlayerState {

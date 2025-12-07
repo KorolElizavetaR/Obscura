@@ -2,17 +2,21 @@ using System;
 using UnityEngine;
 
 public class MovementHandler : MonoBehaviour {
-    [SerializeField] private float moveSpeed = 10f;
+    [SerializeField] 
+    private float moveSpeed = 10f;
     public static TilemapHandler tilemapHandler;
 
     private Vector3Int currentCell;
     private Vector3Int targetCell;
     public Vector3Int _moveDir { get; set; }
 
+    public bool canMove;
+    
     private bool isPlayer;
 
     void Start() {
         isPlayer = TryGetComponent<Player>(out Player playerComponent);
+
         //Debug.Log($"[MovementHandler] playerComponent: {playerComponent}");
         //currentCell = isPlayer 
         //    ? tilemapHandler.getInitialPlayerPosition()
@@ -62,7 +66,6 @@ public class MovementHandler : MonoBehaviour {
         if (isPlayer) {
             tilemapHandler.triggerTileEvent(currentCell, nextCell);
         }
-
         bool collision = tilemapHandler.isCollision(nextCell);
 
         if (!collision) // если клетка не стена

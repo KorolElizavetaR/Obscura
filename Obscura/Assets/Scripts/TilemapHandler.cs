@@ -1,7 +1,8 @@
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using System.Collections.Generic;
 
 public class TilemapHandler : MonoBehaviour {
     [SerializeField] private Grid Grid;
@@ -73,12 +74,16 @@ public class TilemapHandler : MonoBehaviour {
     }
 
     private AbstractTile getObjectBeh(Vector3Int currentCell) {
-        foreach (AbstractTile tile in objects) {
-            if (tile.CheckIsCurrentObject(currentCell)) {
-                return tile;
-            }
-        }
-        return null;
+        //foreach (AbstractTile tile in objects) {
+        //    if (tile.CheckIsCurrentObject(currentCell)) {
+        //        return tile;
+        //    }
+        //}
+        //return null;
+        return objects
+        .Where(t => t.CheckIsCurrentObject(currentCell))
+        .OrderByDescending(t => t is DynamicTile)
+        .FirstOrDefault();
     }
 
 }
