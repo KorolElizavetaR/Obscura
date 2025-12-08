@@ -2,6 +2,9 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Перенести в папку модальных окон
+/// </summary>
 public class ModalEventHandler : MonoBehaviour
 {
     private PopupAnimation popupAnimation;
@@ -20,7 +23,7 @@ public class ModalEventHandler : MonoBehaviour
         });
     }
 
-    public void onClickOpenModal() {
+    public virtual void onClickOpenModal() {
         popupAnimation.onOpenModalSlide();
     }
 

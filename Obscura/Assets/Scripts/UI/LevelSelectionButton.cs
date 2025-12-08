@@ -8,14 +8,17 @@ public class LevelSelectionButton : MonoBehaviour
     [SerializeField] private Image levelImage;
     [SerializeField] private LevelStat levelData;
 
-    public Image LevelImage => levelImage;
-    public void IconLevelRepresentation() {
+    [SerializeField] ModalLevelSelection modalLevelSelection;
 
-    }
+    public Image LevelImage => levelImage;
 
     public void setSelectedLevelToPrefs() {
         PlayerPrefs.SetInt("level", levelData.levelIndex);
-        SceneManager.LoadScene("game_scene");
+        if (modalLevelSelection is null) {
+            Debug.LogError("modalLevelSelection is null");
+        }
+
+        modalLevelSelection.onClickOpenModal();
     }
 
     public int LevelIndex => levelData.levelIndex;

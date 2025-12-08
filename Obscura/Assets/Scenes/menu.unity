@@ -174,6 +174,7 @@ MonoBehaviour:
   levelData:
     levelIndex: 1
     isAvailable: 1
+  modalLevelSelection: {fileID: 316959737}
 --- !u!114 &41339854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -851,10 +852,8 @@ GameObject:
   m_Component:
   - component: {fileID: 316959731}
   - component: {fileID: 316959735}
-  - component: {fileID: 316959732}
-  - component: {fileID: 316959733}
-  - component: {fileID: 316959734}
-  - component: {fileID: 316959736}
+  - component: {fileID: 316959738}
+  - component: {fileID: 316959737}
   m_Layer: 0
   m_Name: ModalLevelLoader
   m_TagString: Untagged
@@ -884,48 +883,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 1619}
   m_SizeDelta: {x: 298, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &316959732
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 316959730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0267e37d02feec49a0090517331c575, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetPoz: {x: 0, y: 90}
-  duration: 0.5
-  ease: 28
-  levelFade: {fileID: 315783869}
-  backgroundFade: {fileID: 166647914}
-  fadeOpacity: 0.5
---- !u!114 &316959733
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 316959730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 244656969a866ad4bbadf92aca361ee3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &316959734
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 316959730}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27368bd755d36264fabbf685963e09f0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &316959735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -952,7 +909,7 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
---- !u!114 &316959736
+--- !u!114 &316959737
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -961,13 +918,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 316959730}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16ffacfd826637245b31971065b62c5d, type: 3}
+  m_Script: {fileID: 11500000, guid: 3cf580c2290e5ad42b172acf42145781, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelImage: {fileID: 0}
-  levelData:
-    levelIndex: 0
-    isAvailable: 0
+  text: {fileID: 1662550051}
+--- !u!114 &316959738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 316959730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0267e37d02feec49a0090517331c575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPoz: {x: 0, y: 90}
+  duration: 0.5
+  ease: 28
+  levelFade: {fileID: 315783869}
+  backgroundFade: {fileID: 166647914}
+  fadeOpacity: 0.5
 --- !u!1 &320115463
 GameObject:
   m_ObjectHideFlags: 0
@@ -1733,7 +1705,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 316959736}
+      - m_Target: {fileID: 869456606}
         m_TargetAssemblyTypeName: LevelSelectionButton, Assembly-CSharp
         m_MethodName: setSelectedLevelToPrefs
         m_Mode: 1
@@ -1799,6 +1771,7 @@ MonoBehaviour:
   levelData:
     levelIndex: 0
     isAvailable: 1
+  modalLevelSelection: {fileID: 316959737}
 --- !u!1 &903539936
 GameObject:
   m_ObjectHideFlags: 0
@@ -2700,8 +2673,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 316959733}
-        m_TargetAssemblyTypeName: ModalEventHandler, Assembly-CSharp
+      - m_Target: {fileID: 316959737}
+        m_TargetAssemblyTypeName: ModalLevelSelection, Assembly-CSharp
         m_MethodName: onClickCloseModal
         m_Mode: 1
         m_Arguments:
@@ -3818,7 +3791,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 316959736}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: LevelPicker, Assembly-CSharp
         m_MethodName: loadLevel
         m_Mode: 1
@@ -4192,6 +4165,7 @@ MonoBehaviour:
   levelData:
     levelIndex: 2
     isAvailable: 1
+  modalLevelSelection: {fileID: 316959737}
 --- !u!114 &2001033291
 MonoBehaviour:
   m_ObjectHideFlags: 0
