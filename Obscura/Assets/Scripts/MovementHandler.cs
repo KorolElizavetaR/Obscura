@@ -6,12 +6,15 @@ public class MovementHandler : MonoBehaviour {
     private float moveSpeed = 10f;
     public static TilemapHandler tilemapHandler;
 
+
     private Vector3Int currentCell;
+
     private Vector3Int targetCell;
+    public Vector3Int TargetCell => targetCell;
     public Vector3Int _moveDir { get; set; }
 
     public bool canMove;
-    
+
     private bool isPlayer;
 
     void Start() {
@@ -63,9 +66,10 @@ public class MovementHandler : MonoBehaviour {
 
         //bool collision = tilemapHandler.isCollision(nextCell);
 
-        if (isPlayer) {
-            tilemapHandler.triggerTileEvent(currentCell, nextCell);
-        }
+        //if (isPlayer) {
+        //    tilemapHandler.triggerTileEvent(currentCell, nextCell);
+        //}
+        tilemapHandler.triggerTileEvent(currentCell, nextCell);
         bool collision = tilemapHandler.isCollision(nextCell);
 
         if (!collision) // если клетка не стена

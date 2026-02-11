@@ -13,7 +13,6 @@ public class Player : DynamicTile {
 
     private bool playedWinSoundOnce;
 
-
     private void Start() {
         State = new PlayerState(animator);
         movementHandler = GetComponent<MovementHandler>();
@@ -73,7 +72,7 @@ public class Player : DynamicTile {
         };
     }
 
-    public override void OnEvent() {
+    public override void OnEvent(GameObject trigger) {
         throw new System.NotImplementedException();
     }
 

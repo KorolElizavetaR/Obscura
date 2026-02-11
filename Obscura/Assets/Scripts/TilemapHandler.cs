@@ -58,7 +58,7 @@ public class TilemapHandler : MonoBehaviour {
             objBehCurrent.OnEvent(objBehNext);
         }
         if (objBehNext != null) { 
-            objBehNext.OnEvent(); 
+            objBehNext.OnEvent(this.gameObject); 
         };
     }
 

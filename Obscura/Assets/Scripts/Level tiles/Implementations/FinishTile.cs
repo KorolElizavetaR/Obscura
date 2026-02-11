@@ -11,7 +11,7 @@ public class FinishTile : StaticTile {
         objectProperty.IsCollision = false;
     }
 
-    public override void OnEvent() {
+    public override void OnEvent(GameObject trigger) {
         return;
     }
 

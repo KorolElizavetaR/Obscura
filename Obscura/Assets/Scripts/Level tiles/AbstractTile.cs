@@ -7,6 +7,6 @@ public abstract class AbstractTile: MonoBehaviour {
 
     public TileProperty objectProperty { get; set; } = new TileProperty();
     public abstract bool CheckIsCurrentObject(Vector3Int cellPos);
-    abstract public void OnEvent();
+    abstract public void OnEvent(GameObject trigger);
     abstract public void OnEvent(AbstractTile nextCell);
 }

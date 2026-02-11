@@ -29,7 +29,7 @@ public class MovingBlockTile : DynamicTile {
         }
     }
 
-    override public void OnEvent() {
+    override public void OnEvent(GameObject trigger) {
         movementHandler._moveDir = playerMovement._moveDir;
         bool canMoveForward = movementHandler.move();
         isMoving = canMoveForward;
@@ -43,7 +43,7 @@ public class MovingBlockTile : DynamicTile {
 
         //objectProperty.IsCollision = nextCell.objectProperty.IsCollision;
         //isMoving = !objectProperty.IsCollision;
-        throw new NotImplementedException();
+        //    throw new NotImplementedException();
     }
 
 }

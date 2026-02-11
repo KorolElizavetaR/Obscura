@@ -4,7 +4,7 @@ public class WallTile : StaticTile {
     private void Awake() {
         objectProperty.IsCollision = true;
     }
-    public override void OnEvent() {
+    public override void OnEvent(GameObject trigger) {
         return;
     }
 

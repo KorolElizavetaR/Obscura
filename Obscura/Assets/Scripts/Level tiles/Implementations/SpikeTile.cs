@@ -3,14 +3,18 @@ using UnityEngine;
 
 public class SpikeTile : StaticTile {
     public PopupAnimation failWindow;
+
     private void Awake() {
         objectProperty.IsCollision = true;        
     }
-    override public void OnEvent() {
-        Player.State.IsDead = true;
+    override public void OnEvent(GameObject trigger) {
 
-        Debug.Log($"u ded in 1 sec");
-        StartCoroutine(ShowDeathWindow());
+        if (trigger.TryGetComponent<Player>(out var player)) {
+            Player.State.IsDead = true;
+            Debug.Log($"u ded in 1 sec");
+            StartCoroutine(ShowDeathWindow());
+        }
+
     }
     public override void OnEvent(AbstractTile nextCell) {
         throw new System.NotImplementedException("Shouldn't be here");
