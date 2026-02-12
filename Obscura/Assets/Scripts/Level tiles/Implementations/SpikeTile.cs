@@ -4,7 +4,8 @@ using UnityEngine;
 public class SpikeTile : StaticTile {
     public PopupAnimation failWindow;
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         objectProperty.IsCollision = true;        
     }
     override public void OnEvent(GameObject trigger) {

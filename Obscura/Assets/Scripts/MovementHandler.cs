@@ -9,22 +9,15 @@ public class MovementHandler : MonoBehaviour {
 
     private Vector3Int currentCell;
 
+    public Vector3Int CurrentCell { get => currentCell; set => currentCell = value; }
+
     private Vector3Int targetCell;
-    public Vector3Int TargetCell => targetCell;
+    public Vector3Int TargetCell { get => targetCell; set => targetCell = value; }
     public Vector3Int _moveDir { get; set; }
 
     public bool canMove;
 
-    private bool isPlayer;
-
     void Start() {
-        isPlayer = TryGetComponent<Player>(out Player playerComponent);
-
-        //Debug.Log($"[MovementHandler] playerComponent: {playerComponent}");
-        //currentCell = isPlayer 
-        //    ? tilemapHandler.getInitialPlayerPosition()
-        //    : tilemapHandler.getCellFromCoords(transform.position);
-        //Debug.Log($"[MovementHandler] currentCell: {currentCell}");
         Vector3 initialCoords = transform.position;
         Debug.Log($"[MovementHandler] initialCoords: {initialCoords}");
         Debug.Log($"[MovementHandler] tilemapHandler: {tilemapHandler}");
@@ -43,6 +36,8 @@ public class MovementHandler : MonoBehaviour {
     /// <para><c>false</c> - если объект останавливается</para>
     /// </returns>
     public bool move() {
+        //if (_moveDir == Vector3Int.zero) return false;
+
         Vector3 targetPos = tilemapHandler.getCoordFromCell(targetCell);
         //Debug.Log($"[MovementHandler] currentCell: {currentCell}");
         transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
@@ -60,16 +55,16 @@ public class MovementHandler : MonoBehaviour {
         return true;
     }
 
-    private void TryMoveToNextCell() {
-        Debug.Log($"movedir: {_moveDir}");
-        Vector3Int nextCell = currentCell + new Vector3Int(_moveDir.x, _moveDir.y, 0);
+    public void TryMoveToNextCell() {
+        // Debug.Log($"movedir: {_moveDir}");
+        Vector3Int nextCell = GetNextCell();
 
         //bool collision = tilemapHandler.isCollision(nextCell);
 
-        //if (isPlayer) {
-        //    tilemapHandler.triggerTileEvent(currentCell, nextCell);
-        //}
-        tilemapHandler.triggerTileEvent(currentCell, nextCell);
+        Debug.Log($"tilemapHandler: {tilemapHandler}");
+        Debug.Log($"currentCell: {currentCell}");
+        Debug.Log($"nextCell: {nextCell}");
+        tilemapHandler.triggerTileEvent(currentCell, nextCell, this.gameObject);
         bool collision = tilemapHandler.isCollision(nextCell);
 
         if (!collision) // если клетка не стена
@@ -78,4 +73,7 @@ public class MovementHandler : MonoBehaviour {
         }
     }
 
+    public Vector3Int GetNextCell() {
+        return currentCell + new Vector3Int(_moveDir.x, _moveDir.y, 0);
+    }
 }

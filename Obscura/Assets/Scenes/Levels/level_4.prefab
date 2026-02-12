@@ -931,6 +931,8 @@ MonoBehaviour:
   - {fileID: 6495204026680996323}
   - {fileID: 7431124801811224770}
   - {fileID: 1152281295220119514}
+  - {fileID: 5291424657905097294}
+  - {fileID: 4310210286772024225}
 --- !u!1 &2112324150300564231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1182,6 +1184,7 @@ GameObject:
   - component: {fileID: 2076182014555033354}
   - component: {fileID: 6791448312145826756}
   - component: {fileID: 5154642962730048594}
+  - component: {fileID: 4310210286772024225}
   m_Layer: 0
   m_Name: PortalTilemap2
   m_TagString: Walls
@@ -1434,6 +1437,19 @@ TilemapRenderer:
   m_Mode: 0
   m_DetectChunkCullingBounds: 0
   m_MaskInteraction: 0
+--- !u!114 &4310210286772024225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4203498184462102322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f8064186c37bd94b97d44fdb9b9c2a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tilemapHandler: {fileID: 2816728987171503026}
 --- !u!1 &4410046551271132611
 GameObject:
   m_ObjectHideFlags: 0
@@ -3686,7 +3702,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tilemapHandler: {fileID: 2816728987171503026}
-  winWindow: {fileID: 0}
 --- !u!1 &8496161390250937208
 GameObject:
   m_ObjectHideFlags: 0

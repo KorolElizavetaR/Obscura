@@ -50,15 +50,20 @@ public class TilemapHandler : MonoBehaviour {
     //}
 
 
-    public void triggerTileEvent(Vector3Int currentCell, Vector3Int nextCell) {
+    public void triggerTileEvent(Vector3Int currentCell, Vector3Int nextCell, GameObject obj) {
+        Debug.Log("enter");
         AbstractTile objBehCurrent = getObjectBeh(currentCell);
+        Debug.Log($"objBehCurrent: {objBehCurrent}");
         AbstractTile objBehNext = getObjectBeh(nextCell);
-        
+
+
         if (objBehCurrent != null) {
+            Debug.Log($"objBehNext: {objBehNext}");
             objBehCurrent.OnEvent(objBehNext);
         }
-        if (objBehNext != null) { 
-            objBehNext.OnEvent(this.gameObject); 
+        if (objBehNext != null) {
+            Debug.Log($"this.gameObject: {obj}");
+            objBehNext.OnEvent(obj); 
         };
     }
 
@@ -74,16 +79,10 @@ public class TilemapHandler : MonoBehaviour {
     }
 
     private AbstractTile getObjectBeh(Vector3Int currentCell) {
-        //foreach (AbstractTile tile in objects) {
-        //    if (tile.CheckIsCurrentObject(currentCell)) {
-        //        return tile;
-        //    }
-        //}
-        //return null;
         return objects
-        .Where(t => t.CheckIsCurrentObject(currentCell))
-        .OrderByDescending(t => t is DynamicTile)
-        .FirstOrDefault();
+            .Where(t => t.CheckIsCurrentObject(currentCell))
+            .OrderByDescending(t => t is DynamicTile)
+            .FirstOrDefault();
     }
 
 }

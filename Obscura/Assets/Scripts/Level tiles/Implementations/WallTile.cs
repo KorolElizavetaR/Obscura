@@ -1,7 +1,8 @@
 using UnityEngine;
 
 public class WallTile : StaticTile {
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         objectProperty.IsCollision = true;
     }
     public override void OnEvent(GameObject trigger) {

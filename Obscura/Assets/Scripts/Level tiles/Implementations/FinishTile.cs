@@ -7,7 +7,8 @@ public class FinishTile : StaticTile {
 
     public PopupAnimation winWindow;
 
-    private void Awake() {
+    protected override void Awake() {
+        base.Awake();
         objectProperty.IsCollision = false;
     }
 
