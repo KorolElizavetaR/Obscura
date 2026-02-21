@@ -43,6 +43,8 @@ public class PortalTile : StaticTile {
         Vector3 vector = new Vector3(teleportCoord.x, teleportCoord.y, trigger.transform.position.z);
         
         GameObject newObject = Instantiate(trigger, vector, trigger.transform.rotation);
+        newObject.name = trigger.name;
+        
         MovementHandler newObjectMovementHandler = newObject.GetComponent<MovementHandler>();
          
         newObjectMovementHandler.CurrentCell = teleportCoord;
