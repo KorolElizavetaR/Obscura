@@ -1,8 +1,7 @@
-using System;
 using UnityEngine;
 
 public class MovingBlockTile : DynamicTile {
-    // перемещение блока
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     private MovementHandler movementHandler;
     private bool isMoving = false;
     private void Awake() {
@@ -29,5 +28,4 @@ public class MovingBlockTile : DynamicTile {
     public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
        
     }
-
 }
