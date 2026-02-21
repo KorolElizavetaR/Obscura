@@ -3,9 +3,11 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Запускается каждый раз при загрузке сцены
-public class MenuManager : MonoBehaviour
+// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
+public class MenuManager : MonoBehaviour, ILogDistributor
 {
+    public string DistributorName => GetType().Name;
+
     [SerializeField] private Sprite _levelButtonSprite;
     [SerializeField] private Sprite _levelButtonCompletedSprite;
 
@@ -29,7 +31,7 @@ public class MenuManager : MonoBehaviour
 
     private void setVisualForLevel() {
         HashSet<int> completedLevels = getCompletedLevels();
-        Debug.Log($"completedLevels: [{string.Join(", ", completedLevels)}]");
+        this.Log($"completedLevels: [{string.Join(", ", completedLevels)}]");
         foreach (LevelSelectionButton level in _levels) {
 
             GameObject levelIcon = initiateLevelIcon(level);
