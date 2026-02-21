@@ -16,7 +16,7 @@ public class FinishTile : StaticTile {
         return;
     }
 
-    public override void OnEvent(AbstractTile nextCell) {
+    public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
         //ObjectProperty nextCellProperty = nextCell.objectProperty;
 
         bool nextCellCollision = _tilemapHandler.isCollision(nextCell);

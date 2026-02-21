@@ -14,6 +14,7 @@ public class PortalTile : StaticTile {
         var coords = GetAllTileCoords();
         portalCoords[0] = coords[0];
         portalCoords[1] = coords[1];
+        Debug.Log($"portal1: {portalCoords[0]} | portal2: {portalCoords[1]}");
     }
 
     protected List<Vector3Int> GetAllTileCoords() {
@@ -30,12 +31,15 @@ public class PortalTile : StaticTile {
 
     /// клетка до
     public override void OnEvent(GameObject trigger) {
+        ToDelete.Add(trigger);
+
         Debug.Log($"PORTAL TRIGER: {trigger.name}");
         
         MovementHandler movementHandler = trigger.GetComponent<MovementHandler>();
         Debug.Log($"movementHandler {movementHandler}, {trigger.name}");
 
-        Vector3Int nextPortalCoord = movementHandler.TargetCell;
+        Vector3Int nextPortalCoord = movementHandler.TargetCell + movementHandler._moveDir;
+        Debug.Log($"nextPortalCoord: {nextPortalCoord}");
         Vector3Int teleportCoord = nextPortalCoord == portalCoords[0] 
             ? portalCoords[1] 
             : portalCoords[0];
@@ -51,11 +55,14 @@ public class PortalTile : StaticTile {
         Debug.Log($"{newObject.name} is teleported at {teleportCoord} with moveDir = {newObjectMovementHandler._moveDir} " +
             $"and target cell = {newObjectMovementHandler.TargetCell}");
     }
+
+    protected HashSet<GameObject> ToDelete = new();
+
     /// на клетке
-    public override void OnEvent(AbstractTile nextCell) {
-
+    public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
+        if (ToDelete.Contains(trigger)) {
+            ToDelete.Remove(trigger);
+            Destroy(trigger);
+        }
     }
-
-  
-
 }

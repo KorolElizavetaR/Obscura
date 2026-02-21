@@ -9,7 +9,7 @@ public class WallTile : StaticTile {
         return;
     }
 
-    public override void OnEvent(AbstractTile nextCell) {
+    public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
         return;
     }
 

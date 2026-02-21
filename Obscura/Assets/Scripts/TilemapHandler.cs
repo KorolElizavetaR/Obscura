@@ -59,7 +59,7 @@ public class TilemapHandler : MonoBehaviour {
 
         if (objBehCurrent != null) {
             Debug.Log($"objBehNext: {objBehNext}");
-            objBehCurrent.OnEvent(objBehNext);
+            objBehCurrent.OnEvent(objBehNext, obj);
         }
         if (objBehNext != null) {
             Debug.Log($"this.gameObject: {obj}");
@@ -67,7 +67,16 @@ public class TilemapHandler : MonoBehaviour {
         };
     }
 
-    public bool isCollision(Vector3Int cell) {
+    public bool isCollisionList(Vector3Int cell) {
+        List<AbstractTile> objBeh = getObjectBehList(cell);
+        foreach (AbstractTile obj in objBeh) {
+            if (isCollision(obj))
+                return true;
+        }
+        return false;
+    }
+
+    public bool isCollision(Vector3Int cell) {        
         AbstractTile objBeh = getObjectBeh(cell);
         return isCollision(objBeh);
     }
@@ -77,12 +86,19 @@ public class TilemapHandler : MonoBehaviour {
             ? objBeh.objectProperty.IsCollision
             : false;
     }
-
+   
     private AbstractTile getObjectBeh(Vector3Int currentCell) {
         return objects
             .Where(t => t.CheckIsCurrentObject(currentCell))
             .OrderByDescending(t => t is DynamicTile)
             .FirstOrDefault();
+    }
+
+    private List<AbstractTile> getObjectBehList(Vector3Int currentCell) {
+        return objects
+            .Where(t => t.CheckIsCurrentObject(currentCell))
+            .OrderByDescending(t => t is DynamicTile)
+            .ToList();
     }
 
 }

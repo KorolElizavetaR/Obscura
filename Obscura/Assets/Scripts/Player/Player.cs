@@ -2,6 +2,8 @@ using UnityEngine;
 using static InputHandler;
 
 public class Player : DynamicTile {
+    public static MovementHandler currMovementHandler;
+
     public static PlayerState State;
     private bool restrictSwiping;
     private MovementHandler movementHandler;
@@ -16,10 +18,12 @@ public class Player : DynamicTile {
     private void Start() {
         State = new PlayerState(animator);
         movementHandler = GetComponent<MovementHandler>();
+        currMovementHandler = movementHandler;
         inputHandler = FindFirstObjectByType<InputHandler>();
         inputHandler.onTouchComplete += onSwipe;
 
         playerSFX = GetComponent<PlayerSFX>();
+
     }
 
     private void OnDestroy() {
@@ -76,7 +80,7 @@ public class Player : DynamicTile {
         throw new System.NotImplementedException();
     }
 
-    public override void OnEvent(AbstractTile nextCell) {
+    public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
         throw new System.NotImplementedException();
     }
 

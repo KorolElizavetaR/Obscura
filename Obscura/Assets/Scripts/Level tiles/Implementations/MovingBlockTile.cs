@@ -2,8 +2,6 @@ using System;
 using UnityEngine;
 
 public class MovingBlockTile : DynamicTile {
-    // следит за игроком
-    private MovementHandler playerMovement;
     // перемещение блока
     private MovementHandler movementHandler;
     private bool isMoving = false;
@@ -11,15 +9,7 @@ public class MovingBlockTile : DynamicTile {
         movementHandler = GetComponent<MovementHandler>();
 
         objectProperty.IsCollision = true;
-
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player != null) {
-            playerMovement = player.GetComponent<MovementHandler>();
-        }
-        else {
-            Debug.Log($"Player is not initialized!!");
-        }
-        Debug.Log($"playerMovement initialized: {playerMovement.name}");
+       
     }
     public void Update() {
         if (isMoving) {
@@ -30,20 +20,14 @@ public class MovingBlockTile : DynamicTile {
     }
 
     override public void OnEvent(GameObject trigger) {
-        movementHandler._moveDir = playerMovement._moveDir;
+        movementHandler._moveDir = Player.currMovementHandler._moveDir; 
         bool canMoveForward = movementHandler.move();
         isMoving = canMoveForward;
         objectProperty.IsCollision = !isMoving;
-
-        //throw new NotImplementedException();
     }
 
-    public override void OnEvent(AbstractTile nextCell) {
-        //movementHandler._moveDir = playerMovement._moveDir;
-
-        //objectProperty.IsCollision = nextCell.objectProperty.IsCollision;
-        //isMoving = !objectProperty.IsCollision;
-        //    throw new NotImplementedException();
+    public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
+       
     }
 
 }

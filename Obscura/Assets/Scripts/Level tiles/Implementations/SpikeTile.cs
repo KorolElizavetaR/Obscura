@@ -17,7 +17,7 @@ public class SpikeTile : StaticTile {
         }
 
     }
-    public override void OnEvent(AbstractTile nextCell) {
+    public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
         throw new System.NotImplementedException("Shouldn't be here");
     }
 
