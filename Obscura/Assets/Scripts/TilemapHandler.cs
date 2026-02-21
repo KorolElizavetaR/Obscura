@@ -50,31 +50,31 @@ public class TilemapHandler : MonoBehaviour, ILogDistributor {
     //}
 
     public void triggerTileEvent(Vector3Int currentCell, Vector3Int nextCell, GameObject obj) {
-        //Debug.Log("enter");
-        //AbstractTile objBehCurrent = getObjectBeh(currentCell);
-        //Debug.Log($"objBehCurrent: {objBehCurrent}");
-        //AbstractTile objBehNext = getObjectBeh(nextCell);
+        this.Log("enter");
+        AbstractTile objBehCurrent = getObjectBeh(currentCell);
+        this.Log($"objBehCurrent: {objBehCurrent}");
+        AbstractTile objBehNext = getObjectBeh(nextCell);
 
 
-        //if (objBehCurrent != null) {
-        //    Debug.Log($"objBehNext: {objBehNext}");
-        //    objBehCurrent.OnEvent(objBehNext, obj);
-        //}
-        //if (objBehNext != null) {
-        //    Debug.Log($"this.gameObject: {obj}");
-        //    objBehNext.OnEvent(obj); 
-        //};
-
-        List<AbstractTile> objsBehCurrent = getObjectBehList(currentCell);
-        List<AbstractTile> objsBehNext = getObjectBehList(nextCell);
-
-        foreach (var objBehCurrent in objsBehCurrent.Where(x => x != null)) {
-            objBehCurrent.OnEvent(obj);
+        if (objBehCurrent != null) {
+            this.Log($"objBehNext: {objBehNext}");
+            objBehCurrent.OnEvent(objBehNext, obj);
         }
+        if (objBehNext != null) {
+            this.Log($"this.gameObject: {obj}");
+            objBehNext.OnEvent(obj); 
+        };
 
-        foreach (var objBehNext in objsBehNext.Where(x => x != null)) {
-            objBehNext.OnEvent(obj);
-        }
+        // List<AbstractTile> objsBehCurrent = getObjectBehList(currentCell);
+        // List<AbstractTile> objsBehNext = getObjectBehList(nextCell);
+        //
+        // foreach (var objBehCurrent in objsBehCurrent.Where(x => x != null)) {
+        //     objBehCurrent.OnEvent(obj);
+        // }
+        //
+        // foreach (var objBehNext in objsBehNext.Where(x => x != null)) {
+        //     objBehNext.OnEvent(obj);
+        // }
     }
 
     public bool isCollisionList(Vector3Int cell) {
