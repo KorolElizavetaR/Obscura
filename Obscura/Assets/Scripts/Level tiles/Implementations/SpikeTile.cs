@@ -12,7 +12,7 @@ public class SpikeTile : StaticTile {
 
         if (trigger.TryGetComponent<Player>(out var player)) {
             Player.State.IsDead = true;
-            Debug.Log($"u ded in 1 sec");
+            this.Log($"u ded in 1 sec");
             StartCoroutine(ShowDeathWindow());
         }
 
@@ -23,7 +23,7 @@ public class SpikeTile : StaticTile {
 
     public IEnumerator ShowDeathWindow() {
         yield return null; // Pause for one frame (in Unity)
-        Debug.Log("Show death window");
+        this.Log("Show death window");
         failWindow.onOpenModalSlide();
     }
 }
