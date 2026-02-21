@@ -1,49 +1,40 @@
-using System;
 using UnityEngine;
 
-public class MovementHandler : MonoBehaviour {
-    [SerializeField] 
-    private float moveSpeed = 10f;
+public class MovementHandler : MonoBehaviour, ILogDistributor {
     public static TilemapHandler tilemapHandler;
+    public string DistributorName => GetType().Name;
 
-
+    [SerializeField] private float moveSpeed = 10f;
+    
     private Vector3Int currentCell;
-
     public Vector3Int CurrentCell { get => currentCell; set => currentCell = value; }
 
     private Vector3Int targetCell;
     public Vector3Int TargetCell { get => targetCell; set => targetCell = value; }
+    
     public Vector3Int _moveDir { get; set; }
 
     public bool canMove;
 
     void Start() {
         Vector3 initialCoords = transform.position;
-        Debug.Log($"[MovementHandler] initialCoords: {initialCoords}");
-        Debug.Log($"[MovementHandler] tilemapHandler: {tilemapHandler}");
+        this.Log($"initialCoords: {initialCoords}");
+        this.Log($"tilemapHandler: {tilemapHandler}");
+        
         currentCell = tilemapHandler.getCellFromCoords(initialCoords);
         targetCell = currentCell;
-        Debug.Log($"[MovementHandler] currentCell: {currentCell}");
-        //targetCell = currentCell;
+        
+        this.Log($"currentCell: {currentCell}");
         transform.position = tilemapHandler.getCoordFromCell(currentCell);
     }
 
-    /// <summary>
-    /// Совершает перемещение, после чего проверяет, будет ли объект двигаться дальше.
-    /// </summary>
-    /// <returns>
-    /// <para><c>true</c> - если объект будет двигаться дальше</para>
-    /// <para><c>false</c> - если объект останавливается</para>
-    /// </returns>
     public bool move() {
-        //if (_moveDir == Vector3Int.zero) return false;
-
         Vector3 targetPos = tilemapHandler.getCoordFromCell(targetCell);
-        //Debug.Log($"[MovementHandler] currentCell: {currentCell}");
+        //this.Log($"currentCell: {currentCell}");
         transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
-        /// значит, что мы достигли нужной клетки.
+
         if (Mathf.Approximately(Vector3.Distance(transform.position, targetPos), 0f)) {
-            //Debug.Log($"next sell");
+            //this.Log($"next sell");
             transform.position = targetPos;
             currentCell = targetCell;
             TryMoveToNextCell();
@@ -56,10 +47,8 @@ public class MovementHandler : MonoBehaviour {
     }
 
     public void TryMoveToNextCell() {
-        // Debug.Log($"movedir: {_moveDir}");
+        // this.Log($"movedir: {_moveDir}");
         Vector3Int nextCell = GetNextCell();
-
-        //bool collision = tilemapHandler.isCollision(nextCell);
 
         Debug.Log($"tilemapHandler: {tilemapHandler}");
         Debug.Log($"currentCell: {currentCell}");
@@ -67,7 +56,7 @@ public class MovementHandler : MonoBehaviour {
         tilemapHandler.triggerTileEvent(currentCell, nextCell, this.gameObject);
         bool collision = tilemapHandler.isCollision(nextCell);
 
-        if (!collision) // если клетка не стена
+        if (!collision)
         {
             targetCell = nextCell;
         }
