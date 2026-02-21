@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 
 public class FinishTile : StaticTile {
-
     public PopupAnimation winWindow;
 
     protected override void Awake() {
@@ -33,7 +32,7 @@ public class FinishTile : StaticTile {
 
             completedLevels.Add(currentLevel);
 
-            Debug.Log($"F completedLevels: {completedLevels.Count}");
+            this.Log($"F completedLevels: {completedLevels.Count}");
 
             jsonData = JsonFormatter.ToJson(completedLevels);
             PlayerPrefs.SetString("levels", jsonData);
