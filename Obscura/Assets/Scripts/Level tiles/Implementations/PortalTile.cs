@@ -28,8 +28,8 @@ public class PortalTile : StaticTile {
     /// ������ ��
     public override void OnEvent(GameObject trigger) {
         ToDelete.Add(trigger);
-
-        this.Log($"PORTAL TRIGER: {trigger.name}");
+        
+        this.Log($"New portal trigger: {trigger.name}");
         
         MovementHandler movementHandler = trigger.GetComponent<MovementHandler>();
         this.Log($"movementHandler {movementHandler}, {trigger.name}");
