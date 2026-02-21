@@ -17,6 +17,11 @@ public static class LogDistributorExtensions
         Debug.Log(GetStandardMessage(distributor, message));
     }
 
+    public static void LogError(this ILogDistributor distributor, string message)
+    {
+        Debug.LogError(GetStandardMessage(distributor, message));
+    }
+
     public static void LogTime(this ILogDistributor distributor, string message)
     {
         Debug.Log(GetTimeMessage(distributor, message));
