@@ -25,6 +25,18 @@ public class TilemapHandler : MonoBehaviour, ILogDistributor {
         
         this.Log("Awake end");
     }
+    
+    //void Start() {
+    //    //bool isPlayer = TryGetComponent<Player>(out Player playerComponent);
+    //    Player player = GameObject.FindFirstObjectByType<Player>();
+
+    //    if (!player) {
+    //        Debug.Log($"[TilemapHandler] Player component found!");
+    //        player.transform.position = playerBegginingPosition.transform.position;
+    //    } else {
+    //        Debug.LogError($"[TilemapHandler] Player component is not found!");
+    //    }
+    //}
 
     public Vector3Int getCellFromCoords(Vector3 objCoord) {
         return Grid.WorldToCell(objCoord);
@@ -32,6 +44,10 @@ public class TilemapHandler : MonoBehaviour, ILogDistributor {
     public Vector3 getCoordFromCell(Vector3Int objCell) {
         return Grid.GetCellCenterWorld(objCell);
     }
+    
+    //public Vector3Int getInitialPlayerPosition() {
+    //    return Grid.WorldToCell(playerBegginingPosition.transform.position);
+    //}
 
     public void triggerTileEvent(Vector3Int currentCell, Vector3Int nextCell, GameObject obj) {
         //Debug.Log("enter");
