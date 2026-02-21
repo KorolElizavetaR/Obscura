@@ -1,42 +1,30 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
-public class TilemapHandler : MonoBehaviour {
+public class TilemapHandler : MonoBehaviour, ILogDistributor {
+    public string DistributorName => GetType().Name;
+
     [SerializeField] private Grid Grid;
     [SerializeField] private List<AbstractTile> objects;
 
     private Vector3 playerBegginingPosition;
+    
     public Vector3 PlayerBeginningPosition => playerBegginingPosition;
-
-
-    //private Player player;
+    
 
     public void Awake() {
         playerBegginingPosition = GameObject.FindGameObjectWithTag("Respawn").transform.position;
-        Debug.Log($"[TilemapHandler] playerBegginingPosition: {playerBegginingPosition}");
+        this.Log($"playerBegginingPosition: {playerBegginingPosition}");
 
         Grid = GetComponent<Grid>();
 
         foreach (AbstractTile obj in objects) {
             obj._tilemapHandler = this;
         }
-        Debug.Log($"[TilemapHandler] Awake");
+        
+        this.Log("Awake end");
     }
-
-    //void Start() {
-    //    //bool isPlayer = TryGetComponent<Player>(out Player playerComponent);
-    //    Player player = GameObject.FindFirstObjectByType<Player>();
-
-    //    if (!player) {
-    //        Debug.Log($"[TilemapHandler] Player component found!");
-    //        player.transform.position = playerBegginingPosition.transform.position;
-    //    } else {
-    //        Debug.LogError($"[TilemapHandler] Player component is not found!");
-    //    }
-    //}
 
     public Vector3Int getCellFromCoords(Vector3 objCoord) {
         return Grid.WorldToCell(objCoord);
@@ -44,11 +32,6 @@ public class TilemapHandler : MonoBehaviour {
     public Vector3 getCoordFromCell(Vector3Int objCell) {
         return Grid.GetCellCenterWorld(objCell);
     }
-
-    //public Vector3Int getInitialPlayerPosition() {
-    //    return Grid.WorldToCell(playerBegginingPosition.transform.position);
-    //}
-
 
     public void triggerTileEvent(Vector3Int currentCell, Vector3Int nextCell, GameObject obj) {
         //Debug.Log("enter");
@@ -111,5 +94,4 @@ public class TilemapHandler : MonoBehaviour {
             .OrderByDescending(t => t is DynamicTile)
             .ToList();
     }
-
 }
