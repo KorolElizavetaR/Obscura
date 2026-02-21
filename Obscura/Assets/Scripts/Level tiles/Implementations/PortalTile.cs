@@ -52,6 +52,11 @@ public class PortalTile : StaticTile {
         newObjectMovementHandler.TargetCell = newObjectMovementHandler.GetNextCell();
         this.Log($"{newObject.name} is teleported at {teleportCoord} with moveDir = {newObjectMovementHandler._moveDir} " +
             $"and target cell = {newObjectMovementHandler.TargetCell}");
+
+        if (newObject.TryGetComponent(out MovingBlockTile movingBlockTile))
+        {
+            movingBlockTile.IsMoving = true;
+        }
     }
 
     protected HashSet<GameObject> ToDelete = new();

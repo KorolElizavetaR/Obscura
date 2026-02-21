@@ -4,6 +4,13 @@ public class MovingBlockTile : DynamicTile {
     // ����������� �����
     private MovementHandler movementHandler;
     private bool isMoving = false;
+
+    public bool IsMoving
+    {
+        get => isMoving;
+        set => isMoving = value;
+    }
+    
     private void Awake() {
         movementHandler = GetComponent<MovementHandler>();
 
