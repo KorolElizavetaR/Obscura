@@ -63,8 +63,7 @@ public class PortalTile : StaticTile {
 
     /// �� ������
     public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
-        if (ToDelete.Contains(trigger)) {
-            ToDelete.Remove(trigger);
+        if (ToDelete.Remove(trigger)) {
             Destroy(trigger);
         }
     }
