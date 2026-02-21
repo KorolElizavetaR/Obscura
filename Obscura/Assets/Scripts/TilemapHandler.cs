@@ -49,6 +49,7 @@ public class TilemapHandler : MonoBehaviour, ILogDistributor {
     //    return Grid.WorldToCell(playerBegginingPosition.transform.position);
     //}
 
+    // TODO: think it over
     public void triggerTileEvent(Vector3Int currentCell, Vector3Int nextCell, GameObject obj) {
         this.Log("enter");
         AbstractTile objBehCurrent = getObjectBeh(currentCell);
