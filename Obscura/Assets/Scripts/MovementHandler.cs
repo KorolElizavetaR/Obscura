@@ -29,6 +29,8 @@ public class MovementHandler : MonoBehaviour, ILogDistributor {
     }
 
     public bool move() {
+        //if (_moveDir == Vector3Int.zero) return false;
+        
         Vector3 targetPos = tilemapHandler.getCoordFromCell(targetCell);
         //this.Log($"currentCell: {currentCell}");
         transform.position = Vector3.MoveTowards(transform.position, targetPos, moveSpeed * Time.deltaTime);
@@ -49,10 +51,12 @@ public class MovementHandler : MonoBehaviour, ILogDistributor {
     public void TryMoveToNextCell() {
         // this.Log($"movedir: {_moveDir}");
         Vector3Int nextCell = GetNextCell();
+        
+        //bool collision = tilemapHandler.isCollision(nextCell);
 
-        Debug.Log($"tilemapHandler: {tilemapHandler}");
-        Debug.Log($"currentCell: {currentCell}");
-        Debug.Log($"nextCell: {nextCell}");
+        this.Log($"tilemapHandler: {tilemapHandler}");
+        this.Log($"currentCell: {currentCell}");
+        this.Log($"nextCell: {nextCell}");
         tilemapHandler.triggerTileEvent(currentCell, nextCell, this.gameObject);
         bool collision = tilemapHandler.isCollision(nextCell);
 
