@@ -26,7 +26,12 @@ public class MovingBlockTile : DynamicTile {
     }
 
     override public void OnThisNextEvent(GameObject trigger) {
-        movementHandler._moveDir = Player.currMovementHandler._moveDir; 
+        if (!trigger.TryGetComponent(out MovementHandler triggerMovement))
+        {
+            return;
+        }
+        
+        movementHandler._moveDir = triggerMovement._moveDir; 
         bool canMoveForward = movementHandler.move();
         isMoving = canMoveForward;
         objectProperty.IsCollision = !isMoving;
