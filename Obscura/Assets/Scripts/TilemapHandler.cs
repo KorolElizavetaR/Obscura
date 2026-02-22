@@ -93,9 +93,7 @@ public class TilemapHandler : MonoBehaviour, ILogDistributor {
     }
 
     public virtual bool IsCollision(AbstractTile objBeh) {
-        return objBeh != null
-            ? objBeh.objectProperty.IsCollision
-            : false;
+        return objBeh != null && objBeh.objectProperty.IsCollision;
     }
    
     private AbstractTile getObjectBeh(Vector3Int currentCell) {
