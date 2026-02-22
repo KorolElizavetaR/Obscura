@@ -58,7 +58,7 @@ public class MovementHandler : MonoBehaviour, ILogDistributor {
         this.Log($"currentCell: {currentCell}");
         this.Log($"nextCell: {nextCell}");
         tilemapHandler.triggerTileEvent(currentCell, nextCell, this.gameObject);
-        bool collision = tilemapHandler.isCollision(nextCell);
+        bool collision = tilemapHandler.IsCollision(nextCell);
 
         if (!collision)
         {

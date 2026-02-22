@@ -81,18 +81,18 @@ public class TilemapHandler : MonoBehaviour, ILogDistributor {
     public bool isCollisionList(Vector3Int cell) {
         List<AbstractTile> objBeh = getObjectBehList(cell);
         foreach (AbstractTile obj in objBeh) {
-            if (isCollision(obj))
+            if (IsCollision(obj))
                 return true;
         }
         return false;
     }
 
-    public bool isCollision(Vector3Int cell) {        
+    public bool IsCollision(Vector3Int cell) {        
         AbstractTile objBeh = getObjectBeh(cell);
-        return isCollision(objBeh);
+        return IsCollision(objBeh);
     }
 
-    public virtual bool isCollision(AbstractTile objBeh) {
+    public virtual bool IsCollision(AbstractTile objBeh) {
         return objBeh != null
             ? objBeh.objectProperty.IsCollision
             : false;
