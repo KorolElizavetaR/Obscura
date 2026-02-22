@@ -59,11 +59,11 @@ public class TilemapHandler : MonoBehaviour, ILogDistributor {
 
         if (objBehCurrent != null) {
             this.Log($"objBehNext: {objBehNext}");
-            objBehCurrent.OnEvent(objBehNext, obj);
+            objBehCurrent.OnThisCurrentEvent(objBehNext, obj);
         }
         if (objBehNext != null) {
             this.Log($"this.gameObject: {obj}");
-            objBehNext.OnEvent(obj); 
+            objBehNext.OnThisNextEvent(obj); 
         };
 
         // List<AbstractTile> objsBehCurrent = getObjectBehList(currentCell);

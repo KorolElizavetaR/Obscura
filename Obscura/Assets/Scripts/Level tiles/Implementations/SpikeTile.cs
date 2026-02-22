@@ -8,7 +8,7 @@ public class SpikeTile : StaticTile {
         base.Awake();
         objectProperty.IsCollision = true;        
     }
-    override public void OnEvent(GameObject trigger) {
+    override public void OnThisNextEvent(GameObject trigger) {
 
         if (trigger.TryGetComponent<Player>(out var player)) {
             Player.State.IsDead = true;
@@ -17,7 +17,7 @@ public class SpikeTile : StaticTile {
         }
 
     }
-    public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
+    public override void OnThisCurrentEvent(AbstractTile nextCell, GameObject trigger) {
         throw new System.NotImplementedException("Shouldn't be here");
     }
 

@@ -28,7 +28,7 @@ public class PortalTile : StaticTile {
     #region portal main logic
     
     /// ������ ��
-    public override void OnEvent(GameObject trigger) {
+    public override void OnThisNextEvent(GameObject trigger) {
         ToDelete.Add(trigger);
         
         this.Log($"New portal trigger: {trigger.name}");
@@ -64,7 +64,7 @@ public class PortalTile : StaticTile {
     protected HashSet<GameObject> ToDelete = new();
 
     /// �� ������
-    public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
+    public override void OnThisCurrentEvent(AbstractTile nextCell, GameObject trigger) {
         this.Log($"Item on tile trigger {trigger.name}");
 
         if (!ToDelete.Remove(trigger)) return;

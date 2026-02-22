@@ -25,14 +25,14 @@ public class MovingBlockTile : DynamicTile {
         }
     }
 
-    override public void OnEvent(GameObject trigger) {
+    override public void OnThisNextEvent(GameObject trigger) {
         movementHandler._moveDir = Player.currMovementHandler._moveDir; 
         bool canMoveForward = movementHandler.move();
         isMoving = canMoveForward;
         objectProperty.IsCollision = !isMoving;
     }
 
-    public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
+    public override void OnThisCurrentEvent(AbstractTile nextCell, GameObject trigger) {
        
     }
 }

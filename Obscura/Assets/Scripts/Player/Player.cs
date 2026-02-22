@@ -75,11 +75,11 @@ public class Player : DynamicTile, ILogDistributor {
         };
     }
 
-    public override void OnEvent(GameObject trigger) {
+    public override void OnThisNextEvent(GameObject trigger) {
         throw new System.NotImplementedException();
     }
 
-    public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
+    public override void OnThisCurrentEvent(AbstractTile nextCell, GameObject trigger) {
         throw new System.NotImplementedException();
     }
 

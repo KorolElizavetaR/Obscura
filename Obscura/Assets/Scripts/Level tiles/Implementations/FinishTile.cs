@@ -11,11 +11,11 @@ public class FinishTile : StaticTile {
         objectProperty.IsCollision = false;
     }
 
-    public override void OnEvent(GameObject trigger) {
+    public override void OnThisNextEvent(GameObject trigger) {
         return;
     }
 
-    public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
+    public override void OnThisCurrentEvent(AbstractTile nextCell, GameObject trigger) {
         //ObjectProperty nextCellProperty = nextCell.objectProperty;
 
         bool nextCellCollision = _tilemapHandler.isCollision(nextCell);
