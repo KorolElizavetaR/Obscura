@@ -18,6 +18,11 @@ public class FinishTile : StaticTile {
     public override void OnThisCurrentEvent(AbstractTile nextCell, GameObject trigger) {
         //ObjectProperty nextCellProperty = nextCell.objectProperty;
 
+        if (nextCell == null)
+        {
+            return;
+        }
+
         bool nextCellCollision = _tilemapHandler.IsCollision(nextCell);
 
         if (nextCellCollision) {
