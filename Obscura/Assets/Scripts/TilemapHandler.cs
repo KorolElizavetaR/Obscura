@@ -49,64 +49,31 @@ public class TilemapHandler : MonoBehaviour, ILogDistributor {
     //    return Grid.WorldToCell(playerBegginingPosition.transform.position);
     //}
 
-    // TODO: think it over
     public void triggerTileEvent(Vector3Int currentCell, Vector3Int nextCell, GameObject obj) {
-        this.Log("enter");
-        AbstractTile objBehCurrent = GetObjectBeh(currentCell);
-        this.Log($"objBehCurrent: {objBehCurrent}");
-        AbstractTile objBehNext = GetObjectBeh(nextCell);
-
-
-        if (objBehCurrent != null) {
-            this.Log($"objBehNext: {objBehNext}");
-            objBehCurrent.OnThisCurrentEvent(objBehNext, obj);
-        }
-        if (objBehNext != null) {
-            this.Log($"this.gameObject: {obj}");
-            objBehNext.OnThisNextEvent(obj); 
-        };
-
-        // List<AbstractTile> objsBehCurrent = getObjectBehList(currentCell);
-        // List<AbstractTile> objsBehNext = getObjectBehList(nextCell);
-        //
-        // foreach (var objBehCurrent in objsBehCurrent.Where(x => x != null)) {
-        //     objBehCurrent.OnEvent(obj);
-        // }
-        //
-        // foreach (var objBehNext in objsBehNext.Where(x => x != null)) {
-        //     objBehNext.OnEvent(obj);
-        // }
+        List<AbstractTile> objBehCurrent = GetObjectBeh(currentCell);
+        List<AbstractTile> objBehNext = GetObjectBeh(nextCell);
+        
+        objBehCurrent.ForEach(x => x.OnThisCurrentEvents(objBehNext, obj));
+        objBehNext.ForEach(x => x.OnThisNextEvent(obj));
+        
+        this.Log($"Triggered events for {obj.name}, current: {string.Join(", ", objBehCurrent.Select(x => x.name))}, " +
+                 $"next: {string.Join(", ", objBehNext.Select(x => x.name))}");
     }
-
-    public bool isCollisionList(Vector3Int cell) {
-        List<AbstractTile> objBeh = getObjectBehList(cell);
-        foreach (AbstractTile obj in objBeh) {
-            if (IsCollision(obj))
-                return true;
-        }
-        return false;
-    }
-
+    
     public bool IsCollision(Vector3Int cell) {        
-        AbstractTile objBeh = GetObjectBeh(cell);
-        return IsCollision(objBeh);
+        List<AbstractTile> objBeh = GetObjectBeh(cell);
+        
+        return objBeh.Any(IsCollision);
     }
 
     public virtual bool IsCollision(AbstractTile objBeh) {
-        return objBeh != null && objBeh.objectProperty.IsCollision;
+        return objBeh.objectProperty.IsCollision;
     }
    
-    private AbstractTile GetObjectBeh(Vector3Int currentCell) {
+    private List<AbstractTile> GetObjectBeh(Vector3Int currentCell) {
         return objects
+            .Where(x => x != null)
             .Where(t => t.CheckIsCurrentObject(currentCell))
-            .OrderByDescending(t => t is DynamicTile)
-            .FirstOrDefault();
-    }
-
-    private List<AbstractTile> getObjectBehList(Vector3Int currentCell) {
-        return objects
-            .Where(t => t.CheckIsCurrentObject(currentCell))
-            .OrderByDescending(t => t is DynamicTile)
             .ToList();
     }
 }
