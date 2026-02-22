@@ -25,6 +25,8 @@ public class PortalTile : StaticTile {
         return result;
     }
 
+    #region portal main logic
+    
     /// ������ ��
     public override void OnEvent(GameObject trigger) {
         ToDelete.Add(trigger);
@@ -70,4 +72,6 @@ public class PortalTile : StaticTile {
         Destroy(trigger);
         this.Log($"Destroyed {trigger.name}");
     }
+    
+    #endregion
 }
