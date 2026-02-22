@@ -52,9 +52,9 @@ public class TilemapHandler : MonoBehaviour, ILogDistributor {
     // TODO: think it over
     public void triggerTileEvent(Vector3Int currentCell, Vector3Int nextCell, GameObject obj) {
         this.Log("enter");
-        AbstractTile objBehCurrent = getObjectBeh(currentCell);
+        AbstractTile objBehCurrent = GetObjectBeh(currentCell);
         this.Log($"objBehCurrent: {objBehCurrent}");
-        AbstractTile objBehNext = getObjectBeh(nextCell);
+        AbstractTile objBehNext = GetObjectBeh(nextCell);
 
 
         if (objBehCurrent != null) {
@@ -88,7 +88,7 @@ public class TilemapHandler : MonoBehaviour, ILogDistributor {
     }
 
     public bool IsCollision(Vector3Int cell) {        
-        AbstractTile objBeh = getObjectBeh(cell);
+        AbstractTile objBeh = GetObjectBeh(cell);
         return IsCollision(objBeh);
     }
 
@@ -96,7 +96,7 @@ public class TilemapHandler : MonoBehaviour, ILogDistributor {
         return objBeh != null && objBeh.objectProperty.IsCollision;
     }
    
-    private AbstractTile getObjectBeh(Vector3Int currentCell) {
+    private AbstractTile GetObjectBeh(Vector3Int currentCell) {
         return objects
             .Where(t => t.CheckIsCurrentObject(currentCell))
             .OrderByDescending(t => t is DynamicTile)
