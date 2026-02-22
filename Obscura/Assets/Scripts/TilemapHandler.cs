@@ -44,6 +44,12 @@ public class TilemapHandler : MonoBehaviour, ILogDistributor {
     public Vector3 getCoordFromCell(Vector3Int objCell) {
         return Grid.GetCellCenterWorld(objCell);
     }
+
+    public void AddTile(AbstractTile obj)
+    {
+        objects.Add(obj);
+        obj._tilemapHandler = this;
+    }
     
     //public Vector3Int getInitialPlayerPosition() {
     //    return Grid.WorldToCell(playerBegginingPosition.transform.position);

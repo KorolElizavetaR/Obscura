@@ -58,6 +58,7 @@ public class PortalTile : StaticTile {
         if (newObject.TryGetComponent(out MovingBlockTile movingBlockTile))
         {
             movingBlockTile.IsMoving = true;
+            _tilemapHandler.AddTile(movingBlockTile);
         }
     }
 
