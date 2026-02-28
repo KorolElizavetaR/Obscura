@@ -1,18 +1,19 @@
 using UnityEngine;
 using static InputHandler;
 
-public class Player : DynamicTile {
-    public static MovementHandler currMovementHandler;
+public class Player : DynamicTile, ILogDistributor {
+    public string DistributorName => GetType().Name;
 
     public static PlayerState State;
-    private bool restrictSwiping;
+    public static MovementHandler currMovementHandler;
+
+    [SerializeField] private Animator animator;
+
     private MovementHandler movementHandler;
-    [SerializeField] 
-    private Animator animator;
     private InputHandler inputHandler;
-
+    
     private PlayerSFX playerSFX;
-
+    private bool restrictSwiping;
     private bool playedWinSoundOnce;
 
     private void Start() {
@@ -23,7 +24,6 @@ public class Player : DynamicTile {
         inputHandler.onTouchComplete += onSwipe;
 
         playerSFX = GetComponent<PlayerSFX>();
-
     }
 
     private void OnDestroy() {
@@ -49,7 +49,7 @@ public class Player : DynamicTile {
             return;
         }
 
-        Debug.Log("On swipe call");
+        this.Log("on swipe call");
         Vector3Int movementDir = inputCallback._swipeDelta;
 
         if (!movementDir.Equals(Vector3Int.zero)) {
@@ -58,14 +58,13 @@ public class Player : DynamicTile {
     }
 
     private void ProcessMovement(Vector3Int movementDir) {
-        
         //playerSFX.playMovementSound();
         restrictSwiping = false;
         State.IsMoving = true;
 
-        Debug.Log($"movementDir: {movementDir}");
+        this.Log($"movementDir: {movementDir}");
         movementHandler._moveDir = movementDir;
-        Debug.Log($"movementHandler._moveDir: {movementHandler._moveDir};");
+        this.Log($"movementHandler._moveDir: {movementHandler._moveDir};");
 
         transform.rotation = (movementHandler._moveDir.x, movementHandler._moveDir.y) switch {
             ( > 0, 0) => Quaternion.Euler(0, 0, 90),   // Right
@@ -76,15 +75,17 @@ public class Player : DynamicTile {
         };
     }
 
-    public override void OnEvent(GameObject trigger) {
+    public override void OnThisNextEvent(GameObject trigger) {
         throw new System.NotImplementedException();
     }
 
-    public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
+    public override void OnThisCurrentEvent(AbstractTile nextCell, GameObject trigger) {
         throw new System.NotImplementedException();
     }
 
-    public class PlayerState {
+    public class PlayerState : ILogDistributor {
+        public string DistributorName => GetType().Name;
+
         private bool isMoving;
         private bool isDead;
         private bool isWin = false;
@@ -94,7 +95,7 @@ public class Player : DynamicTile {
         public PlayerState(Animator animator) {
             this.animator = animator;
 
-            Debug.Log($"animator null:{animator is null} ");
+            this.Log($"animator null:{animator is null} ");
         }
 
         public bool IsWin { get => isWin; set {
@@ -119,7 +120,5 @@ public class Player : DynamicTile {
                 }
             }
         }
-
     }
-
 }

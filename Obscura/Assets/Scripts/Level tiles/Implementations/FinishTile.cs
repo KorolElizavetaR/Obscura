@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 
 public class FinishTile : StaticTile {
-
     public PopupAnimation winWindow;
 
     protected override void Awake() {
@@ -12,14 +11,19 @@ public class FinishTile : StaticTile {
         objectProperty.IsCollision = false;
     }
 
-    public override void OnEvent(GameObject trigger) {
+    public override void OnThisNextEvent(GameObject trigger) {
         return;
     }
 
-    public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
+    public override void OnThisCurrentEvent(AbstractTile nextCell, GameObject trigger) {
         //ObjectProperty nextCellProperty = nextCell.objectProperty;
 
-        bool nextCellCollision = _tilemapHandler.isCollision(nextCell);
+        if (nextCell == null || !trigger.CompareTag("Player"))
+        {
+            return;
+        }
+
+        bool nextCellCollision = _tilemapHandler.IsCollision(nextCell);
 
         if (nextCellCollision) {
             //StartCoroutine(ShowWinWindow());
@@ -33,7 +37,7 @@ public class FinishTile : StaticTile {
 
             completedLevels.Add(currentLevel);
 
-            Debug.Log($"F completedLevels: {completedLevels.Count}");
+            this.Log($"F completedLevels: {completedLevels.Count}");
 
             jsonData = JsonFormatter.ToJson(completedLevels);
             PlayerPrefs.SetString("levels", jsonData);

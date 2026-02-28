@@ -1,31 +1,31 @@
-using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 
-public class TilemapHandler : MonoBehaviour {
+public class TilemapHandler : MonoBehaviour, ILogDistributor {
+    public string DistributorName => GetType().Name;
+
     [SerializeField] private Grid Grid;
     [SerializeField] private List<AbstractTile> objects;
 
     private Vector3 playerBegginingPosition;
+    
     public Vector3 PlayerBeginningPosition => playerBegginingPosition;
-
-
-    //private Player player;
+    
 
     public void Awake() {
         playerBegginingPosition = GameObject.FindGameObjectWithTag("Respawn").transform.position;
-        Debug.Log($"[TilemapHandler] playerBegginingPosition: {playerBegginingPosition}");
+        this.Log($"playerBegginingPosition: {playerBegginingPosition}");
 
         Grid = GetComponent<Grid>();
 
         foreach (AbstractTile obj in objects) {
             obj._tilemapHandler = this;
         }
-        Debug.Log($"[TilemapHandler] Awake");
+        
+        this.Log("Awake end");
     }
-
+    
     //void Start() {
     //    //bool isPlayer = TryGetComponent<Player>(out Player playerComponent);
     //    Player player = GameObject.FindFirstObjectByType<Player>();
@@ -45,60 +45,41 @@ public class TilemapHandler : MonoBehaviour {
         return Grid.GetCellCenterWorld(objCell);
     }
 
+    public void AddTile(AbstractTile obj)
+    {
+        objects.Add(obj);
+        obj._tilemapHandler = this;
+    }
+    
     //public Vector3Int getInitialPlayerPosition() {
     //    return Grid.WorldToCell(playerBegginingPosition.transform.position);
     //}
 
-
     public void triggerTileEvent(Vector3Int currentCell, Vector3Int nextCell, GameObject obj) {
-        Debug.Log("enter");
-        AbstractTile objBehCurrent = getObjectBeh(currentCell);
-        Debug.Log($"objBehCurrent: {objBehCurrent}");
-        AbstractTile objBehNext = getObjectBeh(nextCell);
-
-
-        if (objBehCurrent != null) {
-            Debug.Log($"objBehNext: {objBehNext}");
-            objBehCurrent.OnEvent(objBehNext, obj);
-        }
-        if (objBehNext != null) {
-            Debug.Log($"this.gameObject: {obj}");
-            objBehNext.OnEvent(obj); 
-        };
+        List<AbstractTile> objBehCurrent = GetObjectBeh(currentCell);
+        List<AbstractTile> objBehNext = GetObjectBeh(nextCell);
+        
+        objBehCurrent.ForEach(x => x.OnThisCurrentEvents(objBehNext, obj));
+        objBehNext.ForEach(x => x.OnThisNextEvent(obj));
+        
+        this.Log($"Triggered events for {obj.name}, current: {string.Join(", ", objBehCurrent.Select(x => x.name))}, " +
+                 $"next: {string.Join(", ", objBehNext.Select(x => x.name))}");
+    }
+    
+    public bool IsCollision(Vector3Int cell) {        
+        List<AbstractTile> objBeh = GetObjectBeh(cell);
+        
+        return objBeh.Any(IsCollision);
     }
 
-    public bool isCollisionList(Vector3Int cell) {
-        List<AbstractTile> objBeh = getObjectBehList(cell);
-        foreach (AbstractTile obj in objBeh) {
-            if (isCollision(obj))
-                return true;
-        }
-        return false;
-    }
-
-    public bool isCollision(Vector3Int cell) {        
-        AbstractTile objBeh = getObjectBeh(cell);
-        return isCollision(objBeh);
-    }
-
-    public virtual bool isCollision(AbstractTile objBeh) {
-        return objBeh != null
-            ? objBeh.objectProperty.IsCollision
-            : false;
+    public virtual bool IsCollision(AbstractTile objBeh) {
+        return objBeh.objectProperty.IsCollision;
     }
    
-    private AbstractTile getObjectBeh(Vector3Int currentCell) {
+    private List<AbstractTile> GetObjectBeh(Vector3Int currentCell) {
         return objects
+            .Where(x => x != null)
             .Where(t => t.CheckIsCurrentObject(currentCell))
-            .OrderByDescending(t => t is DynamicTile)
-            .FirstOrDefault();
-    }
-
-    private List<AbstractTile> getObjectBehList(Vector3Int currentCell) {
-        return objects
-            .Where(t => t.CheckIsCurrentObject(currentCell))
-            .OrderByDescending(t => t is DynamicTile)
             .ToList();
     }
-
 }

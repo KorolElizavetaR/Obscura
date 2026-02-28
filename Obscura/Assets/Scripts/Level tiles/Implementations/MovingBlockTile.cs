@@ -1,10 +1,16 @@
-using System;
 using UnityEngine;
 
 public class MovingBlockTile : DynamicTile {
-    // перемещение блока
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
     private MovementHandler movementHandler;
     private bool isMoving = false;
+
+    public bool IsMoving
+    {
+        get => isMoving;
+        set => isMoving = value;
+    }
+    
     private void Awake() {
         movementHandler = GetComponent<MovementHandler>();
 
@@ -19,15 +25,19 @@ public class MovingBlockTile : DynamicTile {
         }
     }
 
-    override public void OnEvent(GameObject trigger) {
-        movementHandler._moveDir = Player.currMovementHandler._moveDir; 
+    override public void OnThisNextEvent(GameObject trigger) {
+        if (!trigger.TryGetComponent(out MovementHandler triggerMovement))
+        {
+            return;
+        }
+        
+        movementHandler._moveDir = triggerMovement._moveDir; 
         bool canMoveForward = movementHandler.move();
         isMoving = canMoveForward;
         objectProperty.IsCollision = !isMoving;
     }
 
-    public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
+    public override void OnThisCurrentEvent(AbstractTile nextCell, GameObject trigger) {
        
     }
-
 }
