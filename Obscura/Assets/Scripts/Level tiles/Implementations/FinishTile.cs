@@ -18,7 +18,7 @@ public class FinishTile : StaticTile {
     public override void OnThisCurrentEvent(AbstractTile nextCell, GameObject trigger) {
         //ObjectProperty nextCellProperty = nextCell.objectProperty;
 
-        if (nextCell == null)
+        if (nextCell == null || !trigger.CompareTag("Player"))
         {
             return;
         }
