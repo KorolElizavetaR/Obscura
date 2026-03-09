@@ -1,45 +1,43 @@
 using UnityEngine;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
 public class PortalTile : StaticTile {
-
     Vector3Int[] portalCoords = new Vector3Int[2];
 
     private void Start() {
         objectProperty.IsCollision = false;
-     
 
         var coords = GetAllTileCoords();
         portalCoords[0] = coords[0];
         portalCoords[1] = coords[1];
-        Debug.Log($"portal1: {portalCoords[0]} | portal2: {portalCoords[1]}");
+        this.Log($"portal1: {portalCoords[0]} | portal2: {portalCoords[1]}");
     }
 
     protected List<Vector3Int> GetAllTileCoords() {
         var result = new List<Vector3Int>();
-        Debug.Log($"1");
+        this.Log($"1");
         foreach (var pos in currentTilemap.cellBounds.allPositionsWithin) {
             if (currentTilemap.HasTile(pos)) {
                 result.Add(pos);
             }
         }
-        Debug.Log($"2");
+        this.Log($"2");
         return result;
     }
 
-    /// клетка до
-    public override void OnEvent(GameObject trigger) {
+    #region portal main logic
+    
+    /// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ
+    public override void OnThisNextEvent(GameObject trigger) {
         ToDelete.Add(trigger);
-
-        Debug.Log($"PORTAL TRIGER: {trigger.name}");
+        
+        this.Log($"New portal trigger: {trigger.name}");
         
         MovementHandler movementHandler = trigger.GetComponent<MovementHandler>();
-        Debug.Log($"movementHandler {movementHandler}, {trigger.name}");
+        this.Log($"movementHandler {movementHandler}, {trigger.name}");
 
         Vector3Int nextPortalCoord = movementHandler.TargetCell + movementHandler._moveDir;
-        Debug.Log($"nextPortalCoord: {nextPortalCoord}");
+        this.Log($"nextPortalCoord: {nextPortalCoord}");
         Vector3Int teleportCoord = nextPortalCoord == portalCoords[0] 
             ? portalCoords[1] 
             : portalCoords[0];
@@ -47,22 +45,34 @@ public class PortalTile : StaticTile {
         Vector3 vector = new Vector3(teleportCoord.x, teleportCoord.y, trigger.transform.position.z);
         
         GameObject newObject = Instantiate(trigger, vector, trigger.transform.rotation);
+        newObject.name = trigger.name;
+        
         MovementHandler newObjectMovementHandler = newObject.GetComponent<MovementHandler>();
          
         newObjectMovementHandler.CurrentCell = teleportCoord;
         newObjectMovementHandler._moveDir = movementHandler._moveDir;
         newObjectMovementHandler.TargetCell = newObjectMovementHandler.GetNextCell();
-        Debug.Log($"{newObject.name} is teleported at {teleportCoord} with moveDir = {newObjectMovementHandler._moveDir} " +
+        this.Log($"{newObject.name} is teleported at {teleportCoord} with moveDir = {newObjectMovementHandler._moveDir} " +
             $"and target cell = {newObjectMovementHandler.TargetCell}");
+
+        if (newObject.TryGetComponent(out MovingBlockTile movingBlockTile))
+        {
+            movingBlockTile.IsMoving = true;
+            _tilemapHandler.AddTile(movingBlockTile);
+        }
     }
 
     protected HashSet<GameObject> ToDelete = new();
 
-    /// на клетке
-    public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
-        if (ToDelete.Contains(trigger)) {
-            ToDelete.Remove(trigger);
-            Destroy(trigger);
-        }
+    /// пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+    public override void OnThisCurrentEvent(AbstractTile nextCell, GameObject trigger) {
+        this.Log($"Item on tile trigger {trigger.name}");
+
+        if (!ToDelete.Remove(trigger)) return;
+        
+        Destroy(trigger);
+        this.Log($"Destroyed {trigger.name}");
     }
+    
+    #endregion
 }

@@ -2,12 +2,12 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class InputHandler : MonoBehaviour
+public class InputHandler : MonoBehaviour, ILogDistributor
 {
-    [SerializeField]
-    private InputActionReference _touch;
-    [SerializeField]
-    private InputActionReference _swipe;
+    public string DistributorName => GetType().Name;
+
+    [SerializeField] private InputActionReference _touch;
+    [SerializeField] private InputActionReference _swipe;
 
     public event Action<InputCallback> onTouchComplete;
     public event Action<InputCallback> onSwipeDelta;
@@ -19,7 +19,6 @@ public class InputHandler : MonoBehaviour
     private InputCallback inputCallback;
 
     private static InputHandler Instance;
-    //private float _swipeThreshold = 10f;
 
     void Awake() {
         if (Instance == null) {
@@ -48,7 +47,7 @@ public class InputHandler : MonoBehaviour
     }
 
     private void ProcessTouchComplete(InputAction.CallbackContext context) {
-        Debug.Log($"inputCallback._swipeDelta: {inputCallback._swipeDelta}");
+        this.Log($"inputCallback._swipeDelta: {inputCallback._swipeDelta}");
         onTouchComplete?.Invoke(inputCallback);
     }
 

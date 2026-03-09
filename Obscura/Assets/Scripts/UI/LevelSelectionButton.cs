@@ -1,10 +1,10 @@
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LevelSelectionButton : MonoBehaviour
+public class LevelSelectionButton : MonoBehaviour, ILogDistributor
 {
+    public string DistributorName => GetType().Name;
+    
     [SerializeField] private Image levelImage;
     [SerializeField] private LevelStat levelData;
 
@@ -15,7 +15,7 @@ public class LevelSelectionButton : MonoBehaviour
     public void setSelectedLevelToPrefs() {
         PlayerPrefs.SetInt("level", levelData.levelIndex);
         if (modalLevelSelection is null) {
-            Debug.LogError("modalLevelSelection is null");
+            this.LogError("modalLevelSelection is null");
         }
 
         modalLevelSelection.onClickOpenModal();

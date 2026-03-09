@@ -1,24 +1,24 @@
-using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class ButtonToggler : MonoBehaviour {
-    private Image[] buttonImages;
+public abstract class ButtonToggler : MonoBehaviour, ILogDistributor {
+    public string DistributorName => GetType().Name;
 
+    [SerializeField] protected string prefName;
+    
+    private Image[] buttonImages;
     protected bool currentToggleState;
-    [SerializeField]
-    protected string prefName;
 
     public virtual void Awake() {
         buttonImages = GetComponentsInChildren<Image>();
         currentToggleState = PlayerPrefs.GetInt(prefName, 1) == 1;
-        Debug.Log($"INIT currentToggleState for pref {prefName}: {currentToggleState}");
+        this.Log($"INIT currentToggleState for pref {prefName}: {currentToggleState}");
         changeImageAlpha();
     }
 
     public virtual void toggleState() {
         currentToggleState = !currentToggleState;
-        Debug.Log($"currentToggleState for pref {prefName}: {currentToggleState}");
+        this.Log($"currentToggleState for pref {prefName}: {currentToggleState}");
         changeImageAlpha();
         PlayerPrefs.SetInt(prefName, currentToggleState ? 1 : 0);
         PlayerPrefs.Save();
@@ -31,5 +31,4 @@ public abstract class ButtonToggler : MonoBehaviour {
             img.color = new Color(img.color.r, img.color.g, img.color.b, targetAlpha);
         }
     }
-
 }
