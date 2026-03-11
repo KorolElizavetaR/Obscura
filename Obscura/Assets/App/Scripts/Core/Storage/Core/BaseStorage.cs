@@ -46,6 +46,11 @@ namespace App.Scripts.Core.Storage.Core
             return true;
         }
 
+        public bool TryAdd<T1>(T1 value)
+        {
+            throw new NotImplementedException();
+        }
+
         public virtual void Save()
         {
             throw new System.NotImplementedException();

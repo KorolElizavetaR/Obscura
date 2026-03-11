@@ -4,6 +4,7 @@
     {
         void Load();
         bool TryGet<T>(out T value); 
+        bool TryAdd<T>(T value);
         void Save();
     }
 }
