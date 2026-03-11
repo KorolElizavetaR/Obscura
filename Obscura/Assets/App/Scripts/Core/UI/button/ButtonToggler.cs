@@ -1,7 +1,15 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public abstract class ButtonToggler : MonoBehaviour, ILogDistributor {
+    [Serializable]
+    public enum ToggleType
+    {
+        OstVolume,
+        SfxVolume
+    }
+    
     public string DistributorName => GetType().Name;
 
     [SerializeField] protected string prefName;
