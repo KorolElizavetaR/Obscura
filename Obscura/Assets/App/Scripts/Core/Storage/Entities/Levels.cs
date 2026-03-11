@@ -4,13 +4,13 @@ namespace App.Scripts.Core.Storage.Entities
 {
     public class Levels : IEntity<LevelsDto>
     {
-        public int Id { get; set; }
+        public int CurrentLevelId { get; set; }
 
         public Levels() {}
         
         public Levels(LevelsDto dto)
         {
-            Id = dto.Id;
+            CurrentLevelId = dto.CurrentLevelId;
         }
         
         public LevelsDto ToDto()

@@ -27,7 +27,7 @@ public class LevelLoaderManager : MonoBehaviour {
     {
         EntitiesStorage.Instance.TryGet(out _levelsEntity);
         
-        currentLevel = Instantiate(_levels[_levelsEntity.Id]);
+        currentLevel = Instantiate(_levels[_levelsEntity.CurrentLevelId]);
         currentTilemapHandler = currentLevel.GetComponent<TilemapHandler>();
         MovementHandler.tilemapHandler = currentTilemapHandler;
         SetupCamera();

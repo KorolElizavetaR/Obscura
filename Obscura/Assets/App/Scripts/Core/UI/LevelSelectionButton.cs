@@ -25,7 +25,7 @@ public class LevelSelectionButton : MonoBehaviour, ILogDistributor
     public void setSelectedLevelToPrefs() {
         if (_levelsEntity is not null)
         {
-            _levelsEntity.Id = levelData.levelIndex;
+            _levelsEntity.CurrentLevelId = levelData.levelIndex;
         }
         
         if (modalLevelSelection is null) {
