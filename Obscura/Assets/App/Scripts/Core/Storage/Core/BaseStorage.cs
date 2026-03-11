@@ -40,6 +40,8 @@ namespace App.Scripts.Core.Storage.Core
 
             value = valueConverted;
 
+            this.Log($"Loaded storage value for type {typeof(TT)}");
+            
             return true;
         }
 
@@ -51,6 +53,8 @@ namespace App.Scripts.Core.Storage.Core
             {
                 Debug.LogWarning($"Storage value already exists for type {typeof(TT)}");
             }
+            
+            this.Log($"Added storage value for type {typeof(TT)}");
             
             return success;
         }
