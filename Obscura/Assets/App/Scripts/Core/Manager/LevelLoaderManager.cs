@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using App.Scripts.Core.Storage;
+using App.Scripts.Core.Storage.Entities;
 using UnityEngine;
 using UnityEngine.InputSystem.Controls;
 
@@ -20,9 +22,10 @@ public class LevelLoaderManager : MonoBehaviour {
     [SerializeField]
     private Player player;
 
-    private void Awake() {
-        int currentLevelId = PlayerPrefs.GetInt("level");
-        currentLevel = Instantiate(_levels[currentLevelId]);
+    private void Awake()
+    {
+        EntitiesStorage.Instance.TryGet(out Level level);
+        currentLevel = Instantiate(_levels[level.Id]);
         currentTilemapHandler = currentLevel.GetComponent<TilemapHandler>();
         MovementHandler.tilemapHandler = currentTilemapHandler;
         SetupCamera();

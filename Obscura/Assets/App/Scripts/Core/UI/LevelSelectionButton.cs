@@ -1,3 +1,5 @@
+using App.Scripts.Core.Storage;
+using App.Scripts.Core.Storage.Entities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,7 +15,9 @@ public class LevelSelectionButton : MonoBehaviour, ILogDistributor
     public Image LevelImage => levelImage;
 
     public void setSelectedLevelToPrefs() {
-        PlayerPrefs.SetInt("level", levelData.levelIndex);
+        EntitiesStorage.Instance.TryGet(out Level level);
+        level.Id = levelData.levelIndex;
+        
         if (modalLevelSelection is null) {
             this.LogError("modalLevelSelection is null");
         }
