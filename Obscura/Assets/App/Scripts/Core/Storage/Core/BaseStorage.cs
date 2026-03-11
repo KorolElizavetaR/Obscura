@@ -45,7 +45,14 @@ namespace App.Scripts.Core.Storage.Core
 
         public bool TryAdd<TT>(TT value)
         {
-            throw new NotImplementedException();
+            var success = _storage.TryAdd(typeof(TT), value);
+
+            if (!success)
+            {
+                Debug.LogWarning($"Storage value already exists for type {typeof(TT)}");
+            }
+            
+            return success;
         }
 
         public virtual void Save() {}
