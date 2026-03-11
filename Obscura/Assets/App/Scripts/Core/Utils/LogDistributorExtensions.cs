@@ -21,6 +21,11 @@ public static class LogDistributorExtensions
     {
         Debug.LogError(GetStandardMessage(distributor, message));
     }
+    
+    public static void LogWarning(this ILogDistributor distributor, string message)
+    {
+        Debug.LogWarning(GetStandardMessage(distributor, message));
+    }
 
     public static void LogTime(this ILogDistributor distributor, string message)
     {
