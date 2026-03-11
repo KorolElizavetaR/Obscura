@@ -1,7 +1,11 @@
-﻿namespace App.Scripts.Core.Storage.Core
+﻿using System.Collections.Generic;
+
+namespace App.Scripts.Core.Storage.Core
 {
     public class BaseStorage<T> : IStorage<T>
     {
+        private readonly HashSet<T> _items = new();
+        
         public void Load()
         {
             throw new System.NotImplementedException();
