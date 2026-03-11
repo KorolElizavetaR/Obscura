@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace App.Scripts.Core.Storage.Core
 {
@@ -19,6 +20,7 @@ namespace App.Scripts.Core.Storage.Core
         private BaseStorage()
         {
             Load();
+            Application.exitCancellationToken.Register(Save);
         }
         
         public void Load()
