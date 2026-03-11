@@ -33,7 +33,7 @@ namespace App.Scripts.Core.Storage.Core
 
             if (foundValue is not TT valueConverted)
             {
-                this.LogWarning($"Storage found value for type {typeof(TT)} but it not the same type");
+                this.LogWarning($"Storage found value for type {typeof(TT)} but it not the same type: {foundValue?.GetType()}");
                 _storage.Remove(typeof(TT));
                 return false;
             }
