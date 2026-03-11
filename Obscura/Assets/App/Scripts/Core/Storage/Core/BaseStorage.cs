@@ -3,8 +3,10 @@ using System.Collections.Generic;
 
 namespace App.Scripts.Core.Storage.Core
 {
-    public class BaseStorage : IStorage
+    public class BaseStorage : IStorage, ILogDistributor
     {
+        public string DistributorName => GetType().Name;
+        
         private readonly Dictionary<Type, object> _storage = new ();
         
         public void Load()
@@ -18,11 +20,13 @@ namespace App.Scripts.Core.Storage.Core
             
             if (!_storage.TryGetValue(typeof(T), out var foundValue))
             {
+                this.LogError($"No storage found for type {typeof(T)}");
                 return false;
             }
 
             if (foundValue is not T valueConverted)
             {
+                this.LogError($"Storage found value for type {typeof(T)} but it not the same");
                 _storage.Remove(typeof(T));
                 return false;
             }
