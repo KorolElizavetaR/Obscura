@@ -7,7 +7,7 @@ public class ModalLevelSelection : ModalEventHandler {
 
     public override void onClickOpenModal() {
         int levelNum = PlayerPrefs.GetInt("level", 1);
-        text.text = "������� " + levelNum;
+        text.text = $"Запустить {levelNum.ToString()}";
         base.onClickOpenModal();
     }
 
