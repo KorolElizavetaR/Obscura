@@ -16,7 +16,7 @@ public class ModalLevelSelection : ModalEventHandler {
     }
     
     public override void onClickOpenModal() {
-        text.text = $"Запустить {_levelEntity.Id.ToString()}";
+        text.text = $"Уровень {_levelEntity.Id.ToString()}";
         base.onClickOpenModal();
     }
 
