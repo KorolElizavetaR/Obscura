@@ -19,10 +19,7 @@ namespace App.Scripts.Core.Storage.Core
             Application.exitCancellationToken.Register(Save);
         }
         
-        public virtual void Load()
-        {
-            throw new System.NotImplementedException();
-        }
+        public virtual void Load() {}
 
         public bool TryGet<TT>(out TT value)
         {
@@ -51,9 +48,6 @@ namespace App.Scripts.Core.Storage.Core
             throw new NotImplementedException();
         }
 
-        public virtual void Save()
-        {
-            throw new System.NotImplementedException();
-        }
+        public virtual void Save() {}
     }
 }
