@@ -19,7 +19,7 @@ public abstract class ButtonToggler : MonoBehaviour, ILogDistributor {
     private ButtonTogglers _buttonTogglersEntity;
     [SerializeField] private ToggleType _toggleType;
 
-    public virtual void Awake() {
+    protected virtual void Awake() {
         EntitiesStorage.Instance.TryGet(out _buttonTogglersEntity);
         
         buttonImages = GetComponentsInChildren<Image>();
