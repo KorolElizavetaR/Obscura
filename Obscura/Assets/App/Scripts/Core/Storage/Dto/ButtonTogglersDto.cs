@@ -5,7 +5,7 @@ namespace App.Scripts.Core.Storage.Dto
     [Serializable]
     public sealed class ButtonTogglersDto : IDto
     {
-        public bool OstVolumeEnabled;
-        public bool SfxVolumeEnabled;
+        public bool OstVolumeEnabled = true;
+        public bool SfxVolumeEnabled = true;
     }
 }
