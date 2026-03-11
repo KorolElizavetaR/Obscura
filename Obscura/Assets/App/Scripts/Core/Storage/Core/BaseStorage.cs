@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace App.Scripts.Core.Storage.Core
 {
-    public class BaseStorage<T> : IStorage, ILogDistributor 
+    public abstract class BaseStorage<T> : IStorage, ILogDistributor 
         where T : BaseStorage<T>, new ()
     {
         public string DistributorName => GetType().Name;
