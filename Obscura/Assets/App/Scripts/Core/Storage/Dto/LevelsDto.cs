@@ -8,5 +8,6 @@ namespace App.Scripts.Core.Storage.Dto
     {
         public int CurrentLevelId;
         public HashSet<int> CompletedLevels = new ();
+        public int MaxLevelId;
     }
 }
