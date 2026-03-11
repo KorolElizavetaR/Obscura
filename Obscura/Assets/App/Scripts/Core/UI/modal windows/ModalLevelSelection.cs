@@ -1,3 +1,5 @@
+using App.Scripts.Core.Storage;
+using App.Scripts.Core.Storage.Entities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -5,9 +7,15 @@ using UnityEngine.SceneManagement;
 public class ModalLevelSelection : ModalEventHandler {
     [SerializeField] TextMeshProUGUI text;
 
+    private Level _levelEntity;
+    
+    private void Awake()
+    {
+        EntitiesStorage.Instance.TryGet(out _levelEntity);
+    }
+    
     public override void onClickOpenModal() {
-        int levelNum = PlayerPrefs.GetInt("level", 1);
-        text.text = $"Запустить {levelNum.ToString()}";
+        text.text = $"Запустить {_levelEntity.Id.ToString()}";
         base.onClickOpenModal();
     }
 
