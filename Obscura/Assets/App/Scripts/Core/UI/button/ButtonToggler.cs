@@ -49,16 +49,32 @@ public abstract class ButtonToggler : MonoBehaviour, ILogDistributor {
     
     public bool GetToggleState()
     {
-        return false;
+        return _toggleType switch
+        {
+            ToggleType.OstVolume => _buttonTogglersEntity.OstVolumeEnabled,
+            ToggleType.SfxVolume => _buttonTogglersEntity.SfxVolumeEnabled,
+            _ => false
+        };
     }
 
-    public void ChangeToggleState()
+    public bool ChangeToggleState()
     {
-        
-    }
-
-    public void SetToggleState(bool state)
-    {
-        
+        switch (_toggleType)
+        {
+            case ToggleType.OstVolume:
+            {
+                _buttonTogglersEntity.OstVolumeEnabled = !_buttonTogglersEntity.OstVolumeEnabled;
+                return _buttonTogglersEntity.OstVolumeEnabled;
+            }
+            case ToggleType.SfxVolume:
+            {
+                _buttonTogglersEntity.SfxVolumeEnabled = !_buttonTogglersEntity.SfxVolumeEnabled;
+                return _buttonTogglersEntity.SfxVolumeEnabled;
+            }
+            default:
+            {
+                return false;
+            }
+        }
     }
 }
