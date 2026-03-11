@@ -46,9 +46,9 @@ public class MenuManager : MonoBehaviour, ILogDistributor
         }
     }
 
-    private void setMaxAvailableLevelAmount() {
-        PlayerPrefs.SetInt("maxAvailableLevel", _levels.Count-1);
-        PlayerPrefs.Save();
+    private void setMaxAvailableLevelAmount()
+    {
+        _levelsEntity.MaxLevelId = _levels.Count - 1;
     }
 
     private GameObject initiateLevelIcon(LevelSelectionButton level) {
