@@ -4,18 +4,14 @@ using UnityEngine;
 
 namespace App.Scripts.Core.Storage.Core
 {
-    public class BaseStorage : IStorage, ILogDistributor
+    public class BaseStorage<T> : IStorage, ILogDistributor 
+        where T : BaseStorage<T>, new ()
     {
         public string DistributorName => GetType().Name;
         private readonly Dictionary<Type, object> _storage = new ();
         
-        private static BaseStorage _instance;
-
-        public static BaseStorage GetInstance()
-        {
-            _instance ??= new BaseStorage();
-            return _instance;
-        }
+        private static T _instance;
+        public static T Instance => _instance ??= new T();
 
         protected BaseStorage()
         {
