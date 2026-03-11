@@ -10,7 +10,7 @@ public class LevelLoaderManager : MonoBehaviour {
 
     private GameObject currentLevel;
     private TilemapHandler currentTilemapHandler;
-    private Level levelEntity;
+    private Levels _levelsEntity;
 
     [Header("Camera")]
     public Camera cam;
@@ -25,9 +25,9 @@ public class LevelLoaderManager : MonoBehaviour {
 
     private void Awake()
     {
-        EntitiesStorage.Instance.TryGet(out levelEntity);
+        EntitiesStorage.Instance.TryGet(out _levelsEntity);
         
-        currentLevel = Instantiate(_levels[levelEntity.Id]);
+        currentLevel = Instantiate(_levels[_levelsEntity.Id]);
         currentTilemapHandler = currentLevel.GetComponent<TilemapHandler>();
         MovementHandler.tilemapHandler = currentTilemapHandler;
         SetupCamera();

@@ -7,16 +7,16 @@ using UnityEngine.SceneManagement;
 public class ModalLevelSelection : ModalEventHandler {
     [SerializeField] TextMeshProUGUI text;
 
-    private Level _levelEntity;
+    private Levels _levelsEntity;
     
     protected override void Awake()
     {
         base.Awake();
-        EntitiesStorage.Instance.TryGet(out _levelEntity);
+        EntitiesStorage.Instance.TryGet(out _levelsEntity);
     }
     
     public override void onClickOpenModal() {
-        text.text = $"Уровень {_levelEntity.Id.ToString()}";
+        text.text = $"Уровень {_levelsEntity.Id.ToString()}";
         base.onClickOpenModal();
     }
 

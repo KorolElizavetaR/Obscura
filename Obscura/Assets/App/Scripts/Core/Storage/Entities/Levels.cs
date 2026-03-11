@@ -2,20 +2,20 @@
 
 namespace App.Scripts.Core.Storage.Entities
 {
-    public class Level : IEntity<LevelDto>
+    public class Levels : IEntity<LevelsDto>
     {
         public int Id { get; set; }
 
-        public Level() {}
+        public Levels() {}
         
-        public Level(LevelDto dto)
+        public Levels(LevelsDto dto)
         {
             Id = dto.Id;
         }
         
-        public LevelDto ToDto()
+        public LevelsDto ToDto()
         {
-            return new LevelDto();
+            return new LevelsDto();
         }
     }
 }

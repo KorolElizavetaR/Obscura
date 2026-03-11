@@ -13,19 +13,19 @@ public class LevelSelectionButton : MonoBehaviour, ILogDistributor
 
     [SerializeField] ModalLevelSelection modalLevelSelection;
 
-    private Level levelEntity;
+    private Levels _levelsEntity;
     
     public Image LevelImage => levelImage;
 
     private void Awake()
     {
-        EntitiesStorage.Instance.TryGet(out levelEntity);
+        EntitiesStorage.Instance.TryGet(out _levelsEntity);
     }
 
     public void setSelectedLevelToPrefs() {
-        if (levelEntity is not null)
+        if (_levelsEntity is not null)
         {
-            levelEntity.Id = levelData.levelIndex;
+            _levelsEntity.Id = levelData.levelIndex;
         }
         
         if (modalLevelSelection is null) {

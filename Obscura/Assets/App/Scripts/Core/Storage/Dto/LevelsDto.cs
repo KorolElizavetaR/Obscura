@@ -3,7 +3,7 @@
 namespace App.Scripts.Core.Storage.Dto
 {
     [Serializable]
-    public class LevelDto : IDto
+    public class LevelsDto : IDto
     {
         public int Id;
     }
