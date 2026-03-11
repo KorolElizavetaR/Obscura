@@ -24,20 +24,20 @@ namespace App.Scripts.Core.Storage.Core
             throw new System.NotImplementedException();
         }
 
-        public bool TryGet<T>(out T value)
+        public bool TryGet<TT>(out TT value)
         {
             value = default;
             
-            if (!_storage.TryGetValue(typeof(T), out var foundValue))
+            if (!_storage.TryGetValue(typeof(TT), out var foundValue))
             {
-                this.LogError($"No storage found for type {typeof(T)}");
+                this.LogError($"No storage found for type {typeof(TT)}");
                 return false;
             }
 
-            if (foundValue is not T valueConverted)
+            if (foundValue is not TT valueConverted)
             {
-                this.LogError($"Storage found value for type {typeof(T)} but it not the same");
-                _storage.Remove(typeof(T));
+                this.LogError($"Storage found value for type {typeof(TT)} but it not the same");
+                _storage.Remove(typeof(TT));
                 return false;
             }
 
@@ -46,7 +46,7 @@ namespace App.Scripts.Core.Storage.Core
             return true;
         }
 
-        public bool TryAdd<T1>(T1 value)
+        public bool TryAdd<TT>(TT value)
         {
             throw new NotImplementedException();
         }
