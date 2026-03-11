@@ -1,3 +1,5 @@
+using System;
+using App.Scripts.Core.Storage;
 using App.Scripts.Core.Storage.Entities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,6 +8,11 @@ public class HandleModalButtonsEvents : MonoBehaviour, ILogDistributor {
     public string DistributorName => GetType().Name;
 
     private Levels _levelsEntity;
+
+    protected virtual void Awake()
+    {
+        EntitiesStorage.Instance.TryGet(out _levelsEntity);
+    }
 
     public void resetProgress() {
         if (PlayerPrefs.HasKey("levels")) {
