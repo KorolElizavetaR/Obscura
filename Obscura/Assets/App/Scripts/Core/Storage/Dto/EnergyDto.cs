@@ -5,13 +5,13 @@ namespace App.Scripts.Core.Storage.Dto
     [Serializable]
     public sealed class EnergyDto
     {
-        private int _energy;
+        private int _count;
         private DateTime _reductionDateTime;
 
-        public int Energy
+        public int Count
         {
-            get => _energy;
-            set => _energy = value;
+            get => _count;
+            set => _count = value;
         }
 
         public DateTime ReductionDateTime
