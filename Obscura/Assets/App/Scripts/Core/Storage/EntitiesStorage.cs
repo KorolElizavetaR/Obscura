@@ -9,7 +9,7 @@ namespace App.Scripts.Core.Storage
     {
         public override void Load()
         {
-            TryAdd(new Levels(PlayerPrefsEx.GetJson(StorageContracts.CurrentLevel, new LevelsDto())));
+            TryAdd(new Levels(PlayerPrefsEx.GetJson(StorageContracts.Levels, new LevelsDto())));
             TryAdd(new Entities.Energy(PlayerPrefsEx.GetJson(StorageContracts.Energy, new EnergyDto())));
             TryAdd(new ButtonTogglers(PlayerPrefsEx.GetJson(StorageContracts.ButtonTogglers, new ButtonTogglersDto())));
         }
@@ -18,7 +18,7 @@ namespace App.Scripts.Core.Storage
         {
             if (TryGet(out Entities.Levels level))
             {
-                PlayerPrefsEx.SetJson(StorageContracts.CurrentLevel, level.ToDto());
+                PlayerPrefsEx.SetJson(StorageContracts.Levels, level.ToDto());
             }
             
             if (TryGet(out Entities.Energy energy))

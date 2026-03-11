@@ -2,7 +2,7 @@
 {
     public static class StorageContracts
     {
-        public const string CurrentLevel = "level";
+        public const string Levels = "levels";
         public const string Energy = "energy";
         public const string ButtonTogglers = "button_togglers";
     }
