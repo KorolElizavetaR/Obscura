@@ -3,7 +3,7 @@
 namespace App.Scripts.Core.Storage.Dto
 {
     [Serializable]
-    public sealed class EnergyDto
+    public sealed class EnergyDto : IDto
     {
         private int _count;
         private DateTime _reductionDateTime;
