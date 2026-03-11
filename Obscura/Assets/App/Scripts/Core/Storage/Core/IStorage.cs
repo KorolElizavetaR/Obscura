@@ -1,4 +1,4 @@
-﻿namespace App.Scripts.Core.Storage
+﻿namespace App.Scripts.Core.Storage.Core
 {
     public interface IStorage<T>
     {
