@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using App.Scripts.Core.Storage;
+using App.Scripts.Core.Storage.Entities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +18,13 @@ public class MenuManager : MonoBehaviour, ILogDistributor
     [SerializeField] private TMP_FontAsset _textFont;
 
     [SerializeField] private List<LevelSelectionButton> _levels;
+
+    private Levels _levelsEntity;
+
+    protected virtual void Awake()
+    {
+        EntitiesStorage.Instance.TryGet(out _levelsEntity);
+    }
 
     void Start() {
         setVisualForLevel();
