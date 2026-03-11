@@ -1,3 +1,4 @@
+using System;
 using App.Scripts.Core.Storage;
 using App.Scripts.Core.Storage.Entities;
 using UnityEngine;
@@ -12,14 +13,24 @@ public class LevelSelectionButton : MonoBehaviour, ILogDistributor
 
     [SerializeField] ModalLevelSelection modalLevelSelection;
 
+    private Level levelEntity;
+    
     public Image LevelImage => levelImage;
 
+    private void Awake()
+    {
+        EntitiesStorage.Instance.TryGet(out levelEntity);
+    }
+
     public void setSelectedLevelToPrefs() {
-        EntitiesStorage.Instance.TryGet(out Level level);
-        level.Id = levelData.levelIndex;
+        if (levelEntity is not null)
+        {
+            levelEntity.Id = levelData.levelIndex;
+        }
         
         if (modalLevelSelection is null) {
             this.LogError("modalLevelSelection is null");
+            return;
         }
 
         modalLevelSelection.onClickOpenModal();
