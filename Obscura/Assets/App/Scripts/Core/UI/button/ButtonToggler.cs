@@ -1,4 +1,6 @@
 using System;
+using App.Scripts.Core.Storage;
+using App.Scripts.Core.Storage.Entities;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +19,11 @@ public abstract class ButtonToggler : MonoBehaviour, ILogDistributor {
     private Image[] buttonImages;
     protected bool currentToggleState;
 
+    private ButtonTogglers _buttonTogglersEntity;
+
     public virtual void Awake() {
+        EntitiesStorage.Instance.TryGet(out _buttonTogglersEntity);
+        
         buttonImages = GetComponentsInChildren<Image>();
         currentToggleState = PlayerPrefs.GetInt(prefName, 1) == 1;
         this.Log($"INIT currentToggleState for pref {prefName}: {currentToggleState}");
