@@ -5,11 +5,11 @@ public class WallTile : StaticTile {
         base.Awake();
         objectProperty.IsCollision = true;
     }
-    public override void OnEvent(GameObject trigger) {
+    public override void OnThisNextEvent(GameObject trigger) {
         return;
     }
 
-    public override void OnEvent(AbstractTile nextCell, GameObject trigger) {
+    public override void OnThisCurrentEvent(AbstractTile nextCell, GameObject trigger) {
         return;
     }
 

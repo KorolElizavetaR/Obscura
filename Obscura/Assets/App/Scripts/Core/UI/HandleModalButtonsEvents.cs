@@ -1,15 +1,17 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class HandleModalButtonsEvents : MonoBehaviour {
+public class HandleModalButtonsEvents : MonoBehaviour, ILogDistributor {
+    public string DistributorName => GetType().Name;
+
     public void resetProgress() {
         if (PlayerPrefs.HasKey("levels")) {
             PlayerPrefs.DeleteKey("levels");
             PlayerPrefs.Save(); // ensure changes are written to disk
-            Debug.Log("All level progress erased.");
+            this.Log("All level progress erased.");
         }
         else {
-            Debug.Log("No saved progress to erase.");
+            this.Log("No saved progress to erase.");
         }
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -19,7 +21,7 @@ public class HandleModalButtonsEvents : MonoBehaviour {
         int maxAvailableLevel = PlayerPrefs.GetInt("maxAvailableLevel");
         int currLevel = PlayerPrefs.GetInt("level");
         if (currLevel == maxAvailableLevel) {
-            Debug.Log("Дальше уровней нема");
+            this.Log("пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ");
             return;
         }
         PlayerPrefs.SetInt("level", ++currLevel);
