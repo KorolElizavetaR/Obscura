@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.starasgames.tmpro-dynamic-data-cleaner": "https://github.com/STARasGAMES/tmpro-dynamic-data-cleaner.git#upm",
     "com.unity.adaptiveperformance.google.android": "5.1.6",
     "com.unity.collab-proxy": "2.9.3",
     "com.unity.feature.2d": "2.0.1",
