@@ -50,6 +50,16 @@ public abstract class ButtonToggler : MonoBehaviour, ILogDistributor {
         };
     }
 
+    public string GetToggleName()
+    {
+        return _toggleType switch
+        {
+            ToggleType.OstVolume => "OSTVolume",
+            ToggleType.SfxVolume => "SFXVolume",
+            _ => ""
+        };
+    }
+
     public bool ChangeToggleState()
     {
         switch (_toggleType)
