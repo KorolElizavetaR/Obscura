@@ -369,6 +369,13 @@
       },
       "url": "https://packages.unity.com"
     },
+    "severnbli.smart-merge-registrator": {
+      "version": "https://github.com/Severnbli/smart-merge-registrator.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "71c2c464c4cf3db01906b98a84a2b9191be931b0"
+    },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",
       "depth": 0,
