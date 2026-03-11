@@ -6,7 +6,7 @@ namespace App.Scripts.Core.Storage.Entities
     public class Levels : IEntity<LevelsDto>
     {
         public int CurrentLevelId { get; set; }
-        public List<int> CompletedLevels { get; set; } = new ();
+        public HashSet<int> CompletedLevels { get; set; } = new ();
 
         public Levels() {}
         

@@ -7,6 +7,6 @@ namespace App.Scripts.Core.Storage.Dto
     public class LevelsDto : IDto
     {
         public int CurrentLevelId;
-        public List<int> CompletedLevels = new ();
+        public HashSet<int> CompletedLevels = new ();
     }
 }
