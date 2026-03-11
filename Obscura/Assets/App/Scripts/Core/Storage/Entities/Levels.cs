@@ -15,7 +15,10 @@ namespace App.Scripts.Core.Storage.Entities
         
         public LevelsDto ToDto()
         {
-            return new LevelsDto();
+            return new LevelsDto()
+            {
+                CurrentLevelId = CurrentLevelId
+            };
         }
     }
 }
