@@ -23,7 +23,7 @@ namespace App.Scripts.Core.Storage.Core
             Application.exitCancellationToken.Register(Save);
         }
         
-        public void Load()
+        public virtual void Load()
         {
             throw new System.NotImplementedException();
         }
@@ -50,7 +50,7 @@ namespace App.Scripts.Core.Storage.Core
             return true;
         }
 
-        public void Save()
+        public virtual void Save()
         {
             throw new System.NotImplementedException();
         }
