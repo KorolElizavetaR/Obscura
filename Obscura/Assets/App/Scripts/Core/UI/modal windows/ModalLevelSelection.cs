@@ -1,28 +1,26 @@
+using App.Scripts.Core.Storage;
+using App.Scripts.Core.Storage.Entities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ModalLevelSelection : ModalEventHandler {
+    [SerializeField] TextMeshProUGUI text;
 
-
-    [SerializeField]
-    TextMeshProUGUI text;
-
-    //void Start() {
-    //    text = levelText.GetComponent<TextMeshPro>();
-    //    if (text == null) {
-    //        Debug.LogError("TextMeshPro component not found on levelText GameObject!");
-    //    }
-    //}
-
+    private Levels _levelsEntity;
+    
+    protected override void Awake()
+    {
+        base.Awake();
+        EntitiesStorage.Instance.TryGet(out _levelsEntity);
+    }
+    
     public override void onClickOpenModal() {
-        int levelNum = PlayerPrefs.GetInt("level", 1);
-        text.text = "Óðîâåíü " + levelNum;
+        text.text = $"Ð£Ñ€Ð¾Ð²ÐµÐ½ÑŒ {_levelsEntity.CurrentLevelId.ToString()}";
         base.onClickOpenModal();
     }
 
     public void loadLevel() {
         SceneManager.LoadScene("game_scene");
     }
-
 }

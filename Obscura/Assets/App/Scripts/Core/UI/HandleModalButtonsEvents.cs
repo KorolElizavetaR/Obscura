@@ -1,30 +1,33 @@
+using App.Scripts.Core.Storage;
+using App.Scripts.Core.Storage.Entities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class HandleModalButtonsEvents : MonoBehaviour, ILogDistributor {
     public string DistributorName => GetType().Name;
 
+    private Levels _levelsEntity;
+
+    protected virtual void Awake()
+    {
+        EntitiesStorage.Instance.TryGet(out _levelsEntity);
+    }
+
     public void resetProgress() {
-        if (PlayerPrefs.HasKey("levels")) {
-            PlayerPrefs.DeleteKey("levels");
-            PlayerPrefs.Save(); // ensure changes are written to disk
-            this.Log("All level progress erased.");
-        }
-        else {
-            this.Log("No saved progress to erase.");
-        }
+        _levelsEntity.CompletedLevels.Clear();
+        this.Log("Levels data erased");
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void loadNextLevel() {
-        int maxAvailableLevel = PlayerPrefs.GetInt("maxAvailableLevel");
-        int currLevel = PlayerPrefs.GetInt("level");
-        if (currLevel == maxAvailableLevel) {
-            this.Log("������ ������� ����");
+        if (_levelsEntity.CurrentLevelId.Equals(_levelsEntity.MaxLevelId))
+        {
+            this.Log("Now max level");
             return;
         }
-        PlayerPrefs.SetInt("level", ++currLevel);
+
+        _levelsEntity.CurrentLevelId++;
         SceneManager.LoadScene("game_scene");
     }
 

@@ -1,13 +1,23 @@
-using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ButtonTogglerGlobalSounds : ButtonToggler {
     [SerializeField]
     private AudioManager audioManager;
 
-    public override void toggleState() {
+    protected override void Awake()
+    {
+        base.Awake();
+        SetVolume();
+    }
+
+    public override void toggleState()
+    {
         base.toggleState();
-        audioManager.setVolume(prefName, currentToggleState);
+        SetVolume();
+    }
+
+    private void SetVolume()
+    {
+        audioManager.setVolume(GetToggleName(), GetToggleState());
     }
 }

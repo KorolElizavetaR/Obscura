@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using System.Linq;
+using App.Scripts.Core.Storage;
+using App.Scripts.Core.Storage.Entities;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,38 +20,35 @@ public class MenuManager : MonoBehaviour, ILogDistributor
 
     [SerializeField] private List<LevelSelectionButton> _levels;
 
+    private Levels _levelsEntity;
+
+    protected virtual void Awake()
+    {
+        EntitiesStorage.Instance.TryGet(out _levelsEntity);
+    }
+
     void Start() {
         setVisualForLevel();
         setMaxAvailableLevelAmount();
     }
 
-    private HashSet<int> getCompletedLevels() {
-        string jsonData = PlayerPrefs.GetString("levels", string.Empty);
-        return string.IsNullOrEmpty(jsonData)
-            ? new HashSet<int>()
-            : JsonFormatter.FromJson<HashSet<int>>(jsonData);
-    }
-
     private void setVisualForLevel() {
-        HashSet<int> completedLevels = getCompletedLevels();
-        this.Log($"completedLevels: [{string.Join(", ", completedLevels)}]");
+        this.Log($"completedLevels: [{string.Join(", ", _levelsEntity.CompletedLevels.Select(x => x.ToString()))}]");
         foreach (LevelSelectionButton level in _levels) {
 
             GameObject levelIcon = initiateLevelIcon(level);
 
             levelIcon.transform.SetParent(level.transform, false);
 
-            level.LevelImage.sprite = completedLevels.Contains(level.LevelIndex)
+            level.LevelImage.sprite = _levelsEntity.CompletedLevels.Contains(level.LevelIndex)
                 ? _levelButtonCompletedSprite
                 : _levelButtonSprite;
-
-            // make object from initiateLevelIcon(level) chilf og LevelSelectionButton
         }
     }
 
-    private void setMaxAvailableLevelAmount() {
-        PlayerPrefs.SetInt("maxAvailableLevel", _levels.Count-1);
-        PlayerPrefs.Save();
+    private void setMaxAvailableLevelAmount()
+    {
+        _levelsEntity.MaxLevelId = _levels.Count - 1;
     }
 
     private GameObject initiateLevelIcon(LevelSelectionButton level) {
