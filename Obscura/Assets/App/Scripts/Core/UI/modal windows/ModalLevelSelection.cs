@@ -9,8 +9,9 @@ public class ModalLevelSelection : ModalEventHandler {
 
     private Level _levelEntity;
     
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         EntitiesStorage.Instance.TryGet(out _levelEntity);
     }
     
