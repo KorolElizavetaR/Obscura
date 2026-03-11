@@ -45,4 +45,19 @@ public abstract class ButtonToggler : MonoBehaviour, ILogDistributor {
             img.color = new Color(img.color.r, img.color.g, img.color.b, targetAlpha);
         }
     }
+    
+    public bool GetToggleState()
+    {
+        return false;
+    }
+
+    public void ChangeToggleState()
+    {
+        
+    }
+
+    public void SetToggleState(bool state)
+    {
+        
+    }
 }
