@@ -1,9 +1,9 @@
 ﻿namespace App.Scripts.Core.Storage.Core
 {
-    public interface IStorage<T>
+    public interface IStorage
     {
         void Load();
-        bool TryGet(out T value);
+        bool TryGet<T>(out T value); 
         void Save();
     }
 }
