@@ -16,8 +16,8 @@ namespace App.Scripts.Core.Storage.Core
             _instance ??= new BaseStorage();
             return _instance;
         }
-        
-        private BaseStorage()
+
+        protected BaseStorage()
         {
             Load();
             Application.exitCancellationToken.Register(Save);
