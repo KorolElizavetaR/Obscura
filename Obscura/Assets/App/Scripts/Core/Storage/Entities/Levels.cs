@@ -7,6 +7,7 @@ namespace App.Scripts.Core.Storage.Entities
     {
         public int CurrentLevelId { get; set; }
         public HashSet<int> CompletedLevels { get; set; } = new ();
+        public int MaxLevelId { get; set; }
 
         public Levels() {}
         
@@ -14,6 +15,7 @@ namespace App.Scripts.Core.Storage.Entities
         {
             CurrentLevelId = dto.CurrentLevelId;
             CompletedLevels = dto.CompletedLevels;
+            MaxLevelId = dto.MaxLevelId;
         }
         
         public LevelsDto ToDto()
@@ -21,7 +23,8 @@ namespace App.Scripts.Core.Storage.Entities
             return new LevelsDto()
             {
                 CurrentLevelId = CurrentLevelId,
-                CompletedLevels = CompletedLevels
+                CompletedLevels = CompletedLevels,
+                MaxLevelId = MaxLevelId
             };
         }
     }
