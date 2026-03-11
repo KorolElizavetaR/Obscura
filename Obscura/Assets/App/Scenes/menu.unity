@@ -2741,7 +2741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad283b691dedad48b35ccd66316ac66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefName: OSTVolume
+  _toggleType: 0
   audioManager: {fileID: 1339585177}
 --- !u!1 &1388641632
 GameObject:
@@ -3336,7 +3336,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad283b691dedad48b35ccd66316ac66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefName: SFXVolume
+  _toggleType: 1
   audioManager: {fileID: 1339585177}
 --- !u!1 &1608185012
 GameObject:
