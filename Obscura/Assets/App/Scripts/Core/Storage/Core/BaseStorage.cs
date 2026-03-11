@@ -27,13 +27,13 @@ namespace App.Scripts.Core.Storage.Core
             
             if (!_storage.TryGetValue(typeof(TT), out var foundValue))
             {
-                this.LogError($"No storage found for type {typeof(TT)}");
+                this.LogWarning($"No storage found for type {typeof(TT)}");
                 return false;
             }
 
             if (foundValue is not TT valueConverted)
             {
-                this.LogError($"Storage found value for type {typeof(TT)} but it not the same");
+                this.LogWarning($"Storage found value for type {typeof(TT)} but it not the same");
                 _storage.Remove(typeof(TT));
                 return false;
             }
