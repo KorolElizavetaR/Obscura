@@ -1,14 +1,21 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using App.Scripts.Core.Storage;
+using App.Scripts.Core.Storage.Entities;
 using Unity.VisualScripting;
 
 public class FinishTile : StaticTile {
     public PopupAnimation winWindow;
 
+    private Levels _levelsEntity;
+
     protected override void Awake() {
         base.Awake();
         objectProperty.IsCollision = false;
+        
+        EntitiesStorage.Instance.TryGet(out _levelsEntity);
     }
 
     public override void OnThisNextEvent(GameObject trigger) {
@@ -27,24 +34,12 @@ public class FinishTile : StaticTile {
 
         if (nextCellCollision) {
             //StartCoroutine(ShowWinWindow());
-
-            int currentLevel = PlayerPrefs.GetInt("level");
-
-            string jsonData = PlayerPrefs.GetString("levels", string.Empty);
-            var completedLevels = string.IsNullOrEmpty(jsonData)
-                ? new HashSet<int>()
-                : JsonFormatter.FromJson<HashSet<int>>(jsonData);
-
-            completedLevels.Add(currentLevel);
-
-            this.Log($"F completedLevels: {completedLevels.Count}");
-
-            jsonData = JsonFormatter.ToJson(completedLevels);
-            PlayerPrefs.SetString("levels", jsonData);
+            _levelsEntity.CompletedLevels.Add(_levelsEntity.CurrentLevelId);
+            
+            this.Log($"F completedLevels: {string.Join(", ", _levelsEntity.CompletedLevels.Select(x => x.ToString()))}");
 
             Player.State.IsWin = true;
             
-
             ShowWinWindow();
         }
     }
