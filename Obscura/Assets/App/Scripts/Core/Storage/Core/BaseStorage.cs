@@ -6,8 +6,20 @@ namespace App.Scripts.Core.Storage.Core
     public class BaseStorage : IStorage, ILogDistributor
     {
         public string DistributorName => GetType().Name;
-        
         private readonly Dictionary<Type, object> _storage = new ();
+        
+        private static BaseStorage _instance;
+
+        public static BaseStorage GetInstance()
+        {
+            _instance ??= new BaseStorage();
+            return _instance;
+        }
+        
+        private BaseStorage()
+        {
+            Load();
+        }
         
         public void Load()
         {
