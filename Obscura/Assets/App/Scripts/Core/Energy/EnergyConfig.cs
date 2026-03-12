@@ -2,6 +2,7 @@
 
 namespace App.Scripts.Core.Energy
 {
+    [CreateAssetMenu(fileName = "EnergyConfig", menuName = "Obscura/Energy/Energy Config")]
     public class EnergyConfig : ScriptableObject
     {
         [SerializeField] private int _maxCount = 5;
