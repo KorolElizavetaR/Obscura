@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: EnergyConfig
   m_EditorClassIdentifier: 
   _maxCount: 5
-  _recoverSpeed: 600
+  _recoverSpeed: 20
   _resetOnStart: 0
