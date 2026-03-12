@@ -14,5 +14,10 @@ namespace App.Scripts.Core.UI.button
             _button = GetComponent<Button>();
             EntitiesStorage.Instance.TryGet(out _energyEntity);
         }
+        
+        protected virtual void Update()
+        {
+            _button.interactable = _energyEntity.Count.Equals(0);
+        }
     }
 }
