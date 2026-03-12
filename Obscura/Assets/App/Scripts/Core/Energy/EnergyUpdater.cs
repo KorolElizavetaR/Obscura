@@ -17,5 +17,10 @@ namespace App.Scripts.Core.Energy
                 EnergyOperations.Reset();
             }
         }
+
+        protected virtual void Update()
+        {
+            EnergyOperations.TryIncrease();
+        }
     }
 }
