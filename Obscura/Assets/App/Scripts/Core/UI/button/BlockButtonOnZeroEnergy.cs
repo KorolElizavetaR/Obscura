@@ -17,7 +17,7 @@ namespace App.Scripts.Core.UI.button
         
         protected virtual void Update()
         {
-            _button.interactable = _energyEntity.Count.Equals(0);
+            _button.interactable = !_energyEntity.Count.Equals(0);
         }
     }
 }
