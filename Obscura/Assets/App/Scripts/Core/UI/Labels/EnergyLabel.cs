@@ -8,8 +8,8 @@ namespace App.Scripts.Core.UI.Labels
 {
     public class EnergyLabel : MonoBehaviour
     {
-        [SerializeField] private TextMeshPro _energyCount;
-        [SerializeField] private TextMeshPro _timeToIncrease;
+        [SerializeField] private TextMeshProUGUI _energyCount;
+        [SerializeField] private TextMeshProUGUI _timeToIncrease;
         [SerializeField] private EnergyConfig _energyConfig;
         
         private Storage.Entities.Energy _energyEntity;
