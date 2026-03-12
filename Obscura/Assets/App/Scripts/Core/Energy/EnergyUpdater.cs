@@ -6,9 +6,11 @@ namespace App.Scripts.Core.Energy
     {
         [SerializeField] private EnergyConfig _energyConfig;
         
+        public EnergyOperations EnergyOperations { get; private set; }
+        
         protected virtual void Awake()
         {
-            
+            EnergyOperations = new EnergyOperations(_energyConfig);
         }
     }
 }
