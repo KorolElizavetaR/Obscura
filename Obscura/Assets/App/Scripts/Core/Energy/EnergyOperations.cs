@@ -2,6 +2,11 @@
 {
     public class EnergyOperations
     {
+        private EnergyConfig _energyConfig;
         
+        public EnergyOperations(EnergyConfig energyConfig)
+        {
+            _energyConfig = energyConfig;
+        }
     }
 }
