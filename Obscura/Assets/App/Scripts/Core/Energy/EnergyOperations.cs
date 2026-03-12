@@ -14,6 +14,12 @@ namespace App.Scripts.Core.Energy
             EntitiesStorage.Instance.TryGet(out _energyEntity);
         }
 
+        public void Reset()
+        {
+            _energyEntity.Count = _energyConfig.MaxCount;
+            _energyEntity.ReductionDateTime = default;
+        }
+
         public bool TryDecrease(int value = 1)
         {
             var energyCount = _energyEntity.Count;
