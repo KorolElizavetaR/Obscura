@@ -9,6 +9,10 @@ namespace App.Scripts.Core.Energy
         private EnergyConfig _energyConfig;
         private Storage.Entities.Energy _energyEntity;
         
+        public event Action OnReset;
+        public event Action<int> OnDecrease;
+        public event Action<int> OnIncrease;
+        
         public EnergyOperations(EnergyConfig energyConfig)
         {
             _energyConfig = energyConfig;
@@ -19,6 +23,8 @@ namespace App.Scripts.Core.Energy
         {
             _energyEntity.Count = _energyConfig.MaxCount;
             _energyEntity.ReductionDateTime = default;
+            
+            OnReset?.Invoke();
         }
 
         public bool TryDecrease(int value = 1)
@@ -36,7 +42,10 @@ namespace App.Scripts.Core.Energy
                 _energyEntity.ReductionDateTime = DateTime.Now;
             }
 
-            _energyEntity.Count = Math.Clamp(energyCount - value, 0, _energyConfig.MaxCount);
+            energyCount = Math.Clamp(energyCount - value, 0, _energyConfig.MaxCount);
+            OnDecrease?.Invoke(energyCount);
+            
+            _energyEntity.Count = energyCount;
             return true;
         }
 
@@ -61,9 +70,10 @@ namespace App.Scripts.Core.Energy
             }
             
             energyCount = Math.Clamp(energyCount + finalValue, 0, _energyConfig.MaxCount);
-
+            OnIncrease?.Invoke(energyCount);
+            
             _energyEntity.ReductionDateTime = energyCount < _energyConfig.MaxCount ? DateTime.Now : default;
-
+            
             _energyEntity.Count = energyCount;
             return true;
         }
