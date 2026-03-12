@@ -1,5 +1,6 @@
 ﻿using System;
 using App.Scripts.Core.Storage;
+using UnityEngine;
 
 namespace App.Scripts.Core.Energy
 {
@@ -51,12 +52,15 @@ namespace App.Scripts.Core.Energy
 
             var datetimeDiff = DateTime.Now - _energyEntity.ReductionDateTime;
 
-            if (datetimeDiff.Seconds < _energyConfig.RecoverSpeed)
+            var canIncreaseQuantity = Mathf.CeilToInt(datetimeDiff.Seconds / _energyConfig.RecoverSpeed); 
+            var finalValue = value < canIncreaseQuantity ? value : canIncreaseQuantity;
+
+            if (finalValue.Equals(0))
             {
                 return false;
             }
             
-            energyCount = Math.Clamp(energyCount + value, 0, _energyConfig.MaxCount);
+            energyCount = Math.Clamp(energyCount + finalValue, 0, _energyConfig.MaxCount);
 
             _energyEntity.ReductionDateTime = energyCount < _energyConfig.MaxCount ? DateTime.Now : default;
 
