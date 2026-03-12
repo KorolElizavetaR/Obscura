@@ -26,5 +26,23 @@ namespace App.Scripts.Core.Utils
             
             return anyComponents;
         }
+        
+        public static bool TryFind<T>(out T result, bool logging = true) where T : Component
+        {
+            result = null;
+            
+            if (!TryFind(out List<T> listResult, false))
+            {
+                if (logging)
+                {
+                    _logger.Log($"Component with type {typeof(T).Name} not found");
+                }
+                
+                return false;
+            }
+
+            result = listResult.FirstOrDefault();
+            return true;
+        }
     }
 }
