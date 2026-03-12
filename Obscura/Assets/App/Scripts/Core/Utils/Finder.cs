@@ -7,7 +7,7 @@
             public string DistributorName => nameof(Finder);
         }
 
-        private static Logger _logger = new ();
+        private static readonly Logger _logger = new ();
         
     }
 }
