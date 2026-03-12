@@ -50,7 +50,7 @@ namespace App.Scripts.Core.UI.Labels
             
             var dateTimeDiff = DateTime.Now - _energyEntity.ReductionDateTime;
             
-            _timeToIncrease.text = $"{dateTimeDiff.TotalMinutes:D2} : {dateTimeDiff.Seconds:D2}";
+            _timeToIncrease.text =$"{dateTimeDiff.TotalMinutes.ToString("00")} : {dateTimeDiff.Seconds.ToString("00")}";
         }
     }
 }
