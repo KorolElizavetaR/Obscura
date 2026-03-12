@@ -30,7 +30,7 @@ namespace App.Scripts.Core.Energy
                 _energyEntity.ReductionDateTime = DateTime.Now;
             }
 
-            _energyEntity.Count = Math.Clamp(energyCount - 1, 0, _energyConfig.MaxCount);
+            _energyEntity.Count = Math.Clamp(energyCount - value, 0, _energyConfig.MaxCount);
             return true;
         }
     }
