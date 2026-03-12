@@ -61,7 +61,7 @@ namespace App.Scripts.Core.Energy
 
             var datetimeDiff = DateTime.Now - _energyEntity.ReductionDateTime;
 
-            var canIncreaseQuantity = Mathf.CeilToInt(datetimeDiff.Seconds / _energyConfig.RecoverSpeed); 
+            var canIncreaseQuantity = Mathf.FloorToInt(datetimeDiff.Seconds / _energyConfig.RecoverSpeed); 
             var finalValue = value < canIncreaseQuantity ? value : canIncreaseQuantity;
 
             if (finalValue.Equals(0))
