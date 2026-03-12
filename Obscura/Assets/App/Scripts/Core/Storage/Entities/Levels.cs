@@ -14,7 +14,7 @@ namespace App.Scripts.Core.Storage.Entities
         public Levels(LevelsDto dto)
         {
             CurrentLevelId = dto.CurrentLevelId;
-            CompletedLevels = dto.CompletedLevels;
+            CompletedLevels = JsonFormatter.FromJson<HashSet<int>>(dto.CompletedLevels) ?? new HashSet<int>();
             MaxLevelId = dto.MaxLevelId;
         }
         
@@ -23,7 +23,7 @@ namespace App.Scripts.Core.Storage.Entities
             return new LevelsDto()
             {
                 CurrentLevelId = CurrentLevelId,
-                CompletedLevels = CompletedLevels,
+                CompletedLevels = JsonFormatter.ToJson(CompletedLevels),
                 MaxLevelId = MaxLevelId
             };
         }
