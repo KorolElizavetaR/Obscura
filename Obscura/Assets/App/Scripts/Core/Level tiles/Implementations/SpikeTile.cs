@@ -19,6 +19,7 @@ public class SpikeTile : StaticTile {
         if (trigger.TryGetComponent<Player>(out var player)) {
             Player.State.IsDead = true;
             this.Log($"u ded in 1 sec");
+            _energyUpdater.EnergyOperations.TryDecrease();
             StartCoroutine(ShowDeathWindow());
         }
 
