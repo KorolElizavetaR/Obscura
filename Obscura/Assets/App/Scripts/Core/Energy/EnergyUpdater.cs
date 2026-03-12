@@ -16,6 +16,10 @@ namespace App.Scripts.Core.Energy
             {
                 EnergyOperations.Reset();
             }
+            else
+            {
+                EnergyOperations.TryIncrease(_energyConfig.MaxCount);
+            }
         }
 
         protected virtual void Update()
