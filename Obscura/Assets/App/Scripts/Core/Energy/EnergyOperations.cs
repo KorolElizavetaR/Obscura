@@ -1,6 +1,5 @@
 ﻿using System;
 using App.Scripts.Core.Storage;
-using UnityEngine;
 
 namespace App.Scripts.Core.Energy
 {
@@ -31,6 +30,31 @@ namespace App.Scripts.Core.Energy
             }
 
             _energyEntity.Count = Math.Clamp(energyCount - value, 0, _energyConfig.MaxCount);
+            return true;
+        }
+
+        public bool TryIncrease(int value = 1)
+        {
+            var energyCount = _energyEntity.Count;
+
+            if (energyCount >= _energyConfig.MaxCount)
+            {
+                _energyEntity.Count = _energyConfig.MaxCount;
+                return false;
+            }
+
+            var datetimeDiff = DateTime.Now - _energyEntity.ReductionDateTime;
+
+            if (datetimeDiff.Seconds < _energyConfig.RecoverSpeed)
+            {
+                return false;
+            }
+            
+            energyCount = Math.Clamp(energyCount + value, 0, _energyConfig.MaxCount);
+
+            _energyEntity.ReductionDateTime = energyCount < _energyConfig.MaxCount ? DateTime.Now : default;
+
+            _energyEntity.Count = energyCount;
             return true;
         }
     }
