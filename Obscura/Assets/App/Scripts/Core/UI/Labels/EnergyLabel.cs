@@ -49,8 +49,11 @@ namespace App.Scripts.Core.UI.Labels
             }
             
             var dateTimeDiff = DateTime.Now - _energyEntity.ReductionDateTime;
+            var elapsedSeconds = _energyConfig.RecoverSpeed - dateTimeDiff.Seconds;
+            var elapsedMinutes = Mathf.FloorToInt(elapsedSeconds / 60);
+            var elapsedSecondsWithoutMinutes = elapsedSeconds % 60;
             
-            _timeToIncrease.text =$"{dateTimeDiff.TotalMinutes.ToString("00")} : {dateTimeDiff.Seconds.ToString("00")}";
+            _timeToIncrease.text =$"{elapsedMinutes:00} : {elapsedSecondsWithoutMinutes:00}";
         }
     }
 }
