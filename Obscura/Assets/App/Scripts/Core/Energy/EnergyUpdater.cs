@@ -11,6 +11,11 @@ namespace App.Scripts.Core.Energy
         protected virtual void Awake()
         {
             EnergyOperations = new EnergyOperations(_energyConfig);
+
+            if (_energyConfig.ResetOnStart)
+            {
+                EnergyOperations.Reset();
+            }
         }
     }
 }
