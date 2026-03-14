@@ -6,6 +6,6 @@ namespace App.Scripts.Core.Storage.Dto
     public sealed class EnergyDto : IDto
     {
         public int Count;
-        public DateTime ReductionDateTime;
+        public long ReductionTicks;
     }
 }

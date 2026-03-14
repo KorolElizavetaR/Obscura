@@ -1,18 +1,25 @@
 using System.Collections;
+using App.Scripts.Core.Energy;
+using App.Scripts.Core.Utils;
 using UnityEngine;
 
 public class SpikeTile : StaticTile {
     public PopupAnimation failWindow;
+    
+    private EnergyUpdater _energyUpdater;
 
     protected override void Awake() {
         base.Awake();
-        objectProperty.IsCollision = true;        
+        objectProperty.IsCollision = true;
+        Finder.TryFind(out _energyUpdater);
     }
+    
     override public void OnThisNextEvent(GameObject trigger) {
 
         if (trigger.TryGetComponent<Player>(out var player)) {
             Player.State.IsDead = true;
             this.Log($"u ded in 1 sec");
+            _energyUpdater.EnergyOperations.TryDecrease();
             StartCoroutine(ShowDeathWindow());
         }
 

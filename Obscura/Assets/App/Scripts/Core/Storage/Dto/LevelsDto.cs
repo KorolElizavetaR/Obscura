@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace App.Scripts.Core.Storage.Dto
 {
@@ -7,7 +6,7 @@ namespace App.Scripts.Core.Storage.Dto
     public class LevelsDto : IDto
     {
         public int CurrentLevelId;
-        public HashSet<int> CompletedLevels = new ();
+        public string CompletedLevels = string.Empty;
         public int MaxLevelId;
     }
 }

@@ -13,7 +13,7 @@ namespace App.Scripts.Core.Storage.Entities
         public Energy(EnergyDto dto)
         {
             Count = dto.Count;
-            ReductionDateTime = dto.ReductionDateTime;
+            ReductionDateTime = new DateTime(dto.ReductionTicks);
         }
         
         public EnergyDto ToDto()
@@ -21,7 +21,7 @@ namespace App.Scripts.Core.Storage.Entities
             return new EnergyDto()
             {
                 Count = Count,
-                ReductionDateTime = ReductionDateTime
+                ReductionTicks = ReductionDateTime.Ticks
             };
         }
     }
